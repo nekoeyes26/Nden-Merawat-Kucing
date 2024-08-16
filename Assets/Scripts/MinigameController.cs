@@ -50,6 +50,15 @@ public class MinigameController : MonoBehaviour
         }
     }
 
+    public void Jump()
+    {
+        if (isGrounded == true && !isEnemyHitCooldown)
+        {
+            rb.AddForce(Vector2.up * jumpForce);
+            isGrounded = false;
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))

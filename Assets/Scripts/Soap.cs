@@ -74,7 +74,6 @@ public class Soap : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Return the soap to its original position when dragging ends
         rectTransform.anchoredPosition = originalPosition;
     }
 }

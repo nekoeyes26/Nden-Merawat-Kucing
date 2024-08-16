@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Shower : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private Vector3 originalPosition; // The original position of the soap
+    private Vector3 originalPosition;
     private RectTransform rectTransform;
     private Canvas canvas;
 
@@ -40,7 +40,6 @@ public class Shower : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnDrag(PointerEventData eventData)
     {
-        // Move the soap with the mouse/touch position
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
         // Convert the screen position to a world position
@@ -86,12 +85,9 @@ public class Shower : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     private void Update()
     {
-        // If the object is over "Pet", start counting the hold time
         if (isOverPet)
         {
             holdTimer += Time.deltaTime;
-
-            // If held for the required time, set isWet to true
             if (holdTimer >= holdTime)
             {
                 bathController.IsWet = true;
@@ -115,7 +111,6 @@ public class Shower : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Return the soap to its original position when dragging ends
         rectTransform.anchoredPosition = originalPosition;
         IsAnimDone = true;
         StopCoroutine(m_CorotineAnim);

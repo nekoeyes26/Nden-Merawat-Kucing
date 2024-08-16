@@ -35,7 +35,7 @@ public class Dryer : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        // Optional: Do something when drag starts (e.g., play a sound)
+
     }
 
     public void OnDrag(PointerEventData eventData)
