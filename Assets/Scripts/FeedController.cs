@@ -10,6 +10,7 @@ public class FeedController : MonoBehaviour
     public Image bar;
     private float lerpSpeed;
     private bool isFull = false;
+    private bool isXPAdded = false;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class FeedController : MonoBehaviour
             if (point >= targetPoint)
             {
                 Full();
+                Debug.Log(point);
             }
         }
         else
@@ -50,5 +52,11 @@ public class FeedController : MonoBehaviour
     {
         isFull = true;
         Debug.Log("Full");
+        if (!isXPAdded)
+        {
+            GameManager.instance.AddXP();
+            GameManager.instance.CatProfile.catScriptable.hungryRemaining--;
+            isXPAdded = true;
+        }
     }
 }

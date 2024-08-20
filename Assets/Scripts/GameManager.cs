@@ -5,12 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
-    private CatScriptable cat;
-    private int hungryCooldown;
-    private int showerCooldown;
-    private int playCooldown;
-    private int photoCooldown;
-
+    private Cat cat;
     private void Awake()
     {
         if (instance != null)
@@ -34,25 +29,15 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void AssignCat(CatScriptable catScriptable)
+    public Cat CatProfile
     {
-        cat = catScriptable;
+        get { return cat; }
+        set { cat = value; }
     }
 
-    public string CatName
+    public void AddXP()
     {
-        get { return cat.name; }
-        set { cat.name = value; }
-    }
-
-    public int CatXP
-    {
-        get { return cat.xp; }
-        set { cat.xp = value; }
-    }
-    public int CatLevel
-    {
-        get { return cat.level; }
-        set { cat.level = value; }
+        cat.catScriptable.xp++;
+        GameEvents.XpChanged(cat.catScriptable.xp);
     }
 }

@@ -328,7 +328,7 @@ MonoBehaviour:
   restartButton: {fileID: 209530621}
   pauseButton: {fileID: 1279125210}
   resumeButton: {fileID: 198746478}
-  targetScore: 99
+  targetScore: 3
   bar: {fileID: 1799597574}
   avaXMin: -225
   avaXMax: 270
@@ -1333,6 +1333,7 @@ MonoBehaviour:
   - {fileID: 8823331355295284687, guid: b20f306ff2e9b8040a8251caebe7b61b, type: 3}
   - {fileID: 8965577028342606272, guid: e5dd86ff122f4714a8baad548cc277b3, type: 3}
   obstacleSpawnTime: 1.75
+  groundnCoinMove: {fileID: 2731832478497864749, guid: f68b6b401f63dfc4da37bd225ef4f234, type: 3}
 --- !u!4 &1107554491
 Transform:
   m_ObjectHideFlags: 0
@@ -2422,7 +2423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b54072f9ce62634d9128d2fabccf116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
+  sceneName: MainPage
 --- !u!114 &1831966895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2469,7 +2470,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1831966894}
         m_TargetAssemblyTypeName: SceneLoad, Assembly-CSharp
-        m_MethodName: Exit
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

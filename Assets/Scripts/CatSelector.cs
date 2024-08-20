@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class ChoosingCarouselMenu : MonoBehaviour
+public class CatSelector : MonoBehaviour
 {
     public Transform[] boxes;
     public float moveDuration = 0.5f;
@@ -21,10 +22,11 @@ public class ChoosingCarouselMenu : MonoBehaviour
     private RectTransform[] boxRects;
     private Color[] originalColors;
     private float[] originalAlphas;
-    public CatManager[] cats;
-    public CatManager middleCat;
+    private Cat[] cats;
+    private Cat middleCat;
     public GameObject[] choosingCatUI;
     public GameObject[] givingNameUI;
+    public Image preview;
 
     void Start()
     {
@@ -38,7 +40,7 @@ public class ChoosingCarouselMenu : MonoBehaviour
         boxRects = new RectTransform[boxes.Length];
         originalColors = new Color[boxes.Length];
         originalAlphas = new float[boxes.Length];
-        cats = new CatManager[boxes.Length];
+        cats = new Cat[boxes.Length];
 
         // Simpan komponen Image dan RectTransform serta warna asli dari setiap box
         for (int i = 0; i < boxes.Length; i++)
@@ -47,7 +49,7 @@ public class ChoosingCarouselMenu : MonoBehaviour
             boxRects[i] = boxes[i].GetComponent<RectTransform>();
             originalColors[i] = boxImages[i].color;
             originalAlphas[i] = originalColors[i].a;
-            cats[i] = boxes[i].GetComponent<CatManager>();
+            cats[i] = boxes[i].GetComponent<Cat>();
         }
 
         // Cari child object yang berada di tengah saat start
@@ -252,20 +254,45 @@ public class ChoosingCarouselMenu : MonoBehaviour
 
     public void ChooseCat()
     {
-        GameManager.instance.AssignCat(middleCat.catScriptable);
+        GameManager.instance.CatProfile = middleCat;
         Debug.Log(middleCat.catScriptable.animationFolderPath);
     }
 
     public void GiveNameUI()
     {
-        foreach (GameObject UI in choosingCatUI)
+        if (GameManager.instance.CatProfile.catScriptable.state == CatState.Unnamed)
         {
-            UI.SetActive(false);
-        }
+            Sprite sprite;
+            if (GameManager.instance.CatProfile.catScriptable.phase == CatPhase.Baby)
+            {
+                sprite = Resources.Load<Sprite>(GameManager.instance.CatProfile.catScriptable.spriteFolderPath + "baby");
+            }
+            else if (GameManager.instance.CatProfile.catScriptable.phase == CatPhase.Child)
+            {
+                sprite = Resources.Load<Sprite>(GameManager.instance.CatProfile.catScriptable.spriteFolderPath + "child");
+            }
+            else if (GameManager.instance.CatProfile.catScriptable.phase == CatPhase.Adult)
+            {
+                sprite = Resources.Load<Sprite>(GameManager.instance.CatProfile.catScriptable.spriteFolderPath + "adult");
+            }
+            else
+            {
+                sprite = preview.sprite;
+            }
+            preview.sprite = sprite;
+            foreach (GameObject UI in choosingCatUI)
+            {
+                UI.SetActive(false);
+            }
 
-        foreach (GameObject UI in givingNameUI)
+            foreach (GameObject UI in givingNameUI)
+            {
+                UI.SetActive(true);
+            }
+        }
+        else
         {
-            UI.SetActive(true);
+            SceneManager.LoadScene("MainPage");
         }
     }
 
@@ -284,7 +311,8 @@ public class ChoosingCarouselMenu : MonoBehaviour
 
     public void NamingCat(InputField inputField)
     {
-        GameManager.instance.CatName = inputField.text;
-        Debug.Log(GameManager.instance.CatName);
+        GameManager.instance.CatProfile.catScriptable.name = inputField.text;
+        Debug.Log(GameManager.instance.CatProfile.name);
+        // Debug.Log(GameManager.instance.CatProfile.state);
     }
 }

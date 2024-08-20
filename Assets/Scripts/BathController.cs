@@ -18,6 +18,7 @@ public class BathController : MonoBehaviour
     public bool IsDried { get { return isDried; } set { isDried = value; } }
     public Image bar;
     private float lerpSpeed;
+    private bool isXPAdded = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +55,12 @@ public class BathController : MonoBehaviour
         if (isWet && isSoapy && isShowered && isDried)
         {
             bar.fillAmount = Mathf.Lerp(bar.fillAmount, 1, lerpSpeed);
+            if (!isXPAdded)
+            {
+                GameManager.instance.AddXP();
+                GameManager.instance.CatProfile.catScriptable.showerRemaining--;
+                isXPAdded = true;
+            }
         }
     }
 }

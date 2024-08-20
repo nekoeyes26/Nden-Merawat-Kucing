@@ -31,6 +31,7 @@ public class MinigameManager : MonoBehaviour
     private List<GameObject> healthObjects = new List<GameObject>(); // List to keep track of instantiated health prefabs
 
     public BackgroundScript[] backgroundScripts;
+    private bool isXPAdded = false;
 
     private void Start()
     {
@@ -86,6 +87,12 @@ public class MinigameManager : MonoBehaviour
         restartButton.SetActive(true);
         pauseButton.SetActive(false);
         resumeButton.SetActive(false);
+        if (!isXPAdded && GameManager.instance.CatProfile.catScriptable.playRemaining > 0)
+        {
+            GameManager.instance.AddXP();
+            GameManager.instance.CatProfile.catScriptable.playRemaining--;
+            isXPAdded = true;
+        }
     }
 
     public void GameOver()
@@ -118,6 +125,7 @@ public class MinigameManager : MonoBehaviour
     public void Restart()
     {
         obstaclePool.Restart();
+        GenerateHealth();
         pauseButton.SetActive(true);
         restartButton.SetActive(false);
         gameOverText.enabled = false;
@@ -146,7 +154,13 @@ public class MinigameManager : MonoBehaviour
 
     void GenerateHealth()
     {
-        for (int i = 0; i < health; i++)
+        while (healthObjects.Count > health)
+        {
+            Destroy(healthObjects[healthObjects.Count - 1]);
+            healthObjects.RemoveAt(healthObjects.Count - 1);
+        }
+
+        for (int i = healthObjects.Count; i < health; i++)
         {
             GameObject healthObject = Instantiate(healthPrefab, healthParent);
             healthObjects.Add(healthObject);
@@ -155,7 +169,6 @@ public class MinigameManager : MonoBehaviour
 
     private void ReduceSpeedForAllGroundnCoin()
     {
-        // Find all objects with the GroundnCoinMove script and call ReduceAndRestoreSpeed
         GroundnCoinMove[] groundnCoinObjects = FindObjectsOfType<GroundnCoinMove>();
 
         foreach (GroundnCoinMove obj in groundnCoinObjects)

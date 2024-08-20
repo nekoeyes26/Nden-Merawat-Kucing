@@ -123,50 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &6395724
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6395726}
-  - component: {fileID: 6395725}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &6395725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6395724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65015a709d240534ba72b3373ea25644, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &6395726
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6395724}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 327.6221, y: 249.8853, z: -0.85121936}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &33528436
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +838,7 @@ GameObject:
   - component: {fileID: 533490780}
   - component: {fileID: 533490779}
   - component: {fileID: 533490781}
+  - component: {fileID: 533490782}
   m_Layer: 5
   m_Name: Kucing (3)
   m_TagString: Untagged
@@ -959,6 +916,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catScriptable: {fileID: 11400000, guid: 1e4a6bdb38fb767489dcbfb80b3e2784, type: 2}
+  name: 
+  xp: 0
+  xpNeeded: 0
+  level: 0
+  phase: 0
+  hungryRemaining: 0
+  showerRemaining: 0
+  playRemaining: 0
+  photoRemaining: 0
+  state: 0
+--- !u!114 &533490782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533490777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d737a69d700052c488c456c9dddc36e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &596557385
 GameObject:
   m_ObjectHideFlags: 0
@@ -2122,7 +2101,7 @@ GameObject:
   - component: {fileID: 1351443109}
   - component: {fileID: 1351443112}
   m_Layer: 5
-  m_Name: Kucing
+  m_Name: CatSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2233,8 +2212,6 @@ MonoBehaviour:
   normalScale: 0.5
   middleScale: 1
   scaleTransitionDuration: 0.2
-  cats: []
-  middleCat: {fileID: 0}
   choosingCatUI:
   - {fileID: 1029081924}
   - {fileID: 821844365}
@@ -2245,6 +2222,7 @@ MonoBehaviour:
   - {fileID: 1676664822}
   - {fileID: 368867225}
   - {fileID: 1881138793}
+  preview: {fileID: 62874983}
 --- !u!1 &1400302493
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,6 +2314,7 @@ GameObject:
   - component: {fileID: 1439992509}
   - component: {fileID: 1439992508}
   - component: {fileID: 1439992510}
+  - component: {fileID: 1439992511}
   m_Layer: 5
   m_Name: Kucing (1)
   m_TagString: Untagged
@@ -2413,6 +2392,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catScriptable: {fileID: 11400000, guid: 86364e8c07aacd040b29dca73c42a381, type: 2}
+  name: 
+  xp: 0
+  xpNeeded: 0
+  level: 0
+  phase: 0
+  hungryRemaining: 0
+  showerRemaining: 0
+  playRemaining: 0
+  photoRemaining: 0
+  state: 0
+--- !u!114 &1439992511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439992506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d737a69d700052c488c456c9dddc36e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1462766361
 GameObject:
   m_ObjectHideFlags: 0
@@ -2425,6 +2426,7 @@ GameObject:
   - component: {fileID: 1462766364}
   - component: {fileID: 1462766363}
   - component: {fileID: 1462766365}
+  - component: {fileID: 1462766366}
   m_Layer: 5
   m_Name: Kucing (2)
   m_TagString: Untagged
@@ -2502,6 +2504,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catScriptable: {fileID: 11400000, guid: 3452b0fb6eda33f4aa5c7c89b3c78657, type: 2}
+  name: 
+  xp: 0
+  xpNeeded: 0
+  level: 0
+  phase: 0
+  hungryRemaining: 0
+  showerRemaining: 0
+  playRemaining: 0
+  photoRemaining: 0
+  state: 0
+--- !u!114 &1462766366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462766361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d737a69d700052c488c456c9dddc36e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1676664822
 GameObject:
   m_ObjectHideFlags: 0
@@ -2958,6 +2982,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1834675879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1834675881}
+  - component: {fileID: 1834675883}
+  - component: {fileID: 1834675882}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1834675881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834675879}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 327.6221, y: 249.8853, z: -0.85121936}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1834675882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834675879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee8b53c4fe1dee4e8b973bb1bacab2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1834675883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834675879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65015a709d240534ba72b3373ea25644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1846519390
 GameObject:
   m_ObjectHideFlags: 0
@@ -3256,4 +3337,4 @@ SceneRoots:
   - {fileID: 1812355015}
   - {fileID: 1741539154}
   - {fileID: 596557388}
-  - {fileID: 6395726}
+  - {fileID: 1834675881}

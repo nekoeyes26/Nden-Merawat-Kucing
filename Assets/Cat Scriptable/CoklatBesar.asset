@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb6df5622997174d903ab637d08899f, type: 3}
   m_Name: CoklatBesar
   m_EditorClassIdentifier: 
-  name: 
+  preview: {fileID: 0}
+  catName: 
   xp: 0
+  xpNeeded: 0
   level: 0
   phase: 0
   hungryRemaining: 0
   showerRemaining: 0
   playRemaining: 0
   photoRemaining: 0
+  state: 0
+  spriteFolderPath: temporary/Cat/CoklatBesar/
   animationFolderPath: Anim/CoklatBesar

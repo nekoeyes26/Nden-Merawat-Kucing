@@ -15,6 +15,13 @@ public class ObstaclePool : MonoBehaviour
     private int lastSpawnedIndex = -1;
     private int secondLastSpawnedIndex = -1;
 
+    public GroundnCoinMove groundnCoinMove;
+    private float originalGroundSpeed;
+
+    private void Start()
+    {
+        originalGroundSpeed = groundnCoinMove.speed;
+    }
     private void Update()
     {
         SpawnLoop();
@@ -29,7 +36,7 @@ public class ObstaclePool : MonoBehaviour
             if (groundnCoinObjects.Length > 0)
             {
                 // Debug.Log("index 0 " + groundnCoinObjects[0].speed);
-                if (groundnCoinObjects[0].speed == 5)
+                if (groundnCoinObjects[0].speed == originalGroundSpeed)
                 {
                     Spawn();
                     timeUntilObstacleSpawn = 0;
