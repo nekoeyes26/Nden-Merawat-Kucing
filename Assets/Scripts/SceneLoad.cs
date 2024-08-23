@@ -10,6 +10,7 @@ public class SceneLoad : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sceneName))
         {
+            if (Time.timeScale == 0f) Time.timeScale = 1f;
             SceneManager.LoadScene(sceneName);
         }
         else

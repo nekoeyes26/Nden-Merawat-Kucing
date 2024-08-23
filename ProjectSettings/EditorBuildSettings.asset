@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/ChoosingCat.unity
     guid: d56282f97d1397944b863698dd50d08a
   - enabled: 1
-    path: Assets/Scenes/GivingName.unity
-    guid: 3695359f380c6fc489ea2ba9ac1b2f4d
-  - enabled: 1
     path: Assets/Scenes/MainPage.unity
     guid: 1e7a078a62537c44e92dd6fbd0d98f0c
   - enabled: 1
@@ -29,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Feeding.unity
     guid: 4e01ea5b53f998b499c905470e80376e
+  - enabled: 1
+    path: Assets/Scenes/Wefie.unity
+    guid: 09c83cb9a7e1c5b429d47eeb5af0f876
   m_configObjects: {}

@@ -28,7 +28,7 @@ public class MinigameManager : MonoBehaviour
     public GameObject healthPrefab;
     public Transform healthParent;
 
-    private List<GameObject> healthObjects = new List<GameObject>(); // List to keep track of instantiated health prefabs
+    private List<GameObject> healthObjects = new List<GameObject>();
 
     public BackgroundScript[] backgroundScripts;
     private bool isXPAdded = false;
@@ -60,11 +60,9 @@ public class MinigameManager : MonoBehaviour
     public void AvatarMove()
     {
         // float range = avaXMax - avaXMin;
-        float normalizedScore = Mathf.Clamp01((float)score / (float)targetScore); // Normalize the score to be between 0 and 1
+        float normalizedScore = Mathf.Clamp01((float)score / (float)targetScore);
         float targetX = Mathf.Lerp(avaXMin, avaXMax, normalizedScore);
         float newX = Mathf.Lerp(avatarRect.anchoredPosition.x, targetX, lerpSpeed);
-
-        // Update the avatar's anchored position
         avatarRect.anchoredPosition = new Vector2(newX, avatarRect.anchoredPosition.y);
     }
 
@@ -92,6 +90,7 @@ public class MinigameManager : MonoBehaviour
             GameManager.instance.AddXP();
             GameManager.instance.CatProfile.catScriptable.playRemaining--;
             isXPAdded = true;
+            GameManager.instance.LevelUpChecker();
         }
     }
 

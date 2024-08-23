@@ -58,15 +58,10 @@ public class ObstaclePool : MonoBehaviour
             prefabIndex = Random.Range(0, obstaclePrefabs.Length);
         } while (prefabIndex == lastSpawnedIndex && prefabIndex == secondLastSpawnedIndex);
 
-        // Update the history of the last two spawned indices
         secondLastSpawnedIndex = lastSpawnedIndex;
         lastSpawnedIndex = prefabIndex;
-
-        // Instantiate the new obstacle
         GameObject obstacleToSpawn = obstaclePrefabs[prefabIndex];
         GameObject spawnedObstacle = Instantiate(obstacleToSpawn, transform.position, Quaternion.identity);
-
-        // Add the new obstacle to the queue
         obstaclePool.Enqueue(spawnedObstacle);
 
         if (obstaclePool.Count > maxPoolSize)
@@ -78,19 +73,13 @@ public class ObstaclePool : MonoBehaviour
 
     public void Restart()
     {
-        // Clear the obstacle pool
         while (obstaclePool.Count > 0)
         {
-            // Dequeue and destroy each obstacle
             GameObject obstacleToDestroy = obstaclePool.Dequeue();
             Destroy(obstacleToDestroy);
         }
-
-        // Reset the last two spawned indices
         lastSpawnedIndex = -1;
         secondLastSpawnedIndex = -1;
-
-        // Reset the timer for spawning
         timeUntilObstacleSpawn = 0f;
     }
 }

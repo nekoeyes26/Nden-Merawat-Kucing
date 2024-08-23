@@ -40,4 +40,22 @@ public class GameManager : MonoBehaviour
         cat.catScriptable.xp++;
         GameEvents.XpChanged(cat.catScriptable.xp);
     }
+
+    public void LevelUp()
+    {
+        cat.catScriptable.level++;
+        cat.catScriptable.xp = 0;
+        cat.RenewRequirement();
+        cat.RenewXpNeeded();
+        cat.RenewPhase(cat.catScriptable.level);
+        GameEvents.LevelChanged(cat.catScriptable.level);
+    }
+
+    public void LevelUpChecker()
+    {
+        if (cat.catScriptable.hungryRemaining <= 0 && cat.catScriptable.showerRemaining <= 0 && cat.catScriptable.playRemaining <= 0 && cat.catScriptable.photoRemaining <= 0)
+        {
+            LevelUp();
+        }
+    }
 }

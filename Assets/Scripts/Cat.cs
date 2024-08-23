@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class Cat : MonoBehaviour
@@ -20,8 +19,7 @@ public class Cat : MonoBehaviour
 
     void Start()
     {
-        RenewRemaining(0);
-        RenewXpNeeded();
+        if (catScriptable.level <= 0) catScriptable.level = 1;
         name = catScriptable.name;
         xp = catScriptable.xp;
         xpNeeded = catScriptable.xpNeeded;
@@ -32,50 +30,78 @@ public class Cat : MonoBehaviour
         playRemaining = catScriptable.playRemaining;
         photoRemaining = catScriptable.photoRemaining;
         state = catScriptable.state;
+        // RenewRemaining(0);
+        RenewRequirement();
+        RenewXpNeeded();
+        RenewPhase(level);
     }
 
-    public void RenewRemaining(int level)
-    {
-        if (level <= 0)
-        {
-            catScriptable.hungryRemaining = 2;
-            catScriptable.showerRemaining = 3;
-            catScriptable.playRemaining = 3;
-            catScriptable.photoRemaining = 1;
-        }
-        else if (level == 1)
-        {
-            catScriptable.hungryRemaining = 3;
-            catScriptable.showerRemaining = 3;
-            catScriptable.playRemaining = 3;
-            catScriptable.photoRemaining = 1;
-        }
-        else if (level == 2)
-        {
-            catScriptable.hungryRemaining = 4;
-            catScriptable.showerRemaining = 4;
-            catScriptable.playRemaining = 4;
-            catScriptable.photoRemaining = 1;
-        }
-        else if (level == 3)
-        {
-            catScriptable.hungryRemaining = 4;
-            catScriptable.showerRemaining = 4;
-            catScriptable.playRemaining = 4;
-            catScriptable.photoRemaining = 2;
-        }
-        else if (level == 4)
-        {
-            catScriptable.hungryRemaining = 5;
-            catScriptable.showerRemaining = 5;
-            catScriptable.playRemaining = 5;
-            catScriptable.photoRemaining = 2;
-        }
-    }
+    // public void RenewRemaining(int level)
+    // {
+    //     if (level <= 0)
+    //     {
+    //         catScriptable.hungryRemaining = 2;
+    //         catScriptable.showerRemaining = 3;
+    //         catScriptable.playRemaining = 3;
+    //         catScriptable.photoRemaining = 1;
+    //     }
+    //     else if (level == 1)
+    //     {
+    //         catScriptable.hungryRemaining = 3;
+    //         catScriptable.showerRemaining = 3;
+    //         catScriptable.playRemaining = 3;
+    //         catScriptable.photoRemaining = 1;
+    //     }
+    //     else if (level == 2)
+    //     {
+    //         catScriptable.hungryRemaining = 4;
+    //         catScriptable.showerRemaining = 4;
+    //         catScriptable.playRemaining = 4;
+    //         catScriptable.photoRemaining = 1;
+    //     }
+    //     else if (level == 3)
+    //     {
+    //         catScriptable.hungryRemaining = 4;
+    //         catScriptable.showerRemaining = 4;
+    //         catScriptable.playRemaining = 4;
+    //         catScriptable.photoRemaining = 2;
+    //     }
+    //     else if (level == 4)
+    //     {
+    //         catScriptable.hungryRemaining = 5;
+    //         catScriptable.showerRemaining = 5;
+    //         catScriptable.playRemaining = 5;
+    //         catScriptable.photoRemaining = 2;
+    //     }
+    // }
     public void RenewXpNeeded()
     {
         catScriptable.xpNeeded = catScriptable.hungryRemaining + catScriptable.showerRemaining + catScriptable.playRemaining + catScriptable.photoRemaining;
     }
 
+    public void RenewRequirement()
+    {
+        int currentLevel = catScriptable.level;
+        if (currentLevel <= 0) currentLevel = 1;
+        RequirementScriptable requirementScriptable;
+        requirementScriptable = Resources.Load<RequirementScriptable>("RequirementScriptable/" + currentLevel.ToString());
+        Debug.Log("RequirementScriptable/" + currentLevel.ToString());
+        catScriptable.hungryRemaining = requirementScriptable.hungry;
+        catScriptable.showerRemaining = requirementScriptable.shower;
+        catScriptable.playRemaining = requirementScriptable.play;
+        catScriptable.photoRemaining = requirementScriptable.photo;
+    }
+
+    public void RenewPhase(int currentLevel)
+    {
+        if (currentLevel == 6)
+        {
+            catScriptable.phase = CatPhase.Child;
+        }
+        else if (currentLevel == 11)
+        {
+            catScriptable.phase = CatPhase.Adult;
+        }
+    }
 
 }
