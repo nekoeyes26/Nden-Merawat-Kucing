@@ -7,6 +7,10 @@ public class GameEvents : MonoBehaviour
 {
     public static event Action<int> OnXpChange;
     public static event Action<int> OnLevelChange;
+    public static event Action OnHungryChange;
+    public static event Action OnDirtyChange;
+    public static event Action OnSadChange;
+    public static event Action OnSickChange;
 
     public static void XpChanged(int xpNow)
     {
@@ -16,5 +20,25 @@ public class GameEvents : MonoBehaviour
     public static void LevelChanged(int levelNow)
     {
         OnXpChange?.Invoke(levelNow);
+    }
+
+    public static void HungryChanged()
+    {
+        OnHungryChange?.Invoke();
+    }
+
+    public static void DirtyChanged()
+    {
+        OnDirtyChange?.Invoke();
+    }
+
+    public static void SadChanged()
+    {
+        OnSadChange?.Invoke();
+    }
+
+    public static void SickChanged()
+    {
+        OnSickChange?.Invoke();
     }
 }

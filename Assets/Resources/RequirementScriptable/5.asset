@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30bcb3318957904988c8948ba56c553, type: 3}
   m_Name: 5
   m_EditorClassIdentifier: 
-  toLevel: 5
-  hungry: 5
-  shower: 5
-  play: 5
-  photo: 2
+  toLevel: 2
+  hungry: 0
+  shower: 0
+  play: 0
+  photo: 1

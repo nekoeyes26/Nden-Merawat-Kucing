@@ -58,6 +58,7 @@ public class FeedController : MonoBehaviour
             GameManager.instance.CatProfile.catScriptable.hungryRemaining--;
             isXPAdded = true;
             GameManager.instance.LevelUpChecker();
+            if (GameManager.instance.CatProfile.catScriptable.isHungry) GameManager.instance.ChangeHungry();
         }
     }
 }

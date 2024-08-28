@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
     private Cat cat;
+    public int hungryMiss;
+    public int showerMiss;
+    public int photoMiss;
+    public int playMiss;
+    public int totalMiss;
     private void Awake()
     {
         if (instance != null)
@@ -57,5 +62,28 @@ public class GameManager : MonoBehaviour
         {
             LevelUp();
         }
+    }
+    public void ChangeHungry()
+    {
+        cat.catScriptable.isHungry = !cat.catScriptable.isHungry;
+        GameEvents.HungryChanged();
+    }
+
+    public void ChangeDirty()
+    {
+        cat.catScriptable.isDirty = !cat.catScriptable.isDirty;
+        GameEvents.DirtyChanged();
+    }
+
+    public void ChangeSad()
+    {
+        cat.catScriptable.isSad = !cat.catScriptable.isSad;
+        GameEvents.SadChanged();
+    }
+
+    public void ChangeSick()
+    {
+        cat.catScriptable.isSick = !cat.catScriptable.isSick;
+        GameEvents.SickChanged();
     }
 }

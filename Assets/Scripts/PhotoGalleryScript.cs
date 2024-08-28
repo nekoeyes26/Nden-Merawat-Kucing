@@ -7,10 +7,19 @@ public class PhotoGalleryScript : MonoBehaviour
 {
     public GameObject imagePrefab; // Prefab for the Image UI element
     public Transform contentTransform; // The content of the ScrollView
+    public GameObject noScreenshotText;
     // Start is called before the first frame update
     void Start()
     {
-        DisplayPhotos();
+        noScreenshotText.SetActive(false);
+        if (WefieController.SavedScreenshots.Count > 0)
+        {
+            DisplayPhotos();
+        }
+        else
+        {
+            noScreenshotText.SetActive(true);
+        }
     }
 
     // Update is called once per frame

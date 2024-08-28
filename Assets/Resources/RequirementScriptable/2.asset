@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 2
   m_EditorClassIdentifier: 
   toLevel: 2
-  hungry: 3
-  shower: 3
-  play: 3
+  hungry: 0
+  shower: 0
+  play: 0
   photo: 1

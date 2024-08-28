@@ -61,6 +61,7 @@ public class BathController : MonoBehaviour
                 GameManager.instance.CatProfile.catScriptable.showerRemaining--;
                 isXPAdded = true;
                 GameManager.instance.LevelUpChecker();
+                if (GameManager.instance.CatProfile.catScriptable.isDirty) GameManager.instance.ChangeDirty();
             }
         }
     }

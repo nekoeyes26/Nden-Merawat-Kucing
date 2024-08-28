@@ -29,6 +29,10 @@ public class CatScriptable : ScriptableObject
     public int playRemaining;
     public int photoRemaining;
     public CatState state;
+    public bool isHungry = false;
+    public bool isDirty = false;
+    public bool isSad = false;
+    public bool isSick = false;
     public string spriteFolderPath;
     public string animationFolderPath;
 

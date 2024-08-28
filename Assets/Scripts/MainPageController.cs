@@ -16,24 +16,39 @@ public class MainPageController : MonoBehaviour
     private CatScriptable catS;
     public Image bar;
     private float lerpSpeed = 1f;
-    public SpriteRenderer spriteRenderer;
+    public SpriteRenderer catSprite;
+    public Animator catAnimator;
+    public Collider2D catCollider;
+    private bool isPetted = false;
 
     void OnEnable()
     {
         GameEvents.OnXpChange += BarFill;
         GameEvents.OnLevelChange += LevelUI;
+        GameEvents.OnHungryChange += CatHungry;
+        GameEvents.OnDirtyChange += CatDirty;
+        GameEvents.OnSadChange += CatSad;
+        GameEvents.OnSickChange += CatSick;
     }
 
     void OnDisable()
     {
         GameEvents.OnXpChange -= BarFill;
         GameEvents.OnLevelChange -= LevelUI;
+        GameEvents.OnHungryChange -= CatHungry;
+        GameEvents.OnDirtyChange -= CatDirty;
+        GameEvents.OnSadChange -= CatSad;
+        GameEvents.OnSickChange -= CatSick;
     }
     void Start()
     {
         catS = GameManager.instance.CatProfile.catScriptable;
         LevelUI(catS.level);
         BarFill(catS.xp);
+        CatHungry();
+        CatDirty();
+        CatSad();
+        CatSick();
     }
 
     // Update is called once per frame
@@ -45,7 +60,13 @@ public class MainPageController : MonoBehaviour
         if (catS.photoRemaining <= 0) photoUI.SetActive(false);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameManager.instance.AddXP();
+            GameManager.instance.ChangeHungry();
+        }
+        if (IsTapped())
+        {
+            isPetted = !isPetted;
+            catAnimator.SetBool("isPet", isPetted);
+            StartCoroutine(ResetIsPetted());
         }
     }
 
@@ -95,8 +116,64 @@ public class MainPageController : MonoBehaviour
         }
         else
         {
-            sprite = spriteRenderer.sprite;
+            sprite = catSprite.sprite;
         }
-        spriteRenderer.sprite = sprite;
+        catSprite.sprite = sprite;
+    }
+
+    private bool IsTapped()
+    {
+        Vector2 inputPosition;
+
+        // For computer (mouse click)
+        if (Input.GetMouseButtonDown(0))
+        {
+            inputPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+        // For mobile (touch input)
+        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            inputPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+        }
+        else
+        {
+            return false;
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(inputPosition, Vector2.zero);
+        if (hit.collider != null)
+        {
+            Debug.Log($"Hit: {hit.collider.gameObject.name}");
+            if (hit.collider == catCollider)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private IEnumerator ResetIsPetted()
+    {
+        yield return new WaitForSeconds(2f);
+        isPetted = false;
+        catAnimator.SetBool("isPet", isPetted);
+    }
+
+    private void CatHungry()
+    {
+        catAnimator.SetBool("isHungry", catS.isHungry);
+    }
+    private void CatDirty()
+    {
+        catAnimator.SetBool("isDirty", catS.isDirty);
+    }
+    private void CatSad()
+    {
+        catAnimator.SetBool("isSad", catS.isSad);
+    }
+    private void CatSick()
+    {
+        catAnimator.SetBool("isSick", catS.isSick);
     }
 }

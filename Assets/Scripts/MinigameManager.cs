@@ -91,6 +91,7 @@ public class MinigameManager : MonoBehaviour
             GameManager.instance.CatProfile.catScriptable.playRemaining--;
             isXPAdded = true;
             GameManager.instance.LevelUpChecker();
+            if (GameManager.instance.CatProfile.catScriptable.isSad) GameManager.instance.ChangeSad();
         }
     }
 
