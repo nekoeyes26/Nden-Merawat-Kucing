@@ -19,6 +19,8 @@ public class BathController : MonoBehaviour
     public Image bar;
     private float lerpSpeed;
     private bool isXPAdded = false;
+    public Button exitButton;
+    public Animator catAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,14 @@ public class BathController : MonoBehaviour
     {
         lerpSpeed = 2f * Time.deltaTime;
         BarFill();
+        if (isWet && !isXPAdded)
+        {
+            exitButton.interactable = false;
+        }
+        else if (isXPAdded)
+        {
+            exitButton.interactable = true;
+        }
     }
 
     public void BarFill()
@@ -40,6 +50,7 @@ public class BathController : MonoBehaviour
         if (isWet && !isSoapy && !isShowered && !isDried)
         {
             bar.fillAmount = Mathf.Lerp(bar.fillAmount, (float)0.25, lerpSpeed);
+            catAnimator.SetBool("isWet", true);
         }
 
         if (isWet && isSoapy && !isShowered && !isDried)
@@ -62,6 +73,8 @@ public class BathController : MonoBehaviour
                 isXPAdded = true;
                 GameManager.instance.LevelUpChecker();
                 if (GameManager.instance.CatProfile.catScriptable.isDirty) GameManager.instance.ChangeDirty();
+                GameManager.instance.isShowerTimerOn = false;
+                catAnimator.SetBool("isWet", false);
             }
         }
     }

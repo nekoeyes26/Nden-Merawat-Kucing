@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 225601621}
   - component: {fileID: 225601620}
   - component: {fileID: 225601622}
+  - component: {fileID: 225601623}
   m_Layer: 0
   m_Name: Cat
   m_TagString: Untagged
@@ -505,6 +506,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b03a5d411c9eb54899a7e811951d6a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &225601623
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225601619}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51171ae420a602940bc9198d3b212b79, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &290233683
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,10 +642,34 @@ MonoBehaviour:
   - panel1
   OnBeginDragging:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1071661249}
+        m_TargetAssemblyTypeName: FeedController, Assembly-CSharp
+        m_MethodName: CatSteady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDragDropFailed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1071661249}
+        m_TargetAssemblyTypeName: FeedController, Assembly-CSharp
+        m_MethodName: CatBackIdle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDroppedSuccessfully:
     m_PersistentCalls:
       m_Calls:
@@ -969,10 +1015,34 @@ MonoBehaviour:
   - panel1
   OnBeginDragging:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1071661249}
+        m_TargetAssemblyTypeName: FeedController, Assembly-CSharp
+        m_MethodName: CatSteady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDragDropFailed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1071661249}
+        m_TargetAssemblyTypeName: FeedController, Assembly-CSharp
+        m_MethodName: CatBackIdle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDroppedSuccessfully:
     m_PersistentCalls:
       m_Calls:
@@ -1210,10 +1280,34 @@ MonoBehaviour:
   - panel1
   OnBeginDragging:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1071661249}
+        m_TargetAssemblyTypeName: FeedController, Assembly-CSharp
+        m_MethodName: CatSteady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDragDropFailed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1071661249}
+        m_TargetAssemblyTypeName: FeedController, Assembly-CSharp
+        m_MethodName: CatBackIdle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDroppedSuccessfully:
     m_PersistentCalls:
       m_Calls:
@@ -1350,6 +1444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPoint: 5
   bar: {fileID: 996321741}
+  catAnimator: {fileID: 225601623}
 --- !u!4 &1071661250
 Transform:
   m_ObjectHideFlags: 0
@@ -1441,7 +1536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6102941, g: 0.6102941, b: 0.6102941, a: 0.2509804}
+  m_Color: {r: 0.6102941, g: 0.6102941, b: 0.6102941, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1840,10 +1935,34 @@ MonoBehaviour:
   - panel1
   OnBeginDragging:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1071661249}
+        m_TargetAssemblyTypeName: FeedController, Assembly-CSharp
+        m_MethodName: CatSteady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDragDropFailed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1071661249}
+        m_TargetAssemblyTypeName: FeedController, Assembly-CSharp
+        m_MethodName: CatBackIdle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDroppedSuccessfully:
     m_PersistentCalls:
       m_Calls:
@@ -2028,10 +2147,34 @@ MonoBehaviour:
   - panel1
   OnBeginDragging:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1071661249}
+        m_TargetAssemblyTypeName: FeedController, Assembly-CSharp
+        m_MethodName: CatSteady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDragDropFailed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1071661249}
+        m_TargetAssemblyTypeName: FeedController, Assembly-CSharp
+        m_MethodName: CatBackIdle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDroppedSuccessfully:
     m_PersistentCalls:
       m_Calls:
@@ -2282,9 +2425,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 824558166}
-  - {fileID: 225601621}
   - {fileID: 1163681127}
   - {fileID: 1725368}
   - {fileID: 123717740}
   - {fileID: 2082702446}
   - {fileID: 1071661250}
+  - {fileID: 225601621}

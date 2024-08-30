@@ -77,7 +77,7 @@ public class CatSelector : MonoBehaviour
     {
         if (!isMoving)
         {
-            StartCoroutine(MoveBoxesLeft());
+            StartCoroutine(MoveBoxesRight());
         }
     }
 
@@ -85,7 +85,7 @@ public class CatSelector : MonoBehaviour
     {
         if (!isMoving)
         {
-            StartCoroutine(MoveBoxesRight());
+            StartCoroutine(MoveBoxesLeft());
         }
     }
 

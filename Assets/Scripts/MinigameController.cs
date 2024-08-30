@@ -86,7 +86,7 @@ public class MinigameController : MonoBehaviour
         if (other.gameObject.CompareTag("Score"))
         {
             manager.AddScore();
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         if (other.gameObject.CompareTag("Enemy") && !isEnemyHitCooldown)
         {

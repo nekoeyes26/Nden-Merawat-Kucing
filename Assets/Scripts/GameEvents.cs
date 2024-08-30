@@ -11,6 +11,7 @@ public class GameEvents : MonoBehaviour
     public static event Action OnDirtyChange;
     public static event Action OnSadChange;
     public static event Action OnSickChange;
+    public static event Action OnMissChange;
 
     public static void XpChanged(int xpNow)
     {
@@ -40,5 +41,10 @@ public class GameEvents : MonoBehaviour
     public static void SickChanged()
     {
         OnSickChange?.Invoke();
+    }
+
+    public static void MissChanged()
+    {
+        OnMissChange?.Invoke();
     }
 }

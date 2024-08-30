@@ -12,13 +12,13 @@ public class Timer : MonoBehaviour
     public float cooldownTime = 60f;
     public float activeTime = 180f;
 
-    private float timer = 0f;
-    private bool isUIActive;
-    private float time;
+    protected float timer = 0f;
+    protected bool isUIActive;
+    protected float time;
     public Image fill;
     public float maxFillAmount = 1f;
     public static bool firstTime = true;
-    private CatScriptable catS;
+    protected CatScriptable catS;
 
     void Awake()
     {
@@ -29,77 +29,77 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
-        // Debug.Log(time);
-        if (!isUIActive && timer >= cooldownTime)
-        {
-            ActivateUI();
-            time = activeTime;
-        }
+        // timer += Time.deltaTime;
+        // // Debug.Log(time);
+        // if (!isUIActive && timer >= cooldownTime)
+        // {
+        //     ActivateUI();
+        //     time = activeTime;
+        // }
 
-        if (isUIActive && timer < cooldownTime + activeTime)
-        {
-            time -= Time.deltaTime;
-            fill.fillAmount = (time / activeTime) * maxFillAmount;
+        // if (isUIActive && timer < cooldownTime + activeTime)
+        // {
+        //     time -= Time.deltaTime;
+        //     fill.fillAmount = (time / activeTime) * maxFillAmount;
 
-            if (time < 0)
-            {
-                time = 0;
-            }
-        }
-        else if (isUIActive && timer >= cooldownTime + activeTime)
-        {
-            DeactivateUI();
-            string gameObjectName = gameObject.name.ToLower();
-            if (gameObjectName.Contains("hungry"))
-            {
-                GameManager.instance.hungryMiss++;
-            }
-            else if (gameObjectName.Contains("shower"))
-            {
-                GameManager.instance.showerMiss++;
-            }
-            else if (gameObjectName.Contains("photo"))
-            {
-                GameManager.instance.photoMiss++;
-            }
-            else if (gameObjectName.Contains("play"))
-            {
-                GameManager.instance.playMiss++;
-            }
-        }
-        GameManager.instance.totalMiss = GameManager.instance.hungryMiss + GameManager.instance.showerMiss + GameManager.instance.photoMiss + GameManager.instance.playMiss;
-        Debug.Log(GameManager.instance.totalMiss);
-        if (GameManager.instance.hungryMiss >= 2 && !catS.isHungry)
-        {
-            GameManager.instance.ChangeHungry();
-        }
-        if (GameManager.instance.showerMiss >= 2 && !catS.isDirty)
-        {
-            GameManager.instance.ChangeDirty();
-        }
-        if (GameManager.instance.playMiss >= 2 && !catS.isSad)
-        {
-            GameManager.instance.ChangeSad();
-        }
-        if (GameManager.instance.totalMiss >= 5 && !catS.isSick)
-        {
-            GameManager.instance.ChangeSick();
-        }
-        else if (GameManager.instance.totalMiss <= 0 && !catS.isHungry && !catS.isDirty && !catS.isSad && catS.isSick)
-        {
-            GameManager.instance.ChangeSick();
-        }
+        //     if (time < 0)
+        //     {
+        //         time = 0;
+        //     }
+        // }
+        // else if (isUIActive && timer >= cooldownTime + activeTime)
+        // {
+        //     DeactivateUI();
+        //     string gameObjectName = gameObject.name.ToLower();
+        //     if (gameObjectName.Contains("hungry"))
+        //     {
+        //         GameManager.instance.hungryMiss++;
+        //     }
+        //     else if (gameObjectName.Contains("shower"))
+        //     {
+        //         GameManager.instance.showerMiss++;
+        //     }
+        //     else if (gameObjectName.Contains("photo"))
+        //     {
+        //         GameManager.instance.photoMiss++;
+        //     }
+        //     else if (gameObjectName.Contains("play"))
+        //     {
+        //         GameManager.instance.playMiss++;
+        //     }
+        // }
+        // GameManager.instance.totalMiss = GameManager.instance.hungryMiss + GameManager.instance.showerMiss + GameManager.instance.photoMiss + GameManager.instance.playMiss;
+        // Debug.Log(GameManager.instance.totalMiss);
+        // if (GameManager.instance.hungryMiss >= 2 && !catS.isHungry)
+        // {
+        //     GameManager.instance.ChangeHungry();
+        // }
+        // if (GameManager.instance.showerMiss >= 2 && !catS.isDirty)
+        // {
+        //     GameManager.instance.ChangeDirty();
+        // }
+        // if (GameManager.instance.playMiss >= 2 && !catS.isSad)
+        // {
+        //     GameManager.instance.ChangeSad();
+        // }
+        // if (GameManager.instance.totalMiss >= 5 && !catS.isSick)
+        // {
+        //     GameManager.instance.ChangeSick();
+        // }
+        // else if (GameManager.instance.totalMiss <= 0 && !catS.isHungry && !catS.isDirty && !catS.isSad && catS.isSick)
+        // {
+        //     GameManager.instance.ChangeSick();
+        // }
     }
 
-    private void ActivateUI()
+    public void ActivateUI()
     {
         uiObject.SetActive(true);
         isUIActive = true;
         timer = cooldownTime;
     }
 
-    private void DeactivateUI()
+    public void DeactivateUI()
     {
         uiObject.SetActive(false);
         isUIActive = false;
@@ -142,13 +142,13 @@ public class Timer : MonoBehaviour
     }
 
     // Call SaveState() when the scene is unloaded
-    void OnDisable()
+    protected void OnDisable()
     {
         SaveState();
     }
 
     // Call LoadState() when the scene is loaded
-    void OnEnable()
+    protected void OnEnable()
     {
         if (firstTime)
         {
@@ -162,14 +162,6 @@ public class Timer : MonoBehaviour
         {
             LoadState();
         }
-        if (isUIActive)
-        {
-            uiObject.SetActive(true);
-        }
-        else if (!isUIActive)
-        {
-            uiObject.SetActive(false);
-        }
     }
 
     public void Reset()
@@ -177,23 +169,23 @@ public class Timer : MonoBehaviour
         timer = 0f;
         isUIActive = false;
         time = 0;
-        string gameObjectName = gameObject.name.ToLower();
-        if (gameObjectName.Contains("hungry"))
-        {
-            GameManager.instance.hungryMiss = 0;
-        }
-        else if (gameObjectName.Contains("shower"))
-        {
-            GameManager.instance.showerMiss = 0;
-        }
-        else if (gameObjectName.Contains("photo"))
-        {
-            GameManager.instance.photoMiss = 0;
-        }
-        else if (gameObjectName.Contains("play"))
-        {
-            GameManager.instance.playMiss = 0;
-        }
+        // string gameObjectName = gameObject.name.ToLower();
+        // if (gameObjectName.Contains("hungry"))
+        // {
+        //     GameManager.instance.hungryMiss = 0;
+        // }
+        // else if (gameObjectName.Contains("shower"))
+        // {
+        //     GameManager.instance.showerMiss = 0;
+        // }
+        // else if (gameObjectName.Contains("photo"))
+        // {
+        //     GameManager.instance.photoMiss = 0;
+        // }
+        // else if (gameObjectName.Contains("play"))
+        // {
+        //     GameManager.instance.playMiss = 0;
+        // }
     }
 
     private IEnumerator ChangeFirstTime()

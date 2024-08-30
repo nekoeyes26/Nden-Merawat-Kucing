@@ -20,6 +20,7 @@ public class MainPageController : MonoBehaviour
     public Animator catAnimator;
     public Collider2D catCollider;
     private bool isPetted = false;
+    private float idlingTimer = 0f;
 
     void OnEnable()
     {
@@ -29,6 +30,7 @@ public class MainPageController : MonoBehaviour
         GameEvents.OnDirtyChange += CatDirty;
         GameEvents.OnSadChange += CatSad;
         GameEvents.OnSickChange += CatSick;
+        GameEvents.OnMissChange += MissCalc;
     }
 
     void OnDisable()
@@ -39,6 +41,7 @@ public class MainPageController : MonoBehaviour
         GameEvents.OnDirtyChange -= CatDirty;
         GameEvents.OnSadChange -= CatSad;
         GameEvents.OnSickChange -= CatSick;
+        GameEvents.OnMissChange -= MissCalc;
     }
     void Start()
     {
@@ -49,15 +52,28 @@ public class MainPageController : MonoBehaviour
         CatDirty();
         CatSad();
         CatSick();
+        MissCalc();
+        idlingTimer = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (catS.hungryRemaining <= 0) hungryUI.SetActive(false);
-        if (catS.showerRemaining <= 0) showerUI.SetActive(false);
-        if (catS.playRemaining <= 0) playUI.SetActive(false);
-        if (catS.photoRemaining <= 0) photoUI.SetActive(false);
+        idlingTimer += Time.deltaTime;
+        if (catS.level < 15)
+        {
+            if (catS.hungryRemaining <= 0) hungryUI.SetActive(false);
+            if (catS.showerRemaining <= 0) showerUI.SetActive(false);
+            if (catS.playRemaining <= 0) playUI.SetActive(false);
+            if (catS.photoRemaining <= 0) photoUI.SetActive(false);
+        }
+        else if (catS.level >= 15)
+        {
+            hungryUI.SetActive(true);
+            showerUI.SetActive(true);
+            playUI.SetActive(true);
+            photoUI.SetActive(true);
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GameManager.instance.ChangeHungry();
@@ -66,7 +82,15 @@ public class MainPageController : MonoBehaviour
         {
             isPetted = !isPetted;
             catAnimator.SetBool("isPet", isPetted);
+            idlingTimer = 0f;
             StartCoroutine(ResetIsPetted());
+        }
+
+        if (idlingTimer >= 5f)
+        {
+            catAnimator.SetBool("isIdling", true);
+            idlingTimer = 0f;
+            StartCoroutine(ResetIdling());
         }
     }
 
@@ -78,7 +102,7 @@ public class MainPageController : MonoBehaviour
     void BarFill(int xp)
     {
         float targetFillAmount = xp / (float)catS.xpNeeded;
-        Debug.Log(xp);
+        // Debug.Log(xp);
         StartCoroutine(FillBarSmoothly(targetFillAmount, lerpSpeed));
     }
 
@@ -175,5 +199,24 @@ public class MainPageController : MonoBehaviour
     private void CatSick()
     {
         catAnimator.SetBool("isSick", catS.isSick);
+    }
+
+    private void MissCalc()
+    {
+        GameManager.instance.totalMiss = GameManager.instance.hungryMiss + GameManager.instance.showerMiss + GameManager.instance.photoMiss + GameManager.instance.playMiss;
+        if (GameManager.instance.totalMiss >= 5 && !catS.isSick)
+        {
+            GameManager.instance.ChangeSick();
+        }
+        else if (GameManager.instance.totalMiss < 5 && (!catS.isHungry || !catS.isDirty || !catS.isSad) && catS.isSick)
+        {
+            GameManager.instance.ChangeSick();
+        }
+    }
+
+    private IEnumerator ResetIdling()
+    {
+        yield return new WaitForSeconds(2f);
+        catAnimator.SetBool("isIdling", false);
     }
 }

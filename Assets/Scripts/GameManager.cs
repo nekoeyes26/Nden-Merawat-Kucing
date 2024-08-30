@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     public int photoMiss;
     public int playMiss;
     public int totalMiss;
+    public bool isHungryTimerOn = false;
+    public bool isShowerTimerOn = false;
+    public bool isPhotoTimerOn = false;
+    public bool isPlayTimerOn = false;
     private void Awake()
     {
         if (instance != null)

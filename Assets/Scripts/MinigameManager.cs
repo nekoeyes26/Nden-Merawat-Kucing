@@ -15,7 +15,7 @@ public class MinigameManager : MonoBehaviour
 
     private int score = 0;
     private bool isGamePaused = false;
-    private bool isGameOver = false;
+    private bool isWin = false;
     public Image bar;
     private float lerpSpeed;
     public float avaXMin;
@@ -23,7 +23,8 @@ public class MinigameManager : MonoBehaviour
     public RectTransform avatarRect;
     public ObstaclePool obstaclePool;
 
-    public int health = 3;
+    private int health = 3;
+    public int maxHealth = 3;
 
     public GameObject healthPrefab;
     public Transform healthParent;
@@ -48,6 +49,7 @@ public class MinigameManager : MonoBehaviour
     {
         lerpSpeed = 2f * Time.deltaTime;
         BarFill();
+        Debug.Log("health: " + healthObjects.Count);
     }
 
     public void BarFill()
@@ -70,15 +72,14 @@ public class MinigameManager : MonoBehaviour
     {
         score++;
         scoreText.text = "Score: " + score;
-        if (score >= targetScore)
+        if (score >= targetScore && !isWin)
         {
-            WinGame();
+            isWin = true;
         }
     }
 
     public void WinGame()
     {
-        isGameOver = true;
         Time.timeScale = 0f;
         gameOverText.enabled = true;
         gameOverText.text = "Congratulations! You won! Your score is " + score;
@@ -92,12 +93,12 @@ public class MinigameManager : MonoBehaviour
             isXPAdded = true;
             GameManager.instance.LevelUpChecker();
             if (GameManager.instance.CatProfile.catScriptable.isSad) GameManager.instance.ChangeSad();
+            GameManager.instance.isPlayTimerOn = false;
         }
     }
 
     public void GameOver()
     {
-        isGameOver = true;
         Time.timeScale = 0f;
         gameOverText.enabled = true;
         gameOverText.text = "Game Over! Your score is " + score;
@@ -124,7 +125,7 @@ public class MinigameManager : MonoBehaviour
 
     public void Restart()
     {
-        obstaclePool.Restart();
+        obstaclePool.RestartObstacles();
         GenerateHealth();
         pauseButton.SetActive(true);
         restartButton.SetActive(false);
@@ -137,12 +138,13 @@ public class MinigameManager : MonoBehaviour
     public void HittingEnemy()
     {
         health--;
-        Debug.Log(health);
+        // Debug.Log(health);
         Destroy(healthObjects[health]);
         healthObjects.RemoveAt(health);
         if (health <= 0)
         {
-            GameOver();
+            if (isWin) WinGame();
+            else GameOver();
         }
         foreach (BackgroundScript backgroundScript in backgroundScripts)
         {
@@ -154,6 +156,7 @@ public class MinigameManager : MonoBehaviour
 
     void GenerateHealth()
     {
+        health = maxHealth;
         while (healthObjects.Count > health)
         {
             Destroy(healthObjects[healthObjects.Count - 1]);

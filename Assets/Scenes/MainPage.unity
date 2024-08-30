@@ -232,7 +232,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1096096493}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Timer, Assembly-CSharp
         m_MethodName: Reset
         m_Mode: 1
@@ -689,11 +689,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 448529310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c2d2fe2291e4d45b4b9713def9c5c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 44a9df7d25dd8e54985c392903b0dee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiObject: {fileID: 256002008}
-  cooldownTime: 5
+  cooldownTime: 8
   activeTime: 10
   fill: {fileID: 140293373}
   maxFillAmount: 0.92
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.81
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -951,18 +951,6 @@ MonoBehaviour:
       - m_Target: {fileID: 673804824}
         m_TargetAssemblyTypeName: SceneLoad, Assembly-CSharp
         m_MethodName: LoadScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 975544097}
-        m_TargetAssemblyTypeName: Timer, Assembly-CSharp
-        m_MethodName: Reset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1591,7 +1579,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 975544095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c2d2fe2291e4d45b4b9713def9c5c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 28c2729efca47fb43baed73e1d64b87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiObject: {fileID: 674972243}
@@ -1708,7 +1696,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1283793701}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Timer, Assembly-CSharp
         m_MethodName: Reset
         m_Mode: 1
@@ -2090,11 +2078,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1096096491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c2d2fe2291e4d45b4b9713def9c5c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c4eff633a01e564f9945452c8756856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiObject: {fileID: 1729129997}
-  cooldownTime: 5
+  cooldownTime: 7
   activeTime: 10
   fill: {fileID: 1901845088}
   maxFillAmount: 0.92
@@ -2643,11 +2631,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1283793699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c2d2fe2291e4d45b4b9713def9c5c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 99a36f7b662f27a42932d8add3e403c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiObject: {fileID: 1759620597}
-  cooldownTime: 5
+  cooldownTime: 3
   activeTime: 10
   fill: {fileID: 795478688}
   maxFillAmount: 0.92
@@ -3843,7 +3831,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 448529312}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Timer, Assembly-CSharp
         m_MethodName: Reset
         m_Mode: 1
@@ -4197,7 +4185,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 83bb8796a93d69f4994d13b240c4dc0b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b3f6ecab1b333d49b8da51ad499462a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4281,7 +4269,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.33, y: 4.7}
+    oldSize: {x: 5.4125, y: 5.875}
     newSize: {x: 4.33, y: 4.7}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

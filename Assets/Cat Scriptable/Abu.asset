@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb6df5622997174d903ab637d08899f, type: 3}
+  m_Name: Abu
+  m_EditorClassIdentifier: 
+  preview: {fileID: 0}
+  catName: 
+  xp: 0
+  xpNeeded: 0
+  level: 0
+  phase: 0
+  hungryRemaining: 0
+  showerRemaining: 0
+  playRemaining: 0
+  photoRemaining: 0
+  state: 0
+  isHungry: 0
+  isDirty: 0
+  isSad: 0
+  isSick: 0
+  spriteFolderPath: Sprite/Cat/Abu/
+  animationFolderPath: Anim/Abu/

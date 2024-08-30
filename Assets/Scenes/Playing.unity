@@ -334,7 +334,7 @@ MonoBehaviour:
   avaXMax: 247.5
   avatarRect: {fileID: 493563627}
   obstaclePool: {fileID: 1107554490}
-  health: 3
+  maxHealth: 2
   healthPrefab: {fileID: 6625836100191003692, guid: 8f3479e40056fe646b8f6bda0621852c, type: 3}
   healthParent: {fileID: 600306257}
   backgroundScripts:
@@ -1422,8 +1422,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -44.5, y: 0}
-  m_SizeDelta: {x: 520, y: 55}
+  m_AnchoredPosition: {x: -25, y: 0}
+  m_SizeDelta: {x: 560, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1182901142
 MonoBehaviour:
@@ -2366,8 +2366,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -44.50004, y: 0}
-  m_SizeDelta: {x: 520, y: 55}
+  m_AnchoredPosition: {x: -25, y: 0}
+  m_SizeDelta: {x: 560, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1799597574
 MonoBehaviour:
@@ -2394,7 +2394,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.81
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

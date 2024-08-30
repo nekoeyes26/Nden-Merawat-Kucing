@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcb6df5622997174d903ab637d08899f, type: 3}
-  m_Name: CoklatTua
+  m_Name: Putih
   m_EditorClassIdentifier: 
   preview: {fileID: 0}
   catName: 
@@ -23,5 +23,9 @@ MonoBehaviour:
   playRemaining: 0
   photoRemaining: 0
   state: 0
-  spriteFolderPath: temporary/Cat/CoklatTua/
-  animationFolderPath: Anim/CoklatTua
+  isHungry: 0
+  isDirty: 0
+  isSad: 0
+  isSick: 0
+  spriteFolderPath: Sprite/Cat/Putih/
+  animationFolderPath: Anim/Putih/

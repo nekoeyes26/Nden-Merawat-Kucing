@@ -138,6 +138,8 @@ public class WefieController : MonoBehaviour
             GameManager.instance.CatProfile.catScriptable.photoRemaining--;
             isXPAdded = true;
             GameManager.instance.LevelUpChecker();
+            if (GameManager.instance.CatProfile.catScriptable.isSad) GameManager.instance.ChangeSad();
+            GameManager.instance.isPhotoTimerOn = false;
         }
     }
 

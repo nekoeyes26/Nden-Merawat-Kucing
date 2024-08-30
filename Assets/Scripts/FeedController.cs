@@ -11,6 +11,7 @@ public class FeedController : MonoBehaviour
     private float lerpSpeed;
     private bool isFull = false;
     private bool isXPAdded = false;
+    public Animator catAnimator;
 
     private void Start()
     {
@@ -41,10 +42,15 @@ public class FeedController : MonoBehaviour
                 Full();
                 Debug.Log(point);
             }
+            catAnimator.SetBool("isSteady", false);
+            catAnimator.SetBool("isEating", true);
+            StartCoroutine(ResetEatingState());
         }
         else
         {
             Debug.Log("The object is not tagged as Food. Point not added.");
+            catAnimator.SetBool("isSteady", false);
+            catAnimator.SetBool("isEating", false);
         }
     }
 
@@ -59,6 +65,23 @@ public class FeedController : MonoBehaviour
             isXPAdded = true;
             GameManager.instance.LevelUpChecker();
             if (GameManager.instance.CatProfile.catScriptable.isHungry) GameManager.instance.ChangeHungry();
+            GameManager.instance.isHungryTimerOn = false;
         }
+    }
+
+    public void CatSteady()
+    {
+        catAnimator.SetBool("isSteady", true);
+    }
+
+    private IEnumerator ResetEatingState()
+    {
+        yield return new WaitForSeconds(2f);
+        catAnimator.SetBool("isEating", false);
+    }
+
+    public void CatBackIdle()
+    {
+        catAnimator.SetBool("isSteady", false);
     }
 }
