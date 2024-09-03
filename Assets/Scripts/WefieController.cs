@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class WefieController : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class WefieController : MonoBehaviour
             sprite = cat.sprite;
         }
         cat.sprite = sprite;
+        LoadScreenshots();
     }
 
     // Update is called once per frame
@@ -131,11 +133,11 @@ public class WefieController : MonoBehaviour
         {
             UI.SetActive(false);
         }
-        StartCoroutine("Screenshot");
+        StartCoroutine(Screenshot());
         if (!isXPAdded && GameManager.instance.CatProfile.catScriptable.photoRemaining > 0)
         {
-            GameManager.instance.AddXP();
             GameManager.instance.CatProfile.catScriptable.photoRemaining--;
+            GameManager.instance.AddXP();
             isXPAdded = true;
             GameManager.instance.LevelUpChecker();
             if (GameManager.instance.CatProfile.catScriptable.isSad) GameManager.instance.ChangeSad();
@@ -164,5 +166,67 @@ public class WefieController : MonoBehaviour
     public void ChangeCobozPose(Sprite coboz)
     {
         charKanan.sprite = coboz;
+    }
+
+    public static void SaveScreenshots()
+    {
+        Debug.Log("saving screenshot");
+        // Create a binary formatter
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string directoryPath = Application.persistentDataPath + "/ScreenshotData";
+        Directory.CreateDirectory(directoryPath);
+        string filePath = directoryPath + "/saved_screenshot.dat";
+        FileStream file = File.Create(filePath);
+
+        // Create a list of byte arrays to store the textures
+        List<byte[]> textureBytes = new List<byte[]>();
+
+        // Convert each texture to a byte array
+        foreach (Texture2D texture in SavedScreenshots)
+        {
+            textureBytes.Add(texture.EncodeToPNG());
+        }
+
+        // Serialize the list of byte arrays
+        formatter.Serialize(file, textureBytes);
+
+        // Close the file stream
+        file.Close();
+    }
+
+    public static void LoadScreenshots()
+    {
+        if (File.Exists(Application.persistentDataPath + "/ScreenshotData/saved_screenshot.dat"))
+        {
+            Debug.Log("Loading Screenshot");
+            // Create a binary formatter
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            // Create a file stream
+            FileStream file = File.Open(Application.persistentDataPath + "/ScreenshotData/saved_screenshot.dat", FileMode.Open);
+
+            // Deserialize the list of byte arrays
+            List<byte[]> textureBytes = formatter.Deserialize(file) as List<byte[]>;
+
+            // Close the file stream
+            file.Close();
+
+            // Clear the SavedScreenshots list
+            SavedScreenshots.Clear();
+
+            // Convert each byte array back to a texture
+            foreach (byte[] bytes in textureBytes)
+            {
+                Texture2D texture = new Texture2D(1, 1);
+                texture.LoadImage(bytes);
+                SavedScreenshots.Add(texture);
+            }
+        }
+    }
+
+    void OnDisable()
+    {
+        SaveScreenshots();
     }
 }

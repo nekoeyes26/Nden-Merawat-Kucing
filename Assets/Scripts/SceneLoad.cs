@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class SceneLoad : MonoBehaviour
 {
     public string sceneName;
-    public static string previousScene;
     public void LoadScene()
     {
         if (!string.IsNullOrEmpty(sceneName))
         {
             if (Time.timeScale == 0f) Time.timeScale = 1f;
-            previousScene = SceneManager.GetActiveScene().name;
+            GameManager.instance.previousScene = SceneManager.GetActiveScene().name;
+            // Debug.Log(SceneManager.GetActiveScene().name);
             SceneManager.LoadScene(sceneName);
         }
         else
@@ -29,11 +29,11 @@ public class SceneLoad : MonoBehaviour
 
     public void PreviousScene()
     {
-        if (!string.IsNullOrEmpty(previousScene))
+        if (!string.IsNullOrEmpty(GameManager.instance.previousScene))
         {
             if (Time.timeScale == 0f) Time.timeScale = 1f;
-            SceneManager.LoadScene(previousScene);
-            previousScene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(GameManager.instance.previousScene);
+            GameManager.instance.previousScene = SceneManager.GetActiveScene().name;
         }
         else
         {

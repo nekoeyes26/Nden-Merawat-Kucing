@@ -88,8 +88,8 @@ public class MinigameManager : MonoBehaviour
         resumeButton.SetActive(false);
         if (!isXPAdded && GameManager.instance.CatProfile.catScriptable.playRemaining > 0)
         {
-            GameManager.instance.AddXP();
             GameManager.instance.CatProfile.catScriptable.playRemaining--;
+            GameManager.instance.AddXP();
             isXPAdded = true;
             GameManager.instance.LevelUpChecker();
             if (GameManager.instance.CatProfile.catScriptable.isSad) GameManager.instance.ChangeSad();

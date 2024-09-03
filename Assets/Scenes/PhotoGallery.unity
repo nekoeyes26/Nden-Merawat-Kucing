@@ -871,6 +871,7 @@ MonoBehaviour:
   imagePrefab: {fileID: 4674487896713589611, guid: aac1581a09767cb43bf2f65f30598811, type: 3}
   contentTransform: {fileID: 365271598}
   noScreenshotText: {fileID: 1703452618}
+  scrollRect: {fileID: 1401084141}
 --- !u!4 &1446474178
 Transform:
   m_ObjectHideFlags: 0

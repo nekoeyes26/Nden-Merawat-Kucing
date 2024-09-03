@@ -74,10 +74,6 @@ public class MainPageController : MonoBehaviour
             playUI.SetActive(true);
             photoUI.SetActive(true);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameManager.instance.ChangeHungry();
-        }
         if (IsTapped())
         {
             isPetted = !isPetted;

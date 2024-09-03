@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
     private Cat cat;
+    public string currentCatName;
+    public string previousCatName;
     public int hungryMiss;
     public int showerMiss;
     public int photoMiss;
@@ -15,6 +17,8 @@ public class GameManager : MonoBehaviour
     public bool isShowerTimerOn = false;
     public bool isPhotoTimerOn = false;
     public bool isPlayTimerOn = false;
+    public string previousScene;
+    public bool isGalleryOpened = false;
     private void Awake()
     {
         if (instance != null)
@@ -41,13 +45,17 @@ public class GameManager : MonoBehaviour
     public Cat CatProfile
     {
         get { return cat; }
-        set { cat = value; }
+        set
+        {
+            cat = value;
+        }
     }
 
     public void AddXP()
     {
         cat.catScriptable.xp++;
         GameEvents.XpChanged(cat.catScriptable.xp);
+        cat.catScriptable.Save();
     }
 
     public void LevelUp()
@@ -58,6 +66,7 @@ public class GameManager : MonoBehaviour
         cat.RenewXpNeeded();
         cat.RenewPhase(cat.catScriptable.level);
         GameEvents.LevelChanged(cat.catScriptable.level);
+        cat.catScriptable.Save();
     }
 
     public void LevelUpChecker()
@@ -71,23 +80,40 @@ public class GameManager : MonoBehaviour
     {
         cat.catScriptable.isHungry = !cat.catScriptable.isHungry;
         GameEvents.HungryChanged();
+        cat.catScriptable.Save();
     }
 
     public void ChangeDirty()
     {
         cat.catScriptable.isDirty = !cat.catScriptable.isDirty;
         GameEvents.DirtyChanged();
+        cat.catScriptable.Save();
     }
 
     public void ChangeSad()
     {
         cat.catScriptable.isSad = !cat.catScriptable.isSad;
         GameEvents.SadChanged();
+        cat.catScriptable.Save();
     }
 
     public void ChangeSick()
     {
         cat.catScriptable.isSick = !cat.catScriptable.isSick;
         GameEvents.SickChanged();
+        cat.catScriptable.Save();
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (cat != null)
+        {
+            cat.catScriptable.Save();
+        }
+        else
+        {
+            Debug.Log("No cat selected");
+        }
+        PlayerPrefs.DeleteAll();
     }
 }

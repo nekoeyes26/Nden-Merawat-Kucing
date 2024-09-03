@@ -60,8 +60,8 @@ public class FeedController : MonoBehaviour
         Debug.Log("Full");
         if (!isXPAdded)
         {
-            GameManager.instance.AddXP();
             GameManager.instance.CatProfile.catScriptable.hungryRemaining--;
+            GameManager.instance.AddXP();
             isXPAdded = true;
             GameManager.instance.LevelUpChecker();
             if (GameManager.instance.CatProfile.catScriptable.isHungry) GameManager.instance.ChangeHungry();

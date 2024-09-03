@@ -2383,6 +2383,8 @@ MonoBehaviour:
   normalScale: 0.5
   middleScale: 1
   scaleTransitionDuration: 0.2
+  middleIndex: 0
+  previousMiddleIndex: 0
   choosingCatUI:
   - {fileID: 1029081924}
   - {fileID: 821844365}
@@ -2394,6 +2396,8 @@ MonoBehaviour:
   - {fileID: 368867225}
   - {fileID: 1881138793}
   preview: {fileID: 62874983}
+  giveNameButton: {fileID: 1724568193}
+  inputField: {fileID: 1273739230}
 --- !u!1 &1400302493
 GameObject:
   m_ObjectHideFlags: 0
@@ -2854,12 +2858,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1351443112}
-        m_TargetAssemblyTypeName: CarouselMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: CatSelector, Assembly-CSharp
         m_MethodName: NamingCat
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1273739230}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3211,11 +3215,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65015a709d240534ba72b3373ea25644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCatName: 
+  previousCatName: 
   hungryMiss: 0
   showerMiss: 0
   photoMiss: 0
   playMiss: 0
   totalMiss: 0
+  isHungryTimerOn: 0
+  isShowerTimerOn: 0
+  isPhotoTimerOn: 0
+  isPlayTimerOn: 0
+  previousScene: 
+  isGalleryOpened: 0
 --- !u!1 &1846519390
 GameObject:
   m_ObjectHideFlags: 0

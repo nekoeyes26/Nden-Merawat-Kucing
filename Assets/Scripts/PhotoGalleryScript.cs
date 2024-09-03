@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class PhotoGalleryScript : MonoBehaviour
 {
-    public GameObject imagePrefab; // Prefab for the Image UI element
-    public Transform contentTransform; // The content of the ScrollView
+    public GameObject imagePrefab;
+    public Transform contentTransform;
     public GameObject noScreenshotText;
+    public ScrollRect scrollRect;
+    public float scrollDuration = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,18 @@ public class PhotoGalleryScript : MonoBehaviour
         if (WefieController.SavedScreenshots.Count > 0)
         {
             DisplayPhotos();
+            if (GameManager.instance.previousScene == "Wefie")
+            {
+                if (!GameManager.instance.isGalleryOpened)
+                {
+                    StartCoroutine(SmoothScroll());
+                    GameManager.instance.isGalleryOpened = true;
+                }
+                else
+                {
+                    scrollRect.horizontalNormalizedPosition = 1f;
+                }
+            }
         }
         else
         {
@@ -30,25 +44,34 @@ public class PhotoGalleryScript : MonoBehaviour
 
     void DisplayPhotos()
     {
-        // Clear any existing children in the content transform
         foreach (Transform child in contentTransform)
         {
             Destroy(child.gameObject);
         }
 
-        // Loop through each saved screenshot in WefieController
         for (int i = 0; i < WefieController.SavedScreenshots.Count; i++)
         {
-            // Instantiate a new Image UI element from the prefab
             GameObject newImage = Instantiate(imagePrefab, contentTransform);
-
-            // Get the Image component from the new UI element
             Image imageComponent = newImage.GetComponent<Image>();
-
-            // Convert the Texture2D to a Sprite and assign it to the Image component
             Texture2D texture = WefieController.SavedScreenshots[i];
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             imageComponent.sprite = sprite;
         }
+    }
+
+    IEnumerator SmoothScroll()
+    {
+        float elapsedTime = 0f;
+        float startValue = scrollRect.horizontalNormalizedPosition;
+        float endValue = 1f;
+
+        while (elapsedTime < scrollDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            scrollRect.horizontalNormalizedPosition = Mathf.Lerp(startValue, endValue, elapsedTime / scrollDuration);
+            yield return null;
+        }
+
+        scrollRect.horizontalNormalizedPosition = endValue;
     }
 }

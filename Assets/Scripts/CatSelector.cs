@@ -15,8 +15,8 @@ public class CatSelector : MonoBehaviour
     public float scaleTransitionDuration = 0.2f;
 
     private bool isMoving = false;
-    private int middleIndex = 0;
-    private int previousMiddleIndex = 0;
+    public int middleIndex = 0;
+    public int previousMiddleIndex = 0;
 
     private Image[] boxImages;
     private RectTransform[] boxRects;
@@ -27,6 +27,8 @@ public class CatSelector : MonoBehaviour
     public GameObject[] choosingCatUI;
     public GameObject[] givingNameUI;
     public Image preview;
+    public Button giveNameButton;
+    public InputField inputField;
 
     void Start()
     {
@@ -52,8 +54,18 @@ public class CatSelector : MonoBehaviour
             cats[i] = boxes[i].GetComponent<Cat>();
         }
 
+        // PlayerPrefs.DeleteAll();
         // Cari child object yang berada di tengah saat start
-        FindMiddleIndex();
+        if (!PlayerPrefs.HasKey("middleIndex"))
+        {
+            FindMiddleIndex();
+        }
+        else
+        {
+            LoadTransforms();
+            middleIndex = PlayerPrefs.GetInt("middleIndex", 2);
+            previousMiddleIndex = PlayerPrefs.GetInt("previousMiddleIndex", 0);
+        }
 
         // Atur skala child object yang berada di tengah ke skala middle
         StartCoroutine(ScaleBoxes());
@@ -70,6 +82,14 @@ public class CatSelector : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isMoving)
         {
             StartCoroutine(MoveBoxesLeft());
+        }
+        if (inputField.text == "")
+        {
+            giveNameButton.interactable = false;
+        }
+        else if (inputField.text != "")
+        {
+            giveNameButton.interactable = true;
         }
     }
 
@@ -114,10 +134,10 @@ public class CatSelector : MonoBehaviour
         yield return new WaitForSeconds(moveDuration);
 
         // Update urutan box dalam hirarki
-        for (int i = 0; i < boxes.Length; i++)
-        {
-            boxes[i].SetSiblingIndex(i);
-        }
+        // for (int i = 0; i < boxes.Length; i++)
+        // {
+        //     boxes[i].SetSiblingIndex(i);
+        // }
 
         isMoving = false;
     }
@@ -141,10 +161,10 @@ public class CatSelector : MonoBehaviour
         yield return new WaitForSeconds(moveDuration);
 
         // Update urutan box dalam hirarki
-        for (int i = 0; i < boxes.Length; i++)
-        {
-            boxes[i].SetSiblingIndex(i);
-        }
+        // for (int i = 0; i < boxes.Length; i++)
+        // {
+        //     boxes[i].SetSiblingIndex(i);
+        // }
 
         isMoving = false;
     }
@@ -255,7 +275,7 @@ public class CatSelector : MonoBehaviour
     public void ChooseCat()
     {
         GameManager.instance.CatProfile = middleCat;
-        Debug.Log(middleCat.catScriptable.animationFolderPath);
+        // Debug.Log(middleCat.catScriptable.animationFolderPath);
     }
 
     public void GiveNameUI()
@@ -292,8 +312,15 @@ public class CatSelector : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("MainPage");
+            SceneLoad sceneLoad = new SceneLoad();
+            sceneLoad.sceneName = "MainPage";
+            sceneLoad.LoadScene();
         }
+        PlayerPrefs.SetInt("middleIndex", middleIndex);
+        PlayerPrefs.SetInt("previousMiddleIndex", previousMiddleIndex);
+        PlayerPrefs.Save();
+        SaveTransforms();
+        Debug.Log("Saving PlayerPrefs");
     }
 
     public void BackChoosingUI()
@@ -309,10 +336,94 @@ public class CatSelector : MonoBehaviour
         }
     }
 
-    public void NamingCat(InputField inputField)
+    public void NamingCat()
     {
         GameManager.instance.CatProfile.catScriptable.name = inputField.text;
-        Debug.Log(GameManager.instance.CatProfile.name);
+        GameManager.instance.CatProfile.catScriptable.Save();
+        // Debug.Log(GameManager.instance.CatProfile.name);
         // Debug.Log(GameManager.instance.CatProfile.state);
     }
+
+    void OnDisable()
+    {
+        if (GameManager.instance.currentCatName != null)
+        {
+            Debug.Log("Cat Tidak Null");
+            GameManager.instance.previousCatName = GameManager.instance.currentCatName;
+        }
+        else
+        {
+            Debug.Log("Cat Null");
+        }
+        if (GameManager.instance.CatProfile != null)
+        {
+            GameManager.instance.currentCatName = GameManager.instance.CatProfile.catScriptable.name;
+        }
+    }
+
+    void SaveTransforms()
+    {
+        for (int i = 0; i < boxes.Length; i++)
+        {
+            // Save position
+            PlayerPrefs.SetFloat("Box_" + i + "_PosX", boxes[i].position.x);
+            PlayerPrefs.SetFloat("Box_" + i + "_PosY", boxes[i].position.y);
+            PlayerPrefs.SetFloat("Box_" + i + "_PosZ", boxes[i].position.z);
+
+            // Save rotation
+            PlayerPrefs.SetFloat("Box_" + i + "_RotX", boxes[i].rotation.eulerAngles.x);
+            PlayerPrefs.SetFloat("Box_" + i + "_RotY", boxes[i].rotation.eulerAngles.y);
+            PlayerPrefs.SetFloat("Box_" + i + "_RotZ", boxes[i].rotation.eulerAngles.z);
+
+            // Save scale
+            PlayerPrefs.SetFloat("Box_" + i + "_ScaleX", boxes[i].localScale.x);
+            PlayerPrefs.SetFloat("Box_" + i + "_ScaleY", boxes[i].localScale.y);
+            PlayerPrefs.SetFloat("Box_" + i + "_ScaleZ", boxes[i].localScale.z);
+        }
+
+        for (int i = 0; i < boxImages.Length; i++)
+        {
+            float alpha = boxImages[i].color.a;
+            PlayerPrefs.SetFloat($"BoxAlpha_{i}", alpha);
+        }
+
+        PlayerPrefs.Save();
+    }
+
+    void LoadTransforms()
+    {
+        Debug.Log("Load Transform");
+        for (int i = 0; i < boxes.Length; i++)
+        {
+            // Load position
+            float posX = PlayerPrefs.GetFloat("Box_" + i + "_PosX", boxes[i].position.x);
+            float posY = PlayerPrefs.GetFloat("Box_" + i + "_PosY", boxes[i].position.y);
+            float posZ = PlayerPrefs.GetFloat("Box_" + i + "_PosZ", boxes[i].position.z);
+            boxes[i].position = new Vector3(posX, posY, posZ);
+
+            // Load rotation
+            float rotX = PlayerPrefs.GetFloat("Box_" + i + "_RotX", boxes[i].rotation.eulerAngles.x);
+            float rotY = PlayerPrefs.GetFloat("Box_" + i + "_RotY", boxes[i].rotation.eulerAngles.y);
+            float rotZ = PlayerPrefs.GetFloat("Box_" + i + "_RotZ", boxes[i].rotation.eulerAngles.z);
+            boxes[i].rotation = Quaternion.Euler(rotX, rotY, rotZ);
+
+            // Load scale
+            float scaleX = PlayerPrefs.GetFloat("Box_" + i + "_ScaleX", boxes[i].localScale.x);
+            float scaleY = PlayerPrefs.GetFloat("Box_" + i + "_ScaleY", boxes[i].localScale.y);
+            float scaleZ = PlayerPrefs.GetFloat("Box_" + i + "_ScaleZ", boxes[i].localScale.z);
+            boxes[i].localScale = new Vector3(scaleX, scaleY, scaleZ);
+        }
+
+        for (int i = 0; i < boxImages.Length; i++)
+        {
+            float alpha = PlayerPrefs.GetFloat($"BoxAlpha_{i}");
+            Color color = boxImages[i].color;
+            color.a = alpha;
+            boxImages[i].color = color;
+        }
+    }
+    // private void OnApplicationQuit()
+    // {
+    //     PlayerPrefs.DeleteAll();
+    // }
 }

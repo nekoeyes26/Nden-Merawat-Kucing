@@ -117,7 +117,7 @@ public class Timer : MonoBehaviour
     // Save the state to a file
     public void SaveState()
     {
-        Debug.Log("Saving");
+        // Debug.Log("Saving");
         TimerData data = new TimerData();
         data.timer = timer;
         data.isUIActive = isUIActive;
@@ -141,15 +141,34 @@ public class Timer : MonoBehaviour
         time = data.time;
     }
 
-    // Call SaveState() when the scene is unloaded
     protected void OnDisable()
     {
         SaveState();
     }
 
-    // Call LoadState() when the scene is loaded
     protected void OnEnable()
     {
+        if (GameManager.instance.currentCatName != GameManager.instance.previousCatName && GameManager.instance.previousScene == "ChoosingCat")
+        {
+            Reset();
+            DeactivateUI();
+            GameManager.instance.isHungryTimerOn = false;
+            GameManager.instance.isShowerTimerOn = false;
+            GameManager.instance.isPhotoTimerOn = false;
+            GameManager.instance.isPlayTimerOn = false;
+            GameManager.instance.hungryMiss = 0;
+            GameManager.instance.showerMiss = 0;
+            GameManager.instance.photoMiss = 0;
+            GameManager.instance.playMiss = 0;
+            GameManager.instance.totalMiss = 0;
+        }
+        else
+        {
+            if (File.Exists(Application.persistentDataPath + "/" + gameObject.name + "/timer_state.json"))
+            {
+                LoadState();
+            }
+        }
         if (firstTime)
         {
             if (File.Exists(Application.persistentDataPath + "/" + gameObject.name + "/timer_state.json"))
@@ -157,10 +176,6 @@ public class Timer : MonoBehaviour
                 File.Delete(Application.persistentDataPath + "/" + gameObject.name + "/timer_state.json");
             }
             StartCoroutine(ChangeFirstTime());
-        }
-        if (File.Exists(Application.persistentDataPath + "/" + gameObject.name + "/timer_state.json"))
-        {
-            LoadState();
         }
     }
 

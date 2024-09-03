@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hitam
   m_EditorClassIdentifier: 
   preview: {fileID: 0}
+  id: 3
   catName: 
   xp: 0
   xpNeeded: 0

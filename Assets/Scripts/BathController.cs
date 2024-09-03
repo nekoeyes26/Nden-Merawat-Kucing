@@ -68,8 +68,8 @@ public class BathController : MonoBehaviour
             bar.fillAmount = Mathf.Lerp(bar.fillAmount, 1, lerpSpeed);
             if (!isXPAdded)
             {
-                GameManager.instance.AddXP();
                 GameManager.instance.CatProfile.catScriptable.showerRemaining--;
+                GameManager.instance.AddXP();
                 isXPAdded = true;
                 GameManager.instance.LevelUpChecker();
                 if (GameManager.instance.CatProfile.catScriptable.isDirty) GameManager.instance.ChangeDirty();

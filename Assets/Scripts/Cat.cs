@@ -16,10 +16,20 @@ public class Cat : MonoBehaviour
     [SerializeField] private int photoRemaining;
     [SerializeField] private CatState state;
 
+    void Awake()
+    {
+        catScriptable.Load();
+    }
 
     void Start()
     {
-        if (catScriptable.level <= 0) catScriptable.level = 1;
+        if (catScriptable.level <= 0)
+        {
+            catScriptable.level = 1;
+            RenewRequirement();
+            RenewXpNeeded();
+        }
+        RenewPhase(catScriptable.level);
         name = catScriptable.name;
         xp = catScriptable.xp;
         xpNeeded = catScriptable.xpNeeded;
@@ -31,9 +41,7 @@ public class Cat : MonoBehaviour
         photoRemaining = catScriptable.photoRemaining;
         state = catScriptable.state;
         // RenewRemaining(0);
-        RenewRequirement();
-        RenewXpNeeded();
-        RenewPhase(level);
+
     }
 
     // public void RenewRemaining(int level)
@@ -85,7 +93,7 @@ public class Cat : MonoBehaviour
         if (currentLevel <= 0) currentLevel = 1;
         RequirementScriptable requirementScriptable;
         requirementScriptable = Resources.Load<RequirementScriptable>("RequirementScriptable/" + currentLevel.ToString());
-        Debug.Log("RequirementScriptable/" + currentLevel.ToString());
+        // Debug.Log("RequirementScriptable/" + currentLevel.ToString());
         catScriptable.hungryRemaining = requirementScriptable.hungry;
         catScriptable.showerRemaining = requirementScriptable.shower;
         catScriptable.playRemaining = requirementScriptable.play;
