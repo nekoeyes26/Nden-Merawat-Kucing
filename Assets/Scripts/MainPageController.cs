@@ -8,7 +8,7 @@ public class MainPageController : MonoBehaviour
 {
     public Text catName;
     public Text catLevel;
-    public Text catXP;
+    // public Text catXP;
     public GameObject hungryUI;
     public GameObject showerUI;
     public GameObject playUI;

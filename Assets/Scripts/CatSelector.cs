@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
-public class CatSelector : MonoBehaviour
+public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     public Transform[] boxes;
     public float moveDuration = 0.5f;
@@ -29,6 +30,10 @@ public class CatSelector : MonoBehaviour
     public Image preview;
     public Button giveNameButton;
     public InputField inputField;
+
+    private Vector2 startTouchPosition;
+    private Vector2 endTouchPosition;
+    public float swipeThreshold = 50f;
 
     void Start()
     {
@@ -83,11 +88,11 @@ public class CatSelector : MonoBehaviour
         {
             StartCoroutine(MoveBoxesLeft());
         }
-        if (inputField.text == "")
+        if (inputField.text.Trim() == "")
         {
             giveNameButton.interactable = false;
         }
-        else if (inputField.text != "")
+        else
         {
             giveNameButton.interactable = true;
         }
@@ -140,6 +145,12 @@ public class CatSelector : MonoBehaviour
         // }
 
         isMoving = false;
+
+        PlayerPrefs.SetInt("middleIndex", middleIndex);
+        PlayerPrefs.SetInt("previousMiddleIndex", previousMiddleIndex);
+        PlayerPrefs.Save();
+        SaveTransforms();
+        Debug.Log("Saving PlayerPrefs");
     }
 
     IEnumerator MoveBoxesRight()
@@ -167,6 +178,12 @@ public class CatSelector : MonoBehaviour
         // }
 
         isMoving = false;
+
+        PlayerPrefs.SetInt("middleIndex", middleIndex);
+        PlayerPrefs.SetInt("previousMiddleIndex", previousMiddleIndex);
+        PlayerPrefs.Save();
+        SaveTransforms();
+        Debug.Log("Saving PlayerPrefs");
     }
 
     IEnumerator MoveAndScaleBoxSmoothly(Transform box, Vector3 targetPosition, bool isMiddleBox)
@@ -316,11 +333,6 @@ public class CatSelector : MonoBehaviour
             sceneLoad.sceneName = "MainPage";
             sceneLoad.LoadScene();
         }
-        PlayerPrefs.SetInt("middleIndex", middleIndex);
-        PlayerPrefs.SetInt("previousMiddleIndex", previousMiddleIndex);
-        PlayerPrefs.Save();
-        SaveTransforms();
-        Debug.Log("Saving PlayerPrefs");
     }
 
     public void BackChoosingUI()
@@ -338,7 +350,7 @@ public class CatSelector : MonoBehaviour
 
     public void NamingCat()
     {
-        GameManager.instance.CatProfile.catScriptable.name = inputField.text;
+        GameManager.instance.CatProfile.catScriptable.name = inputField.text.Trim();
         GameManager.instance.CatProfile.catScriptable.Save();
         // Debug.Log(GameManager.instance.CatProfile.name);
         // Debug.Log(GameManager.instance.CatProfile.state);
@@ -426,4 +438,47 @@ public class CatSelector : MonoBehaviour
     // {
     //     PlayerPrefs.DeleteAll();
     // }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        // Debug.Log("Touched");
+        startTouchPosition = eventData.position;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        // You can track the dragging movement here if needed
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        // Debug.Log("PointerUp");
+        endTouchPosition = eventData.position;
+        DetectSwipeDirection();
+    }
+
+    private void DetectSwipeDirection()
+    {
+        Vector2 swipeVector = endTouchPosition - startTouchPosition;
+        // Debug.Log(swipeVector.magnitude);
+        if (swipeVector.magnitude >= swipeThreshold)
+        {
+            float xDifference = Mathf.Abs(swipeVector.x);
+            float yDifference = Mathf.Abs(swipeVector.y);
+            // Debug.Log("xDifference: " + xDifference + "| yDifference: " + yDifference);
+
+            if (xDifference > yDifference)
+            {
+                // Debug.Log("swipeVector.x");
+                if (swipeVector.x > 0)
+                {
+                    MoveLeft();
+                }
+                else
+                {
+                    MoveRight();
+                }
+            }
+        }
+    }
 }

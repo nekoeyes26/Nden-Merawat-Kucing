@@ -13,6 +13,7 @@ public class PhotoGalleryScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        WefieController.LoadScreenshots();
         noScreenshotText.SetActive(false);
         if (WefieController.SavedScreenshots.Count > 0)
         {
