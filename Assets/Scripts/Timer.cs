@@ -208,4 +208,38 @@ public class Timer : MonoBehaviour
         yield return new WaitForSeconds(1f);
         firstTime = false;
     }
+
+    protected Color GetFillColor(float fillAmount)
+    {
+        Color color;
+        Color customGreen = new Color(0.2f, 0.8f, 0.2f); // a darker green
+        Color customYellow = new Color(0.9f, 0.7f, 0.1f); // a more vibrant yellow
+        Color customRed = new Color(0.8f, 0.1f, 0.1f); // a deeper red
+        if (fillAmount >= 0.8f)
+        {
+            // Green
+            color = customGreen;
+        }
+        else if (fillAmount >= 0.5f)
+        {
+            // Green to yellow
+            color = Color.Lerp(customGreen, customYellow, 1 - (fillAmount - 0.5f) / 0.3f);
+        }
+        else if (fillAmount >= 0.2f)
+        {
+            // Yellow to red
+            color = Color.Lerp(customYellow, customRed, 1 - (fillAmount - 0.2f) / 0.3f);
+        }
+        else if (fillAmount >= 0.0f)
+        {
+            // Red
+            color = customRed;
+        }
+        else
+        {
+            color = Color.black;
+        }
+
+        return color;
+    }
 }

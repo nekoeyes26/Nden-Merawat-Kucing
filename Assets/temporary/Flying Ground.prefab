@@ -540,3 +540,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   speedRestoreDuration: 3
+  type: 1

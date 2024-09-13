@@ -663,10 +663,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1035110890}
         m_TargetAssemblyTypeName: WefieController, Assembly-CSharp
-        m_MethodName: ChangeParizPose
+        m_MethodName: ChangeLeftCharPose
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: 6967c24560258474ba370ce567aef321, type: 3}
+          m_ObjectArgument: {fileID: 21300000, guid: 38ba9d308db973d408c75218812483bb, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -675,7 +675,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1035110890}
         m_TargetAssemblyTypeName: WefieController, Assembly-CSharp
-        m_MethodName: ChangeCobozPose
+        m_MethodName: ChangeRightCharPose
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 21300000, guid: 354a515abb622eb4aab288fc7c4bf718, type: 3}
@@ -735,7 +735,7 @@ GameObject:
   - component: {fileID: 510400743}
   - component: {fileID: 510400742}
   m_Layer: 5
-  m_Name: Pariz
+  m_Name: Coboz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -780,7 +780,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6967c24560258474ba370ce567aef321, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38ba9d308db973d408c75218812483bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1078,7 +1078,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 47606f99495d20c4e965286c94b6b895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7cdabdd0b5a7084d9915e48ab09da56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1138,7 +1138,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -123.49}
   m_SizeDelta: {x: 328, y: 469}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &927669859
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 097a66d1da257064db006809292c9a8b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 627d65dba5cc08d4390d42420363deca, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1398,8 +1398,8 @@ MonoBehaviour:
   displayFrame:
   - {fileID: 1188363493}
   - {fileID: 1883079415}
-  charKiri: {fileID: 510400742}
-  charKanan: {fileID: 1743226248}
+  charOnLeft: {fileID: 510400742}
+  charOnRight: {fileID: 1743226248}
   cat: {fileID: 927669859}
 --- !u!4 &1035110891
 Transform:
@@ -1655,7 +1655,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1035110890}
         m_TargetAssemblyTypeName: WefieController, Assembly-CSharp
-        m_MethodName: ChangeParizPose
+        m_MethodName: ChangeLeftCharPose
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 21300000, guid: 354a515abb622eb4aab288fc7c4bf718, type: 3}
@@ -1667,10 +1667,10 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1035110890}
         m_TargetAssemblyTypeName: WefieController, Assembly-CSharp
-        m_MethodName: ChangeCobozPose
+        m_MethodName: ChangeRightCharPose
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: b8fbc272857c2de458ce67c48caf13e6, type: 3}
+          m_ObjectArgument: {fileID: 21300000, guid: 186543ca366ef0344bce0a8e8760d189, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1800,10 +1800,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1035110890}
         m_TargetAssemblyTypeName: WefieController, Assembly-CSharp
-        m_MethodName: ChangeParizPose
+        m_MethodName: ChangeLeftCharPose
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: 6967c24560258474ba370ce567aef321, type: 3}
+          m_ObjectArgument: {fileID: 21300000, guid: 38ba9d308db973d408c75218812483bb, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1812,10 +1812,10 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1035110890}
         m_TargetAssemblyTypeName: WefieController, Assembly-CSharp
-        m_MethodName: ChangeCobozPose
+        m_MethodName: ChangeRightCharPose
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: b8fbc272857c2de458ce67c48caf13e6, type: 3}
+          m_ObjectArgument: {fileID: 21300000, guid: 186543ca366ef0344bce0a8e8760d189, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2332,7 +2332,7 @@ GameObject:
   - component: {fileID: 1743226249}
   - component: {fileID: 1743226248}
   m_Layer: 5
-  m_Name: Coboz
+  m_Name: Pariz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2377,7 +2377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b8fbc272857c2de458ce67c48caf13e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 186543ca366ef0344bce0a8e8760d189, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2427,10 +2427,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1018778220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 1920, y: 880}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1805084244
 MonoBehaviour:
@@ -2452,9 +2452,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 47606f99495d20c4e965286c94b6b895, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7cdabdd0b5a7084d9915e48ab09da56, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2640,7 +2640,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35.00006, y: -50.00003}
+  m_AnchoredPosition: {x: -35, y: -50.00006}
   m_SizeDelta: {x: 308.73, y: 142.36}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1892299790

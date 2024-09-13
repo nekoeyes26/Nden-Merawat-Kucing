@@ -6,52 +6,45 @@ using UnityEngine;
 
 public class ObstaclePool : MonoBehaviour
 {
-    [SerializeField] private GameObject[] obstaclePrefabs;
+    [SerializeField] private ObstacleObject[] obstaclePrefabs;
     public float obstacleSpawnTime = 2f;
     private float timeUntilObstacleSpawn;
 
-    // private Queue<GameObject> obstaclePool = new Queue<GameObject>();
+    // private Queue<ObstacleObject> obstaclePool = new Queue<ObstacleObject>();
     // private int maxPoolSize = 7;
 
     private int lastSpawnedIndex = -1;
     private int secondLastSpawnedIndex = -1;
 
-    public GroundnCoinMove groundnCoinMove;
-    private float originalGroundSpeed;
-    private List<GameObject> activeObstacleList = new List<GameObject>();
-    private Queue<GameObject> inactiveObstacleQueue = new Queue<GameObject>();
+    [SerializeField] private ObstacleObject tempObstacle;
+    private float originalObstacleSpeed;
+    private List<ObstacleObject> activeObstacleList = new List<ObstacleObject>();
+    private List<ObstacleObject> inactiveObstacleList = new List<ObstacleObject>();
+    [SerializeField] private Transform poolParent;
+    public float maxLeftPosition = -15f;
 
     private void Start()
     {
-        originalGroundSpeed = groundnCoinMove.speed;
+        originalObstacleSpeed = tempObstacle.speed;
     }
     private void Update()
     {
+        CheckObstacleObjectPositions();
         timeUntilObstacleSpawn += Time.deltaTime;
         if (timeUntilObstacleSpawn >= obstacleSpawnTime)
         {
             if (activeObstacleList.Count > 0)
             {
-                GameObject obstacle = activeObstacleList[0];
-                GroundnCoinMove groundnCoinMoves = obstacle.GetComponent<GroundnCoinMove>();
-                // Debug.Log("obstacle 0 speed: " + groundnCoinMoves.speed);
-                if (groundnCoinMoves.speed == originalGroundSpeed)
+                ObstacleObject obstacleObject = activeObstacleList[0];
+                if (obstacleObject.speed == originalObstacleSpeed)
                 {
-                    if (activeObstacleList.Count() >= 7)
-                    {
-                        GameObject outframeObstacle = activeObstacleList[Random.Range(0, 4)];
-                        RemoveObstacle(outframeObstacle);
-                    }
-                    else
-                    {
-                        SpawnObstacle();
-                    }
+                    SpawnObstacle(GetObstacleToSpawn());
                     timeUntilObstacleSpawn = 0;
                 }
             }
             else
             {
-                SpawnObstacle();
+                SpawnObstacle(GetObstacleToSpawn());
                 timeUntilObstacleSpawn = 0;
             }
         }
@@ -66,7 +59,7 @@ public class ObstaclePool : MonoBehaviour
     //         if (groundnCoinObjects.Length > 0)
     //         {
     //             // Debug.Log("index 0 " + groundnCoinObjects[0].speed);
-    //             if (groundnCoinObjects[0].speed == originalGroundSpeed)
+    //             if (groundnCoinObjects[0].speed == originalObstacleSpeed)
     //             {
     //                 Spawn();
     //                 timeUntilObstacleSpawn = 0;
@@ -90,13 +83,13 @@ public class ObstaclePool : MonoBehaviour
 
     //     secondLastSpawnedIndex = lastSpawnedIndex;
     //     lastSpawnedIndex = prefabIndex;
-    //     GameObject obstacleToSpawn = obstaclePrefabs[prefabIndex];
-    //     GameObject spawnedObstacle = Instantiate(obstacleToSpawn, transform.position, Quaternion.identity);
+    //     ObstacleObject obstacleToSpawn = obstaclePrefabs[prefabIndex];
+    //     ObstacleObject spawnedObstacle = Instantiate(obstacleToSpawn, transform.position, Quaternion.identity);
     //     obstaclePool.Enqueue(spawnedObstacle);
 
     //     if (obstaclePool.Count > maxPoolSize)
     //     {
-    //         GameObject oldestObstacle = obstaclePool.Dequeue();
+    //         ObstacleObject oldestObstacle = obstaclePool.Dequeue();
     //         Destroy(oldestObstacle);
     //     }
     // }
@@ -105,7 +98,7 @@ public class ObstaclePool : MonoBehaviour
     // {
     //     while (obstaclePool.Count > 0)
     //     {
-    //         GameObject obstacleToDestroy = obstaclePool.Dequeue();
+    //         ObstacleObject obstacleToDestroy = obstaclePool.Dequeue();
     //         Destroy(obstacleToDestroy);
     //     }
     //     lastSpawnedIndex = -1;
@@ -113,14 +106,9 @@ public class ObstaclePool : MonoBehaviour
     //     timeUntilObstacleSpawn = 0f;
     // }
 
-    private void SpawnObstacle()
+    public ObstacleObject GetObstacleToSpawn()
     {
-        GameObject tempObstacle;
-        if (inactiveObstacleQueue.Count > 0)
-        {
-            tempObstacle = inactiveObstacleQueue.Dequeue();
-        }
-        else
+        if (obstaclePrefabs.Length > 0)
         {
             int prefabIndex;
             do
@@ -130,36 +118,76 @@ public class ObstaclePool : MonoBehaviour
 
             secondLastSpawnedIndex = lastSpawnedIndex;
             lastSpawnedIndex = prefabIndex;
-            GameObject obstacleToSpawn = obstaclePrefabs[prefabIndex];
-            tempObstacle = Instantiate(obstacleToSpawn, transform.position, Quaternion.identity);
+            ObstacleObject obstacleToSpawn = obstaclePrefabs[prefabIndex];
+            Debug.Log("Now: " + obstacleToSpawn.type);
+            return obstacleToSpawn;
+        }
+        else
+        {
+            Debug.LogError("No obstacle prefabs assigned");
+            return null;
+        }
+    }
+
+    private void SpawnObstacle(ObstacleObject obstacleObject)
+    {
+        ObstacleObject foundObstacle = null;
+        foreach (ObstacleObject inactiveObs in inactiveObstacleList)
+        {
+            if (inactiveObs.type == obstacleObject.type)
+            {
+                foundObstacle = inactiveObs;
+                break;
+            }
+        }
+        if (foundObstacle != null)
+        {
+            // If found, remove it from the inactive list and reuse it
+            inactiveObstacleList.Remove(foundObstacle);
+            tempObstacle = foundObstacle;
+        }
+        else
+        {
+            // If not found, instantiate a new object
+            tempObstacle = Instantiate(obstacleObject);
         }
 
+        tempObstacle.transform.SetParent(poolParent);
         tempObstacle.transform.position = transform.position;
-        foreach (Transform child in tempObstacle.transform)
-        {
-            child.gameObject.SetActive(true);
-        }
-        tempObstacle.SetActive(true);
+        tempObstacle.InitializeObject();
+        tempObstacle.gameObject.SetActive(true);
         activeObstacleList.Add(tempObstacle);
     }
 
-    private void RemoveObstacle(GameObject target)
+    private void RemoveObstacle(ObstacleObject target)
     {
-        target.SetActive(false);
+        target.gameObject.SetActive(false);
+        target.speed = originalObstacleSpeed;
         activeObstacleList.Remove(target);
-        inactiveObstacleQueue.Enqueue(target);
+        inactiveObstacleList.Add(target);
+    }
+
+    private void CheckObstacleObjectPositions()
+    {
+        for (int i = activeObstacleList.Count - 1; i >= 0; i--)
+        {
+            ObstacleObject obstacle = activeObstacleList[i];
+            if (obstacle.transform.position.x < maxLeftPosition)
+            {
+                RemoveObstacle(obstacle);
+            }
+        }
     }
 
     public void RestartObstacles()
     {
         // Deactivate all active obstacles and move them back to the inactive queue
-        foreach (GameObject obstacle in activeObstacleList)
+        foreach (ObstacleObject obstacle in activeObstacleList)
         {
             obstacle.transform.position = transform.position;
-            GroundnCoinMove groundnCoinMoves = obstacle.GetComponent<GroundnCoinMove>();
-            groundnCoinMoves.speed = 5;
-            obstacle.SetActive(false);
-            inactiveObstacleQueue.Enqueue(obstacle);
+            obstacle.speed = 5;
+            obstacle.gameObject.SetActive(false);
+            inactiveObstacleList.Add(obstacle);
         }
 
         // Clear the list of active obstacles

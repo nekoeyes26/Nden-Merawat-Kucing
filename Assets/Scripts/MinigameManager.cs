@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class MinigameManager : MonoBehaviour
 {
-    public Text scoreText;
-    public Text gameOverText;
-    public GameObject restartButton;
-    public GameObject pauseButton;
-    public GameObject resumeButton;
+    public GameObject gameOverLose;
+    public GameObject popUpWin;
+    public GameObject gameOverWin;
+    public GameObject backHomeMenu;
+    public GameObject pauseMenu;
+    public GameObject backHomeAdditionalText;
     public int targetScore = 25;
 
     private int score = 0;
-    private bool isGamePaused = false;
     private bool isWin = false;
     public Image bar;
     private float lerpSpeed;
@@ -33,15 +33,20 @@ public class MinigameManager : MonoBehaviour
 
     public BackgroundScript[] backgroundScripts;
     private bool isXPAdded = false;
+    private bool isGameover = false;
+    private bool isPaused = false;
 
     private void Start()
     {
+        isWin = false;
+        isGameover = false;
+        isPaused = false;
         score = 0;
-        scoreText.text = "Score: 0";
-        gameOverText.enabled = false;
-        restartButton.SetActive(false);
-        pauseButton.SetActive(true);
-        resumeButton.SetActive(false);
+        gameOverLose.SetActive(false);
+        gameOverWin.SetActive(false);
+        popUpWin.SetActive(false);
+        backHomeMenu.SetActive(false);
+        pauseMenu.SetActive(false);
         GenerateHealth();
     }
 
@@ -49,7 +54,6 @@ public class MinigameManager : MonoBehaviour
     {
         lerpSpeed = 2f * Time.deltaTime;
         BarFill();
-        Debug.Log("health: " + healthObjects.Count);
     }
 
     public void BarFill()
@@ -71,80 +75,107 @@ public class MinigameManager : MonoBehaviour
     public void AddScore()
     {
         score++;
-        scoreText.text = "Score: " + score;
         if (score >= targetScore && !isWin)
         {
             isWin = true;
+            TargetAchieved();
         }
     }
 
-    public void WinGame()
+    public void TargetAchieved()
     {
         Time.timeScale = 0f;
-        gameOverText.enabled = true;
-        gameOverText.text = "Congratulations! You won! Your score is " + score;
-        restartButton.SetActive(true);
-        pauseButton.SetActive(false);
-        resumeButton.SetActive(false);
-        if (!isXPAdded && GameManager.instance.CatProfile.catScriptable.playRemaining > 0)
+        popUpWin.SetActive(true);
+        if (!isXPAdded)
         {
-            GameManager.instance.CatProfile.catScriptable.playRemaining--;
-            GameManager.instance.AddXP();
+            if (GameManager.instance.CatProfile.catScriptable.playRemaining > 0)
+            {
+                GameManager.instance.CatProfile.catScriptable.playRemaining--;
+                GameManager.instance.AddXP();
+                GameManager.instance.LevelUpChecker();
+            }
             isXPAdded = true;
-            GameManager.instance.LevelUpChecker();
             if (GameManager.instance.CatProfile.catScriptable.isSad) GameManager.instance.ChangeSad();
             GameManager.instance.isPlayTimerOn = false;
         }
     }
 
-    public void GameOver()
+    public void GameOverLose()
+    {
+        isGameover = true;
+        Time.timeScale = 0f;
+        gameOverLose.SetActive(true);
+    }
+
+    public void GameOverWin()
     {
         Time.timeScale = 0f;
-        gameOverText.enabled = true;
-        gameOverText.text = "Game Over! Your score is " + score;
-        restartButton.SetActive(true);
-        pauseButton.SetActive(false);
-        resumeButton.SetActive(false);
+        gameOverWin.SetActive(true);
     }
 
     public void Pause()
     {
-        isGamePaused = true;
+        isPaused = true;
         Time.timeScale = 0f;
-        pauseButton.SetActive(false);
-        resumeButton.SetActive(true);
+        pauseMenu.SetActive(true);
     }
 
     public void Resume()
     {
-        isGamePaused = false;
+        isPaused = false;
+        gameOverLose.SetActive(false);
+        gameOverWin.SetActive(false);
+        popUpWin.SetActive(false);
+        backHomeMenu.SetActive(false);
+        pauseMenu.SetActive(false);
         Time.timeScale = 1f;
-        pauseButton.SetActive(true);
-        resumeButton.SetActive(false);
     }
 
     public void Restart()
     {
         obstaclePool.RestartObstacles();
         GenerateHealth();
-        pauseButton.SetActive(true);
-        restartButton.SetActive(false);
-        gameOverText.enabled = false;
         score = 0;
-        scoreText.text = "Score: " + score;
-        Time.timeScale = 1f;
+        isGameover = false;
+        Resume();
+    }
+
+    public void HomeConfirmation()
+    {
+        Time.timeScale = 0f;
+        if (isPaused) pauseMenu.SetActive(false);
+        if (isGameover) gameOverLose.SetActive(false);
+        if (isWin) backHomeAdditionalText.SetActive(false);
+        backHomeMenu.SetActive(true);
+    }
+
+    public void CancelHome()
+    {
+        if (isGameover)
+        {
+            backHomeMenu.SetActive(false);
+            GameOverLose();
+        }
+        else if (isPaused)
+        {
+            backHomeMenu.SetActive(false);
+            Pause();
+        }
+        else
+        {
+            Resume();
+        }
     }
 
     public void HittingEnemy()
     {
         health--;
-        // Debug.Log(health);
         Destroy(healthObjects[health]);
         healthObjects.RemoveAt(health);
         if (health <= 0)
         {
-            if (isWin) WinGame();
-            else GameOver();
+            if (isWin) GameOverWin();
+            else GameOverLose();
         }
         foreach (BackgroundScript backgroundScript in backgroundScripts)
         {
@@ -172,9 +203,9 @@ public class MinigameManager : MonoBehaviour
 
     private void ReduceSpeedForAllGroundnCoin()
     {
-        GroundnCoinMove[] groundnCoinObjects = FindObjectsOfType<GroundnCoinMove>();
+        ObstacleObject[] groundnCoinObjects = FindObjectsOfType<ObstacleObject>();
 
-        foreach (GroundnCoinMove obj in groundnCoinObjects)
+        foreach (ObstacleObject obj in groundnCoinObjects)
         {
             obj.SpeedReduction();
         }

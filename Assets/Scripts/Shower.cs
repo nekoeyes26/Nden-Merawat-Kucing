@@ -25,6 +25,7 @@ public class Shower : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     private float holdTimer = 0f;
 
     private bool isOverPet = false;
+    private float minusYRaycast = 1.5f;
 
     private void Start()
     {
@@ -46,7 +47,7 @@ public class Shower : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // Adjust the position to be 80 units below the mouse position in the Y-axis
-        Vector2 adjustedPosition = new Vector2(mouseWorldPosition.x, mouseWorldPosition.y - (float)1.5);
+        Vector2 adjustedPosition = new Vector2(mouseWorldPosition.x, mouseWorldPosition.y - minusYRaycast);
 
         // // Perform a raycast
         // RaycastHit2D hit = Physics2D.Raycast(adjustedPosition, Vector2.zero);

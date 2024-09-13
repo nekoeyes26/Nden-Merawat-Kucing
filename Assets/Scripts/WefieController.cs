@@ -10,8 +10,8 @@ public class WefieController : MonoBehaviour
     public Image display;
     public GameObject[] wefieUI;
     public GameObject[] displayFrame;
-    public Image charKiri;
-    public Image charKanan;
+    public Image charOnLeft;
+    public Image charOnRight;
     public Image cat;
     private CatScriptable catS;
     private bool isXPAdded = false;
@@ -134,12 +134,15 @@ public class WefieController : MonoBehaviour
             UI.SetActive(false);
         }
         StartCoroutine(Screenshot());
-        if (!isXPAdded && GameManager.instance.CatProfile.catScriptable.photoRemaining > 0)
+        if (!isXPAdded)
         {
-            GameManager.instance.CatProfile.catScriptable.photoRemaining--;
-            GameManager.instance.AddXP();
+            if (GameManager.instance.CatProfile.catScriptable.photoRemaining > 0)
+            {
+                GameManager.instance.CatProfile.catScriptable.photoRemaining--;
+                GameManager.instance.AddXP();
+                GameManager.instance.LevelUpChecker();
+            }
             isXPAdded = true;
-            GameManager.instance.LevelUpChecker();
             if (GameManager.instance.CatProfile.catScriptable.isSad) GameManager.instance.ChangeSad();
             GameManager.instance.isPhotoTimerOn = false;
         }
@@ -158,14 +161,14 @@ public class WefieController : MonoBehaviour
         }
     }
 
-    public void ChangeParizPose(Sprite pariz)
+    public void ChangeLeftCharPose(Sprite charSprite)
     {
-        charKiri.sprite = pariz;
+        charOnLeft.sprite = charSprite;
     }
 
-    public void ChangeCobozPose(Sprite coboz)
+    public void ChangeRightCharPose(Sprite charSprite)
     {
-        charKanan.sprite = coboz;
+        charOnRight.sprite = charSprite;
     }
 
     public static void SaveScreenshots()

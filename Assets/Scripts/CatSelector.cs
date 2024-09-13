@@ -1,15 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System.Text.RegularExpressions;
+using System;
 
 public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     public Transform[] boxes;
     public float moveDuration = 0.5f;
-    public float minAlpha = 0f;
+    // public float minAlpha = 0f;
     public float maxAlpha = 1f;
     public float normalScale = 0.5f;
     public float middleScale = 1f;
@@ -34,6 +34,9 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
     public float swipeThreshold = 50f;
+    private Image[] catTypeBox;
+    private Text[] catTypeTexts;
+    private GameObject[] adoptedIcon;
 
     void Start()
     {
@@ -49,6 +52,10 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         originalAlphas = new float[boxes.Length];
         cats = new Cat[boxes.Length];
 
+        catTypeBox = new Image[boxes.Length];
+        catTypeTexts = new Text[boxes.Length];
+        adoptedIcon = new GameObject[boxes.Length];
+
         // Simpan komponen Image dan RectTransform serta warna asli dari setiap box
         for (int i = 0; i < boxes.Length; i++)
         {
@@ -57,6 +64,30 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             originalColors[i] = boxImages[i].color;
             originalAlphas[i] = originalColors[i].a;
             cats[i] = boxes[i].GetComponent<Cat>();
+
+            catTypeBox[i] = null;
+            catTypeTexts[i] = null;
+            foreach (Transform child in boxes[i].transform)
+            {
+                if (child.GetComponent<Image>() != null)
+                {
+                    catTypeBox[i] = child.GetComponent<Image>();
+                    adoptedIcon[i] = child.GetChild(0).gameObject;
+                }
+                if (child.GetComponent<Text>() != null)
+                {
+                    catTypeTexts[i] = child.GetComponent<Text>();
+                }
+            }
+            if (!string.IsNullOrEmpty(cats[i].catScriptable.name))
+            {
+                catTypeTexts[i].text = cats[i].catScriptable.name;
+                adoptedIcon[i].SetActive(true);
+            }
+            else
+            {
+                adoptedIcon[i].SetActive(false);
+            }
         }
 
         // PlayerPrefs.DeleteAll();
@@ -88,7 +119,7 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             StartCoroutine(MoveBoxesLeft());
         }
-        if (inputField.text.Trim() == "")
+        if (string.IsNullOrWhiteSpace(inputField.text) || !Regex.IsMatch(inputField.text, @"^(?=.*[a-zA-Z])[a-zA-Z0-9'\s]+$"))
         {
             giveNameButton.interactable = false;
         }
@@ -206,7 +237,6 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         box.position = targetPosition;
         box.localScale = targetScaleVector;
 
-        // Reset opacity sesuai dengan status box (tengah atau bukan)
         float opacity = isMiddleBox ? maxAlpha : 0.2f;
         SetBoxOpacity(box, opacity);
     }
@@ -217,6 +247,24 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         Color newColor = originalColors[boxIndex];
         newColor.a = alpha;
         boxImages[boxIndex].color = newColor;
+        // Get the child Image and Text components
+        Image childImage = catTypeBox[Array.IndexOf(boxes, box)];
+        Text childText = catTypeTexts[Array.IndexOf(boxes, box)];
+
+        // Set the child Image and Text alpha
+        if (childImage != null)
+        {
+            Color childImageColor = childImage.color;
+            childImageColor.a = alpha;
+            childImage.color = childImageColor;
+        }
+
+        if (childText != null)
+        {
+            Color childTextColor = childText.color;
+            childTextColor.a = alpha;
+            childText.color = childTextColor;
+        }
     }
 
     IEnumerator ScaleMiddleBox()
@@ -324,6 +372,7 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
             foreach (GameObject UI in givingNameUI)
             {
+                inputField.text = catTypeTexts[middleIndex].text;
                 UI.SetActive(true);
             }
         }

@@ -45,6 +45,7 @@ public class PlayTimer : Timer
         {
             time -= Time.deltaTime;
             fill.fillAmount = (time / activeTime) * maxFillAmount;
+            fill.color = GetFillColor(fill.fillAmount);
 
             if (time < 0)
             {

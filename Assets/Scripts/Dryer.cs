@@ -25,6 +25,8 @@ public class Dryer : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     private float holdTimer = 0f;
 
     private bool isOverPet = false;
+    private float minusXRaycast = 1.5f;
+    private float circleRadiusRaycast = 1f;
 
     private void Start()
     {
@@ -42,10 +44,10 @@ public class Dryer : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 adjustedPosition = new Vector2(mouseWorldPosition.x - (float)1.5, mouseWorldPosition.y);
+        Vector2 adjustedPosition = new Vector2(mouseWorldPosition.x - minusXRaycast, mouseWorldPosition.y);
 
         // Perform a raycast with a larger radius
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(adjustedPosition, 1, Vector2.zero);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(adjustedPosition, circleRadiusRaycast, Vector2.zero);
 
         IsAnimDone = false;
         m_CorotineAnim = StartCoroutine(Func_PlayAnimUI());

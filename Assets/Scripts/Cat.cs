@@ -93,11 +93,20 @@ public class Cat : MonoBehaviour
         if (currentLevel <= 0) currentLevel = 1;
         RequirementScriptable requirementScriptable;
         requirementScriptable = Resources.Load<RequirementScriptable>("RequirementScriptable/" + currentLevel.ToString());
-        // Debug.Log("RequirementScriptable/" + currentLevel.ToString());
-        catScriptable.hungryRemaining = requirementScriptable.hungry;
-        catScriptable.showerRemaining = requirementScriptable.shower;
-        catScriptable.playRemaining = requirementScriptable.play;
-        catScriptable.photoRemaining = requirementScriptable.photo;
+        if (requirementScriptable != null)
+        {
+            catScriptable.hungryRemaining = requirementScriptable.hungry;
+            catScriptable.showerRemaining = requirementScriptable.shower;
+            catScriptable.playRemaining = requirementScriptable.play;
+            catScriptable.photoRemaining = requirementScriptable.photo;
+        }
+        else
+        {
+            catScriptable.hungryRemaining = 1;
+            catScriptable.showerRemaining = 1;
+            catScriptable.playRemaining = 1;
+            catScriptable.photoRemaining = 1;
+        }
     }
 
     public void RenewPhase(int currentLevel)

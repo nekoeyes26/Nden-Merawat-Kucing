@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundnCoinMove : MonoBehaviour
+public enum ObstacleType
+{
+    Normal,
+    Flying,
+    Enemy
+}
+public class ObstacleObject : MonoBehaviour
 {
     public float speed = 5f;
-    public float speedRestoreDuration = 2f;
+    public float speedRestoreDuration = 3f;
+    public ObstacleType type;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,5 +45,13 @@ public class GroundnCoinMove : MonoBehaviour
 
         // Ensure the speed is fully restored to the original value
         speed = originalSpeed;
+    }
+
+    public void InitializeObject()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
     }
 }
