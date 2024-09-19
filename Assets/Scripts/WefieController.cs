@@ -136,12 +136,13 @@ public class WefieController : MonoBehaviour
         StartCoroutine(Screenshot());
         if (!isXPAdded)
         {
-            if (GameManager.instance.CatProfile.catScriptable.photoRemaining > 0)
-            {
-                GameManager.instance.CatProfile.catScriptable.photoRemaining--;
-                GameManager.instance.AddXP();
-                GameManager.instance.LevelUpChecker();
-            }
+            // if (GameManager.instance.CatProfile.catScriptable.photoRemaining > 0)
+            // {
+            //     GameManager.instance.CatProfile.catScriptable.photoRemaining--;
+            //     GameManager.instance.AddXP();
+            //     GameManager.instance.LevelUpChecker();
+            // }
+            GameManager.instance.CompleteMissionChecker(ref GameManager.instance.CatProfile.catScriptable.photoRemaining);
             isXPAdded = true;
             if (GameManager.instance.CatProfile.catScriptable.isSad) GameManager.instance.ChangeSad();
             GameManager.instance.isPhotoTimerOn = false;

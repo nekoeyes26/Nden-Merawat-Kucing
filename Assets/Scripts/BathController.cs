@@ -34,6 +34,7 @@ public class BathController : MonoBehaviour
     public GameObject instruction2;
     public GameObject instruction3;
     public GameObject instruction4;
+    public GameObject completePopUp;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,7 @@ public class BathController : MonoBehaviour
         instruction2.SetActive(false);
         instruction3.SetActive(false);
         instruction4.SetActive(false);
+        completePopUp.SetActive(false);
     }
 
     private void Update()
@@ -106,16 +108,18 @@ public class BathController : MonoBehaviour
             instruction4.SetActive(false);
             if (!isXPAdded)
             {
-                if (GameManager.instance.CatProfile.catScriptable.showerRemaining > 0)
-                {
-                    GameManager.instance.CatProfile.catScriptable.showerRemaining--;
-                    GameManager.instance.AddXP();
-                    GameManager.instance.LevelUpChecker();
-                }
+                // if (GameManager.instance.CatProfile.catScriptable.showerRemaining > 0)
+                // {
+                //     GameManager.instance.CatProfile.catScriptable.showerRemaining--;
+                //     GameManager.instance.AddXP();
+                //     GameManager.instance.LevelUpChecker();
+                // }
+                GameManager.instance.CompleteMissionChecker(ref GameManager.instance.CatProfile.catScriptable.showerRemaining);
                 isXPAdded = true;
                 if (GameManager.instance.CatProfile.catScriptable.isDirty) GameManager.instance.ChangeDirty();
                 GameManager.instance.isShowerTimerOn = false;
                 catAnimator.SetBool("isWet", false);
+                Invoke("ShowPopUp", 1f);
             }
         }
     }
@@ -220,5 +224,17 @@ public class BathController : MonoBehaviour
         {
             instruction4.SetActive(true);
         }
+    }
+
+    public void ShowPopUp()
+    {
+        completePopUp.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void ClosePopUp()
+    {
+        completePopUp.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

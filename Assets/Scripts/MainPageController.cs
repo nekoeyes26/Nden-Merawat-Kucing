@@ -21,6 +21,7 @@ public class MainPageController : MonoBehaviour
     public Collider2D catCollider;
     private bool isPetted = false;
     private float idlingTimer = 0f;
+    public GameObject maxText;
 
     void OnEnable()
     {
@@ -54,12 +55,6 @@ public class MainPageController : MonoBehaviour
         CatSick();
         MissCalc();
         idlingTimer = 0f;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        idlingTimer += Time.deltaTime;
         if (catS.level < 15)
         {
             if (catS.hungryRemaining <= 0) hungryUI.SetActive(false);
@@ -74,6 +69,12 @@ public class MainPageController : MonoBehaviour
             playUI.SetActive(true);
             photoUI.SetActive(true);
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        idlingTimer += Time.deltaTime;
         if (IsTapped())
         {
             isPetted = !isPetted;
@@ -97,8 +98,17 @@ public class MainPageController : MonoBehaviour
 
     void BarFill(int xp)
     {
-        float targetFillAmount = xp / (float)catS.xpNeeded;
-        // Debug.Log(xp);
+        float targetFillAmount;
+        if (catS.level < 15)
+        {
+            targetFillAmount = xp / (float)catS.xpNeeded;
+            maxText.SetActive(false);
+        }
+        else
+        {
+            targetFillAmount = 1f;
+            maxText.SetActive(true);
+        }
         StartCoroutine(FillBarSmoothly(targetFillAmount, lerpSpeed));
     }
 

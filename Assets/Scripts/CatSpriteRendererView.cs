@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CatSpriteRendererView : MonoBehaviour
 {
     private SpriteRenderer preview;
+    private BoxCollider2D boxCollider;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +29,19 @@ public class CatSpriteRendererView : MonoBehaviour
             sprite = preview.sprite;
         }
         preview.sprite = sprite;
-        Debug.Log(sprite.ToString());
+        // Debug.Log(sprite.ToString());
+        boxCollider = GetComponent<BoxCollider2D>();
+        if (boxCollider == null)
+        {
+            Debug.LogError("BoxCollider2D is not attached to the GameObject.");
+            return;
+        }
+        UpdateColliderSize();
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateColliderSize()
     {
+        Bounds spriteBounds = preview.bounds;
+        boxCollider.size = new Vector2(spriteBounds.size.x, spriteBounds.size.y);
     }
 }

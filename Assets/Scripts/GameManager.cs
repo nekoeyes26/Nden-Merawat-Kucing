@@ -71,9 +71,12 @@ public class GameManager : MonoBehaviour
 
     public void LevelUpChecker()
     {
-        if (cat.catScriptable.hungryRemaining <= 0 && cat.catScriptable.showerRemaining <= 0 && cat.catScriptable.playRemaining <= 0 && cat.catScriptable.photoRemaining <= 0)
+        if (cat.catScriptable.level < 15)
         {
-            LevelUp();
+            if (cat.catScriptable.hungryRemaining <= 0 && cat.catScriptable.showerRemaining <= 0 && cat.catScriptable.playRemaining <= 0 && cat.catScriptable.photoRemaining <= 0)
+            {
+                LevelUp();
+            }
         }
     }
     public void ChangeHungry()
@@ -115,5 +118,18 @@ public class GameManager : MonoBehaviour
             Debug.Log("No cat selected");
         }
         PlayerPrefs.DeleteAll();
+    }
+
+    public void CompleteMissionChecker(ref int remaining)
+    {
+        if (cat.catScriptable.level < 15)
+        {
+            if (remaining > 0)
+            {
+                remaining--;
+                AddXP();
+                LevelUpChecker();
+            }
+        }
     }
 }

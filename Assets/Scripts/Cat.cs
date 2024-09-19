@@ -102,10 +102,10 @@ public class Cat : MonoBehaviour
         }
         else
         {
-            catScriptable.hungryRemaining = 1;
-            catScriptable.showerRemaining = 1;
-            catScriptable.playRemaining = 1;
-            catScriptable.photoRemaining = 1;
+            catScriptable.hungryRemaining = 99;
+            catScriptable.showerRemaining = 99;
+            catScriptable.playRemaining = 99;
+            catScriptable.photoRemaining = 99;
         }
     }
 

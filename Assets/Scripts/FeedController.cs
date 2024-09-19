@@ -12,10 +12,12 @@ public class FeedController : MonoBehaviour
     private bool isFull = false;
     private bool isXPAdded = false;
     public Animator catAnimator;
+    public GameObject completePopUp;
 
     private void Start()
     {
         isFull = false;
+        completePopUp.SetActive(false);
     }
 
     private void Update()
@@ -60,15 +62,17 @@ public class FeedController : MonoBehaviour
         Debug.Log("Full");
         if (!isXPAdded)
         {
-            if (GameManager.instance.CatProfile.catScriptable.hungryRemaining > 0)
-            {
-                GameManager.instance.CatProfile.catScriptable.hungryRemaining--;
-                GameManager.instance.AddXP();
-                GameManager.instance.LevelUpChecker();
-            }
+            // if (GameManager.instance.CatProfile.catScriptable.hungryRemaining > 0)
+            // {
+            //     GameManager.instance.CatProfile.catScriptable.hungryRemaining--;
+            //     GameManager.instance.AddXP();
+            //     GameManager.instance.LevelUpChecker();
+            // }
+            GameManager.instance.CompleteMissionChecker(ref GameManager.instance.CatProfile.catScriptable.hungryRemaining);
             isXPAdded = true;
             if (GameManager.instance.CatProfile.catScriptable.isHungry) GameManager.instance.ChangeHungry();
             GameManager.instance.isHungryTimerOn = false;
+            Invoke("ShowPopUp", 1f);
         }
     }
 
@@ -86,5 +90,17 @@ public class FeedController : MonoBehaviour
     public void CatBackIdle()
     {
         catAnimator.SetBool("isSteady", false);
+    }
+
+    public void ShowPopUp()
+    {
+        completePopUp.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void ClosePopUp()
+    {
+        completePopUp.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

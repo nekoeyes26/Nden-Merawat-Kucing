@@ -34,9 +34,10 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
     public float swipeThreshold = 50f;
-    private Image[] catTypeBox;
+    // private Image[] catTypeBox;
     private Text[] catTypeTexts;
     private GameObject[] adoptedIcon;
+    private CanvasGroup[] canvasGroup;
 
     void Start()
     {
@@ -51,8 +52,9 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         originalColors = new Color[boxes.Length];
         originalAlphas = new float[boxes.Length];
         cats = new Cat[boxes.Length];
+        canvasGroup = new CanvasGroup[boxes.Length];
 
-        catTypeBox = new Image[boxes.Length];
+        // catTypeBox = new Image[boxes.Length];
         catTypeTexts = new Text[boxes.Length];
         adoptedIcon = new GameObject[boxes.Length];
 
@@ -64,14 +66,15 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             originalColors[i] = boxImages[i].color;
             originalAlphas[i] = originalColors[i].a;
             cats[i] = boxes[i].GetComponent<Cat>();
+            canvasGroup[i] = boxes[i].GetComponent<CanvasGroup>();
 
-            catTypeBox[i] = null;
+            // catTypeBox[i] = null;
             catTypeTexts[i] = null;
             foreach (Transform child in boxes[i].transform)
             {
                 if (child.GetComponent<Image>() != null)
                 {
-                    catTypeBox[i] = child.GetComponent<Image>();
+                    // catTypeBox[i] = child.GetComponent<Image>();
                     adoptedIcon[i] = child.GetChild(0).gameObject;
                 }
                 if (child.GetComponent<Text>() != null)
@@ -237,34 +240,36 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         box.position = targetPosition;
         box.localScale = targetScaleVector;
 
-        float opacity = isMiddleBox ? maxAlpha : 0.2f;
+        float opacity = isMiddleBox ? maxAlpha : 0.4f;
+
         SetBoxOpacity(box, opacity);
     }
 
     void SetBoxOpacity(Transform box, float alpha)
     {
         int boxIndex = box.GetSiblingIndex();
-        Color newColor = originalColors[boxIndex];
-        newColor.a = alpha;
-        boxImages[boxIndex].color = newColor;
-        // Get the child Image and Text components
-        Image childImage = catTypeBox[Array.IndexOf(boxes, box)];
-        Text childText = catTypeTexts[Array.IndexOf(boxes, box)];
+        // Color newColor = originalColors[boxIndex];
+        // newColor.a = alpha;
+        // boxImages[boxIndex].color = newColor;
+        // // Get the child Image and Text components
+        // Image childImage = catTypeBox[Array.IndexOf(boxes, box)];
+        // Text childText = catTypeTexts[Array.IndexOf(boxes, box)];
 
-        // Set the child Image and Text alpha
-        if (childImage != null)
-        {
-            Color childImageColor = childImage.color;
-            childImageColor.a = alpha;
-            childImage.color = childImageColor;
-        }
+        // // Set the child Image and Text alpha
+        // if (childImage != null)
+        // {
+        //     Color childImageColor = childImage.color;
+        //     childImageColor.a = alpha;
+        //     childImage.color = childImageColor;
+        // }
 
-        if (childText != null)
-        {
-            Color childTextColor = childText.color;
-            childTextColor.a = alpha;
-            childText.color = childTextColor;
-        }
+        // if (childText != null)
+        // {
+        //     Color childTextColor = childText.color;
+        //     childTextColor.a = alpha;
+        //     childText.color = childTextColor;
+        // }
+        canvasGroup[boxIndex].alpha = alpha;
     }
 
     IEnumerator ScaleMiddleBox()
@@ -325,7 +330,7 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
                 // Interpolasi skala dari skala asli ke skala target
                 box.localScale = Vector3.Lerp(originalScale, targetScale, t);
-                float opacity = i == middleIndex ? maxAlpha : 0.2f;
+                float opacity = i == middleIndex ? maxAlpha : 0.4f;
                 SetBoxOpacity(box, opacity);
 
                 elapsedTime += Time.deltaTime;
@@ -442,10 +447,10 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             PlayerPrefs.SetFloat("Box_" + i + "_ScaleZ", boxes[i].localScale.z);
         }
 
-        for (int i = 0; i < boxImages.Length; i++)
+        for (int i = 0; i < canvasGroup.Length; i++)
         {
-            float alpha = boxImages[i].color.a;
-            PlayerPrefs.SetFloat($"BoxAlpha_{i}", alpha);
+            float alpha = canvasGroup[i].alpha;
+            PlayerPrefs.SetFloat($"CanvasGroupAlpha_{i}", alpha);
         }
 
         PlayerPrefs.Save();
@@ -475,12 +480,10 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             boxes[i].localScale = new Vector3(scaleX, scaleY, scaleZ);
         }
 
-        for (int i = 0; i < boxImages.Length; i++)
+        for (int i = 0; i < canvasGroup.Length; i++)
         {
-            float alpha = PlayerPrefs.GetFloat($"BoxAlpha_{i}");
-            Color color = boxImages[i].color;
-            color.a = alpha;
-            boxImages[i].color = color;
+            float alpha = PlayerPrefs.GetFloat($"CanvasGroupAlpha_{i}");
+            canvasGroup[i].alpha = alpha;
         }
     }
     // private void OnApplicationQuit()

@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 
 public class PetshopStory : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject storyCanvas;
-    public GameObject mainCanvas;
+    public GameObject[] storyLayout;
+    public GameObject[] mainLayout;
     private bool inStory = true;
 
     void Start()
@@ -14,14 +14,26 @@ public class PetshopStory : MonoBehaviour, IPointerClickHandler
         if (GameManager.instance.previousScene == "CoverTitle")
         {
             inStory = true;
-            storyCanvas.SetActive(true);
-            mainCanvas.SetActive(false);
+            foreach (GameObject ui in storyLayout)
+            {
+                ui.SetActive(true);
+            }
+            foreach (GameObject ui in mainLayout)
+            {
+                ui.SetActive(false);
+            }
         }
         else
         {
             inStory = false;
-            storyCanvas.SetActive(false);
-            mainCanvas.SetActive(true);
+            foreach (GameObject ui in storyLayout)
+            {
+                ui.SetActive(false);
+            }
+            foreach (GameObject ui in mainLayout)
+            {
+                ui.SetActive(true);
+            }
         }
     }
 
@@ -29,8 +41,14 @@ public class PetshopStory : MonoBehaviour, IPointerClickHandler
     {
         if (inStory)
         {
-            storyCanvas.SetActive(false);
-            mainCanvas.SetActive(true);
+            foreach (GameObject ui in storyLayout)
+            {
+                ui.SetActive(false);
+            }
+            foreach (GameObject ui in mainLayout)
+            {
+                ui.SetActive(true);
+            }
             inStory = false;
         }
     }

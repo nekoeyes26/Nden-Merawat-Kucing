@@ -88,12 +88,13 @@ public class MinigameManager : MonoBehaviour
         popUpWin.SetActive(true);
         if (!isXPAdded)
         {
-            if (GameManager.instance.CatProfile.catScriptable.playRemaining > 0)
-            {
-                GameManager.instance.CatProfile.catScriptable.playRemaining--;
-                GameManager.instance.AddXP();
-                GameManager.instance.LevelUpChecker();
-            }
+            // if (GameManager.instance.CatProfile.catScriptable.playRemaining > 0)
+            // {
+            //     GameManager.instance.CatProfile.catScriptable.playRemaining--;
+            //     GameManager.instance.AddXP();
+            //     GameManager.instance.LevelUpChecker();
+            // }
+            GameManager.instance.CompleteMissionChecker(ref GameManager.instance.CatProfile.catScriptable.playRemaining);
             isXPAdded = true;
             if (GameManager.instance.CatProfile.catScriptable.isSad) GameManager.instance.ChangeSad();
             GameManager.instance.isPlayTimerOn = false;

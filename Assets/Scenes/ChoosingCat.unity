@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 31220822}
   - component: {fileID: 31220821}
   - component: {fileID: 31220820}
+  - component: {fileID: 31220824}
   m_Layer: 5
   m_Name: Kucing (4)
   m_TagString: Untagged
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -237,6 +238,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31220818}
   m_CullTransparentMesh: 1
+--- !u!225 &31220824
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31220818}
+  m_Enabled: 1
+  m_Alpha: 0.4
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &33528436
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,8 +664,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e4a0a37a70a614cb4fab78fe768b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyCanvas: {fileID: 1420813228}
-  mainCanvas: {fileID: 1741539149}
+  storyLayout:
+  - {fileID: 1420813228}
+  - {fileID: 204920784}
+  mainLayout:
+  - {fileID: 1741539149}
+  - {fileID: 765136971}
 --- !u!1 &62874981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5411765, g: 0.25882354, b: 0.050980397, a: 0.2}
+  m_Color: {r: 0.5411765, g: 0.25882354, b: 0.050980397, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1464,6 +1481,7 @@ GameObject:
   - component: {fileID: 533490779}
   - component: {fileID: 533490781}
   - component: {fileID: 533490782}
+  - component: {fileID: 533490783}
   m_Layer: 5
   m_Name: Kucing (3)
   m_TagString: Untagged
@@ -1565,6 +1583,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d737a69d700052c488c456c9dddc36e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &533490783
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533490777}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &596557385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,6 +1676,7 @@ GameObject:
   - component: {fileID: 624045002}
   - component: {fileID: 624045001}
   - component: {fileID: 624045000}
+  - component: {fileID: 624045004}
   m_Layer: 5
   m_Name: Kucing (5)
   m_TagString: Untagged
@@ -1722,7 +1753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1747,6 +1778,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624044998}
   m_CullTransparentMesh: 1
+--- !u!225 &624045004
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624044998}
+  m_Enabled: 1
+  m_Alpha: 0.4
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &671451636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2032,7 +2075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5411765, g: 0.25882354, b: 0.050980397, a: 0.2}
+  m_Color: {r: 0.5411765, g: 0.25882354, b: 0.050980397, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2077,7 +2120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &765136972
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2196,7 +2239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3738,6 +3781,7 @@ GameObject:
   - component: {fileID: 1439992508}
   - component: {fileID: 1439992510}
   - component: {fileID: 1439992511}
+  - component: {fileID: 1439992512}
   m_Layer: 5
   m_Name: Kucing (1)
   m_TagString: Untagged
@@ -3779,7 +3823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3839,6 +3883,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d737a69d700052c488c456c9dddc36e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1439992512
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439992506}
+  m_Enabled: 1
+  m_Alpha: 0.4
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1455944359
 GameObject:
   m_ObjectHideFlags: 0
@@ -3927,6 +3983,7 @@ GameObject:
   - component: {fileID: 1462766363}
   - component: {fileID: 1462766365}
   - component: {fileID: 1462766366}
+  - component: {fileID: 1462766367}
   m_Layer: 5
   m_Name: Kucing (2)
   m_TagString: Untagged
@@ -3968,7 +4025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4028,6 +4085,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d737a69d700052c488c456c9dddc36e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1462766367
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462766361}
+  m_Enabled: 1
+  m_Alpha: 0.4
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1549167324
 GameObject:
   m_ObjectHideFlags: 0
@@ -4041,6 +4110,7 @@ GameObject:
   - component: {fileID: 1549167328}
   - component: {fileID: 1549167327}
   - component: {fileID: 1549167326}
+  - component: {fileID: 1549167330}
   m_Layer: 5
   m_Name: Kucing (6)
   m_TagString: Untagged
@@ -4117,7 +4187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4142,6 +4212,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549167324}
   m_CullTransparentMesh: 1
+--- !u!225 &1549167330
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549167324}
+  m_Enabled: 1
+  m_Alpha: 0.4
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1591023494
 GameObject:
   m_ObjectHideFlags: 0
@@ -4268,7 +4350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4344,7 +4426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5068,7 +5150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5668,7 +5750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5411765, g: 0.25882354, b: 0.050980397, a: 0.2}
+  m_Color: {r: 0.5411765, g: 0.25882354, b: 0.050980397, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5826,7 +5908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5411765, g: 0.25882354, b: 0.050980397, a: 0.2}
+  m_Color: {r: 0.5411765, g: 0.25882354, b: 0.050980397, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
