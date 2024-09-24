@@ -21,10 +21,10 @@ public class BathController : MonoBehaviour
     private bool isXPAdded = false;
     public Button exitButton;
     public Animator catAnimator;
-    public RectTransform[] checkpointImage;
+    // public RectTransform[] checkpointImage;
     public VerticalLayoutGroup CheckpointVerticalLayout;
-    public RectTransform barTransform;
-    public RectTransform bathubTransform;
+    // public RectTransform barTransform;
+    // public RectTransform bathubTransform;
     public Image checklist1st;
     public Image checklist2nd;
     public Image checklist3rd;
@@ -128,75 +128,74 @@ public class BathController : MonoBehaviour
     {
         float screenAspect = (float)Screen.width / Screen.height;
 
-        // Check if the screen aspect ratio is close to 4:3
-        if (Mathf.Abs(screenAspect - 4f / 3f) < 0.01f)
+        if (Mathf.Abs(screenAspect - 4f / 3f) < 0.012f)
         {
-            Debug.Log("Screen size 4:3");
-            // Set the desired width and height
-            float width = 150f; // Replace with your desired width
-            float height = 150f; // Replace with your desired height
+            // // Set the desired width and height
+            // float width = 150f;
+            // float height = 150f;
 
-            // Change the Rect Transform size
-            foreach (RectTransform check in checkpointImage)
-            {
-                check.sizeDelta = new Vector2(width, height);
-            }
+            // foreach (RectTransform check in checkpointImage)
+            // {
+            //     check.sizeDelta = new Vector2(width, height);
+            // }
 
             CheckpointVerticalLayout.padding.top = -141;
             CheckpointVerticalLayout.padding.bottom = 129;
 
-            float topAnchor = 27.1f;
-            float bottomAnchor = 32f;
-            barTransform.offsetMax = new Vector2(barTransform.offsetMax.x, -topAnchor);
-            barTransform.offsetMin = new Vector2(barTransform.offsetMin.x, bottomAnchor);
+            // float topAnchor = 27.1f;
+            // float bottomAnchor = 32f;
+            // barTransform.offsetMax = new Vector2(barTransform.offsetMax.x, -topAnchor);
+            // barTransform.offsetMin = new Vector2(barTransform.offsetMin.x, bottomAnchor);
 
-            float posX = -547f;
-            bathubTransform.anchoredPosition = new Vector2(posX, bathubTransform.anchoredPosition.y);
+            // float posX = -547f;
+            // bathubTransform.anchoredPosition = new Vector2(posX, bathubTransform.anchoredPosition.y);
         }
-        // Check if the screen aspect ratio is close to 5:4
-        else if (Mathf.Abs(screenAspect - 5f / 4f) < 0.01f)
+        else if (Mathf.Abs(screenAspect - 5f / 3f) < 0.012f)
         {
-            float width = 170f; // Replace with your desired width
-            float height = 170f; // Replace with your desired height
+            CheckpointVerticalLayout.padding.top = -141;
+            CheckpointVerticalLayout.padding.bottom = 129;
+        }
+        else if (Mathf.Abs(screenAspect - 5f / 4f) < 0.012f)
+        {
+            // float width = 170f;
+            // float height = 170f;
 
-            // Change the Rect Transform size
-            foreach (RectTransform check in checkpointImage)
-            {
-                check.sizeDelta = new Vector2(width, height);
-            }
+            // foreach (RectTransform check in checkpointImage)
+            // {
+            //     check.sizeDelta = new Vector2(width, height);
+            // }
 
             CheckpointVerticalLayout.padding.top = -141;
             CheckpointVerticalLayout.padding.bottom = 129;
 
-            float topAnchor = 12.4f;
-            float bottomAnchor = 2.4f;
-            barTransform.offsetMax = new Vector2(barTransform.offsetMax.x, -topAnchor);
-            barTransform.offsetMin = new Vector2(barTransform.offsetMin.x, bottomAnchor);
+            // float topAnchor = 12.4f;
+            // float bottomAnchor = 2.4f;
+            // barTransform.offsetMax = new Vector2(barTransform.offsetMax.x, -topAnchor);
+            // barTransform.offsetMin = new Vector2(barTransform.offsetMin.x, bottomAnchor);
 
-            float posX = -547f;
-            bathubTransform.anchoredPosition = new Vector2(posX, bathubTransform.anchoredPosition.y);
+            // float posX = -547f;
+            // bathubTransform.anchoredPosition = new Vector2(posX, bathubTransform.anchoredPosition.y);
         }
         else
         {
-            float width = 80f; // Replace with your desired width
-            float height = 80f; // Replace with your desired height
+            // float width = 80f;
+            // float height = 80f;
 
-            // Change the Rect Transform size
-            foreach (RectTransform check in checkpointImage)
-            {
-                check.sizeDelta = new Vector2(width, height);
-            }
+            // foreach (RectTransform check in checkpointImage)
+            // {
+            //     check.sizeDelta = new Vector2(width, height);
+            // }
 
             CheckpointVerticalLayout.padding.top = -90;
             CheckpointVerticalLayout.padding.bottom = 47;
 
-            float topAnchor = 14f;
-            float bottomAnchor = 15.2f;
-            barTransform.offsetMax = new Vector2(barTransform.offsetMax.x, -topAnchor);
-            barTransform.offsetMin = new Vector2(barTransform.offsetMin.x, bottomAnchor);
+            // float topAnchor = 14f;
+            // float bottomAnchor = 15.2f;
+            // barTransform.offsetMax = new Vector2(barTransform.offsetMax.x, -topAnchor);
+            // barTransform.offsetMin = new Vector2(barTransform.offsetMin.x, bottomAnchor);
 
-            float posX = -187f;
-            bathubTransform.anchoredPosition = new Vector2(posX, bathubTransform.anchoredPosition.y);
+            // float posX = -187f;
+            // bathubTransform.anchoredPosition = new Vector2(posX, bathubTransform.anchoredPosition.y);
         }
     }
 

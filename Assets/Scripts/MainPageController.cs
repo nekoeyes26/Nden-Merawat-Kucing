@@ -32,6 +32,7 @@ public class MainPageController : MonoBehaviour
         GameEvents.OnSadChange += CatSad;
         GameEvents.OnSickChange += CatSick;
         GameEvents.OnMissChange += MissCalc;
+        GameEvents.OnNameChange += CatNameUI;
     }
 
     void OnDisable()
@@ -43,10 +44,12 @@ public class MainPageController : MonoBehaviour
         GameEvents.OnSadChange -= CatSad;
         GameEvents.OnSickChange -= CatSick;
         GameEvents.OnMissChange -= MissCalc;
+        GameEvents.OnNameChange -= CatNameUI;
     }
     void Start()
     {
         catS = GameManager.instance.CatProfile.catScriptable;
+        CatNameUI();
         LevelUI(catS.level);
         BarFill(catS.xp);
         CatHungry();
@@ -129,7 +132,6 @@ public class MainPageController : MonoBehaviour
 
     void LevelUI(int level)
     {
-        catName.text = catS.name;
         catLevel.text = level.ToString();
         Sprite sprite;
         if (catS.phase == CatPhase.Baby)
@@ -224,5 +226,10 @@ public class MainPageController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         catAnimator.SetBool("isIdling", false);
+    }
+
+    void CatNameUI()
+    {
+        catName.text = catS.name;
     }
 }

@@ -22,7 +22,8 @@ public class MinigameController : MonoBehaviour
     // private Vector2 notGroundedSize = new Vector2(1f, 0.875f);
     // private Vector2 notGroundedOffset = new Vector2(0.5f, 0f);
     // private float transitionDuration = 0.25f;
-    // Start is called before the first frame update
+    private float jumpCooldownTime = 0.5f;
+    private bool isJumping = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,20 +43,18 @@ public class MinigameController : MonoBehaviour
         // }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isGrounded == true && !isEnemyHitCooldown)
-            {
-                rb.AddForce(Vector2.up * jumpForce);
-                isGrounded = false;
-            }
+            Jump();
         }
     }
 
     public void Jump()
     {
-        if (isGrounded == true && !isEnemyHitCooldown)
+        if (isGrounded == true && !isJumping && !isEnemyHitCooldown)
         {
             rb.AddForce(Vector2.up * jumpForce);
             isGrounded = false;
+            isJumping = true;
+            Invoke(nameof(ResetJumping), jumpCooldownTime);
         }
     }
 
@@ -138,4 +137,9 @@ public class MinigameController : MonoBehaviour
     //     boxCollider.size = notGroundedSize;
     //     boxCollider.offset = notGroundedOffset;
     // }
+
+    private void ResetJumping()
+    {
+        isJumping = false;
+    }
 }

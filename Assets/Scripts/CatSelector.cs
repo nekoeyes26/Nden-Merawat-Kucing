@@ -375,9 +375,9 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
                 UI.SetActive(false);
             }
 
+            inputField.text = catTypeTexts[middleIndex].text;
             foreach (GameObject UI in givingNameUI)
             {
-                inputField.text = catTypeTexts[middleIndex].text;
                 UI.SetActive(true);
             }
         }
@@ -404,8 +404,9 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void NamingCat()
     {
-        GameManager.instance.CatProfile.catScriptable.name = inputField.text.Trim();
-        GameManager.instance.CatProfile.catScriptable.Save();
+        // GameManager.instance.CatProfile.catScriptable.name = inputField.text.Trim();
+        // GameManager.instance.CatProfile.catScriptable.Save();
+        GameManager.instance.GiveName(inputField.text.Trim());
         // Debug.Log(GameManager.instance.CatProfile.name);
         // Debug.Log(GameManager.instance.CatProfile.state);
     }

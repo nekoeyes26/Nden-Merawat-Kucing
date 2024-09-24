@@ -15,12 +15,14 @@ public class ShowerGameobject : MonoBehaviour
     public BathController bathController;
     private float holdTime = 2.0f;
     private float holdTimer = 0f;
+    public Hose hose;
 
     private void Start()
     {
         mainCamera = Camera.main;
         originalPosition = transform.position;
         showerAnimator = GetComponent<Animator>();
+        hose.moveSpeed = moveSpeed;
     }
 
     void Update()

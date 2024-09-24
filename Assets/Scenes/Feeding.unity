@@ -2483,7 +2483,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ad7a2d6c58bc38044b2b3cbe715cd5e1, type: 2}
+  - {fileID: 2100000, guid: d4bcbc80eee822e41a5f03d61fe56f6a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2522,8 +2522,8 @@ Transform:
   m_GameObject: {fileID: 1489624298}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.295, z: -0.11}
-  m_LocalScale: {x: 25.131449, y: 2.1592093, z: 1}
+  m_LocalPosition: {x: 0, y: -2.6453, z: -0.11}
+  m_LocalScale: {x: 25.131449, y: 2.0135593, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2972,7 +2972,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 914d9f314f626fe48b9414f4b1a75bf9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c704be373ab6fad4d954d21f73e21ec5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2992,8 +2992,8 @@ Transform:
   m_GameObject: {fileID: 1800650932}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.6829, z: -0.1}
-  m_LocalScale: {x: 0.79274935, y: 0.79274935, z: 0.79274935}
+  m_LocalPosition: {x: 0, y: -3.5117, z: -0.1}
+  m_LocalScale: {x: 0.78914756, y: 0.78914756, z: 0.78914756}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -3159,7 +3159,7 @@ MonoBehaviour:
   inactiveFoodList: []
   poolParent: {fileID: 1952448079}
   maxLeftPosition: -16
-  spawnPosition: {x: 14, y: -2.85, z: -0.15}
+  spawnPosition: {x: 14, y: -2.22, z: -0.15}
 --- !u!4 &1952448079
 Transform:
   m_ObjectHideFlags: 0

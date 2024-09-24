@@ -55,20 +55,20 @@ public class WefieController : MonoBehaviour
         Texture2D textureDisplay = new Texture2D(screenshot.width, screenshot.height, TextureFormat.RGB24, false);
         textureDisplay.SetPixels(screenshot.GetPixels());
         textureDisplay.Apply();
-        WefieController.SavedScreenshots.Add(textureDisplay);
+        SavedScreenshots.Add(textureDisplay);
         Destroy(screenshot);
 
         texture2D.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         texture2D.Apply();
 
-        string name = "IMG" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
+        // string name = "IMG" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
 
         // byte[] bytes = texture2D.EncodeToPNG();
         // File.WriteAllBytes(Application.dataPath + "/" + name, bytes);
 
-        NativeGallery.SaveImageToGallery(texture2D, "Merawat Kucing", name);
+        // NativeGallery.SaveImageToGallery(texture2D, "Merawat Kucing", name);
 
-        Debug.Log("File saved as " + name);
+        // Debug.Log("File saved as " + name);
         Sprite screenshotSprite = Sprite.Create(textureDisplay, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f));
         foreach (GameObject UI in displayFrame)
         {

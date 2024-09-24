@@ -132,4 +132,11 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public void GiveName(string name)
+    {
+        cat.catScriptable.name = name;
+        cat.catScriptable.Save();
+        GameEvents.NameChanged();
+    }
 }
