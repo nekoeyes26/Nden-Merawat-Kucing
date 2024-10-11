@@ -35,6 +35,9 @@ public class MinigameManager : MonoBehaviour
     private bool isXPAdded = false;
     private bool isGameover = false;
     private bool isPaused = false;
+    public GameObject emptyHealthPrefab;
+    public Transform emptyHealthParent;
+    public float maxFillAmount = 0.75f;
 
     private void Start()
     {
@@ -48,6 +51,7 @@ public class MinigameManager : MonoBehaviour
         backHomeMenu.SetActive(false);
         pauseMenu.SetActive(false);
         GenerateHealth();
+        GenerateEmptyHealth();
     }
 
     private void Update()
@@ -59,7 +63,7 @@ public class MinigameManager : MonoBehaviour
     public void BarFill()
     {
         // bar.fillAmount = (float)score / (float)targetScore;
-        bar.fillAmount = Mathf.Lerp(bar.fillAmount, (float)score / (float)targetScore, lerpSpeed);
+        bar.fillAmount = Mathf.MoveTowards(bar.fillAmount, ((float)score / (float)targetScore) * maxFillAmount, lerpSpeed);
         AvatarMove();
     }
 
@@ -70,6 +74,16 @@ public class MinigameManager : MonoBehaviour
         float targetX = Mathf.Lerp(avaXMin, avaXMax, normalizedScore);
         float newX = Mathf.Lerp(avatarRect.anchoredPosition.x, targetX, lerpSpeed);
         avatarRect.anchoredPosition = new Vector2(newX, avatarRect.anchoredPosition.y);
+        // Debug.Log(avatarRect.anchoredPosition.x);
+        float percentForDeactive = 0.18f; // 0.00 - 1.0f
+        if (avatarRect.anchoredPosition.x >= avaXMax - (avaXMax * percentForDeactive))
+        {
+            avatarRect.gameObject.SetActive(false);
+        }
+        else
+        {
+            avatarRect.gameObject.SetActive(true);
+        }
     }
 
     public void AddScore()
@@ -209,6 +223,14 @@ public class MinigameManager : MonoBehaviour
         foreach (ObstacleObject obj in groundnCoinObjects)
         {
             obj.SpeedReduction();
+        }
+    }
+
+    void GenerateEmptyHealth()
+    {
+        for (int i = 0; i < health; i++)
+        {
+            Instantiate(emptyHealthPrefab, emptyHealthParent);
         }
     }
 }

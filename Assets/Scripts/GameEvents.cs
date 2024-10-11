@@ -13,6 +13,7 @@ public class GameEvents : MonoBehaviour
     public static event Action OnSickChange;
     public static event Action OnMissChange;
     public static event Action OnNameChange;
+    public static event Action<CatPhase> OnPhaseChange;
 
     public static void XpChanged(int xpNow)
     {
@@ -52,5 +53,10 @@ public class GameEvents : MonoBehaviour
     public static void NameChanged()
     {
         OnNameChange?.Invoke();
+    }
+
+    public static void PhaseChanged(CatPhase phase)
+    {
+        OnPhaseChange?.Invoke(phase);
     }
 }

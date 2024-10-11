@@ -15,14 +15,16 @@ public class ShowerGameobject : MonoBehaviour
     public BathController bathController;
     private float holdTime = 2.0f;
     private float holdTimer = 0f;
-    public Hose hose;
+    public float limitXMinPos = -3f;
+    public float limitXMaxPos = 7.5f;
+    public float limitYMinPos = -3.67f;
+    public float limitYMaxPos = 3.67f;
 
     private void Start()
     {
         mainCamera = Camera.main;
         originalPosition = transform.position;
         showerAnimator = GetComponent<Animator>();
-        hose.moveSpeed = moveSpeed;
     }
 
     void Update()
@@ -42,6 +44,8 @@ public class ShowerGameobject : MonoBehaviour
         if (isDragging)
         {
             Vector3 newPosition = GetMouseWorldPosition() + offset;
+            newPosition.x = Mathf.Clamp(newPosition.x, limitXMinPos, limitXMaxPos);
+            newPosition.y = Mathf.Clamp(newPosition.y, limitYMinPos, limitYMaxPos);
             transform.position = newPosition;
             showerAnimator.SetBool("isShowering", true);
         }
@@ -54,7 +58,7 @@ public class ShowerGameobject : MonoBehaviour
             showerAnimator.SetBool("isShowering", false);
         }
 
-        if (isOverPet)
+        if (isOverPet && isDragging)
         {
             holdTimer += Time.deltaTime;
             if (holdTimer >= holdTime)
@@ -77,7 +81,7 @@ public class ShowerGameobject : MonoBehaviour
         if (collision.gameObject.CompareTag("Pet") && !bathController.IsWet)
         {
             isOverPet = true;
-            // Debug.Log("Colliding with Pet, isOverPet: " + isOverPet);
+            Debug.Log("Colliding with Pet, isOverPet: " + isOverPet);
         }
 
         if (collision.gameObject.CompareTag("Foam"))

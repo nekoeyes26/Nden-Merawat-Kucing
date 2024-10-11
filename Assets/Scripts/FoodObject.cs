@@ -4,11 +4,12 @@ using UnityEngine;
 
 public enum FoodType
 {
-    Milk,
-    Cheese,
-    Egg,
-    Rice,
-    Pancake
+    Ayam,
+    Daging,
+    Ikan,
+    Kol,
+    Susu,
+    Wortel
 }
 public class FoodObject : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class FoodObject : MonoBehaviour
     private float moveSpeed = 0.2f;
     public float speed = 2f;
 
-    public bool isOverPet = false;
+    private bool isOverPet = false;
 
     [SerializeField] private FeedController feedController;
     [SerializeField] private FoodPool foodPool;
@@ -62,12 +63,12 @@ public class FoodObject : MonoBehaviour
         // Stop dragging and check if the drop is successful or not
         if (Input.GetMouseButtonUp(0))
         {
-            if (isOverPet)
+            if (isOverPet && isDragging)
             {
                 // Drop successful on a "Pet" object, return instantly to original position
                 // Debug.Log("Dropped on Pet");
                 // ReturnToOriginalPositionInstantly();
-                transform.gameObject.SetActive(false);
+                // transform.gameObject.SetActive(false);
                 feedController.AddPoint(transform.gameObject);
                 foodPool.RemoveFood(this);
             }
@@ -97,7 +98,7 @@ public class FoodObject : MonoBehaviour
         if (collision.CompareTag("Pet"))
         {
             isOverPet = false;
-            Debug.Log("Object is no longer over Pet");
+            // Debug.Log("Object is no longer over Pet");
         }
     }
 

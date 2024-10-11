@@ -16,6 +16,9 @@ public class WefieController : MonoBehaviour
     private CatScriptable catS;
     private bool isXPAdded = false;
     public static List<Texture2D> SavedScreenshots = new List<Texture2D>();
+    public Sprite[] BGSprites;
+    private int currentIndex = 0;
+    public Image background;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,8 @@ public class WefieController : MonoBehaviour
         }
         cat.sprite = sprite;
         LoadScreenshots();
+
+        background.sprite = BGSprites[currentIndex];
     }
 
     // Update is called once per frame
@@ -232,5 +237,11 @@ public class WefieController : MonoBehaviour
     void OnDisable()
     {
         SaveScreenshots();
+    }
+
+    public void ChangeBackground()
+    {
+        currentIndex = (currentIndex + 1) % BGSprites.Length;
+        background.sprite = BGSprites[currentIndex];
     }
 }

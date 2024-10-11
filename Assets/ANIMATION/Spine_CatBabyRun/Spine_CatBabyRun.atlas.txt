@@ -1,0 +1,251 @@
+
+Spine_CatBabyRun.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+run1/body
+  rotate: true
+  xy: 731, 41
+  size: 202, 113
+  orig: 202, 113
+  offset: 0, 0
+  index: -1
+run1/head
+  rotate: false
+  xy: 2, 2
+  size: 265, 238
+  orig: 265, 238
+  offset: 0, 0
+  index: -1
+run1/legfar_back
+  rotate: false
+  xy: 1160, 121
+  size: 63, 67
+  orig: 63, 67
+  offset: 0, 0
+  index: -1
+run1/legfar_front
+  rotate: false
+  xy: 1204, 378
+  size: 63, 63
+  orig: 63, 63
+  offset: 0, 0
+  index: -1
+run1/legnear_back
+  rotate: true
+  xy: 1055, 331
+  size: 87, 80
+  orig: 87, 80
+  offset: 0, 0
+  index: -1
+run1/legnear_front
+  rotate: true
+  xy: 1024, 16
+  size: 69, 66
+  orig: 69, 66
+  offset: 0, 0
+  index: -1
+run1/tail
+  rotate: true
+  xy: 971, 420
+  size: 90, 85
+  orig: 90, 85
+  offset: 0, 0
+  index: -1
+run2/body
+  rotate: true
+  xy: 615, 39
+  size: 202, 114
+  orig: 202, 114
+  offset: 0, 0
+  index: -1
+run2/head
+  rotate: true
+  xy: 244, 243
+  size: 267, 240
+  orig: 267, 240
+  offset: 0, 0
+  index: -1
+run2/legfar_back
+  rotate: false
+  xy: 1137, 354
+  size: 65, 67
+  orig: 65, 67
+  offset: 0, 0
+  index: -1
+run2/legfar_front
+  rotate: false
+  xy: 1206, 447
+  size: 63, 63
+  orig: 63, 63
+  offset: 0, 0
+  index: -1
+run2/legnear_back
+  rotate: true
+  xy: 971, 330
+  size: 88, 82
+  orig: 88, 82
+  offset: 0, 0
+  index: -1
+run2/legnear_front
+  rotate: true
+  xy: 1061, 260
+  size: 69, 67
+  orig: 69, 67
+  offset: 0, 0
+  index: -1
+run2/tail
+  rotate: true
+  xy: 935, 153
+  size: 90, 86
+  orig: 90, 86
+  offset: 0, 0
+  index: -1
+run3/body
+  rotate: true
+  xy: 269, 36
+  size: 205, 113
+  orig: 205, 113
+  offset: 0, 0
+  index: -1
+run3/head
+  rotate: true
+  xy: 2, 242
+  size: 268, 240
+  orig: 268, 240
+  offset: 0, 0
+  index: -1
+run3/legfar_back
+  rotate: false
+  xy: 1140, 443
+  size: 64, 67
+  orig: 64, 67
+  offset: 0, 0
+  index: -1
+run3/legfar_front
+  rotate: false
+  xy: 1170, 196
+  size: 63, 64
+  orig: 63, 64
+  offset: 0, 0
+  index: -1
+run3/legnear_back
+  rotate: true
+  xy: 1058, 423
+  size: 87, 80
+  orig: 87, 80
+  offset: 0, 0
+  index: -1
+run3/legnear_front
+  rotate: true
+  xy: 1092, 17
+  size: 68, 67
+  orig: 68, 67
+  offset: 0, 0
+  index: -1
+run3/tail
+  rotate: true
+  xy: 846, 152
+  size: 91, 87
+  orig: 91, 87
+  offset: 0, 0
+  index: -1
+run4/body
+  rotate: true
+  xy: 384, 37
+  size: 204, 114
+  orig: 204, 114
+  offset: 0, 0
+  index: -1
+run4/head
+  rotate: true
+  xy: 486, 243
+  size: 267, 240
+  orig: 267, 240
+  offset: 0, 0
+  index: -1
+run4/legfar_back
+  rotate: false
+  xy: 1130, 262
+  size: 66, 67
+  orig: 66, 67
+  offset: 0, 0
+  index: -1
+run4/legfar_front
+  rotate: false
+  xy: 1161, 56
+  size: 63, 63
+  orig: 63, 63
+  offset: 0, 0
+  index: -1
+run4/legnear_back
+  rotate: false
+  xy: 971, 247
+  size: 88, 81
+  orig: 88, 81
+  offset: 0, 0
+  index: -1
+run4/legnear_front
+  rotate: true
+  xy: 1024, 87
+  size: 69, 67
+  orig: 69, 67
+  offset: 0, 0
+  index: -1
+run4/tail
+  rotate: true
+  xy: 846, 59
+  size: 91, 86
+  orig: 91, 86
+  offset: 0, 0
+  index: -1
+run5/body
+  rotate: true
+  xy: 500, 38
+  size: 203, 113
+  orig: 203, 113
+  offset: 0, 0
+  index: -1
+run5/head
+  rotate: true
+  xy: 728, 245
+  size: 265, 241
+  orig: 265, 241
+  offset: 0, 0
+  index: -1
+run5/legfar_back
+  rotate: false
+  xy: 1105, 190
+  size: 63, 68
+  orig: 63, 68
+  offset: 0, 0
+  index: -1
+run5/legfar_front
+  rotate: true
+  xy: 1198, 288
+  size: 64, 63
+  orig: 64, 63
+  offset: 0, 0
+  index: -1
+run5/legnear_back
+  rotate: true
+  xy: 1023, 158
+  size: 87, 80
+  orig: 87, 80
+  offset: 0, 0
+  index: -1
+run5/legnear_front
+  rotate: true
+  xy: 1093, 88
+  size: 68, 65
+  orig: 68, 65
+  offset: 0, 0
+  index: -1
+run5/tail
+  rotate: true
+  xy: 934, 60
+  size: 90, 88
+  orig: 90, 88
+  offset: 0, 0
+  index: -1

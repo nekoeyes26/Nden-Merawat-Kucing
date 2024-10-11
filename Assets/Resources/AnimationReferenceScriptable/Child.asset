@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b77d0eb05b67bdf40ab5026c976bfcfe, type: 3}
+  m_Name: Child
+  m_EditorClassIdentifier: 
+  elus: {fileID: 11400000, guid: 499fda3a86faeba43826661e08291362, type: 2}
+  makan: {fileID: 11400000, guid: 317d1589c7c2f2f49bb0eca884afc770, type: 2}
+  mandi: {fileID: 11400000, guid: 5f21ea1d2dc96b144bc64e270641d37b, type: 2}
+  normal: {fileID: 11400000, guid: e7017a7f40085424a8d7ef7766f326c2, type: 2}
+  sakit: {fileID: 11400000, guid: 1cdf3210144771a4dbbc657087db96de, type: 2}
+  salah: {fileID: 11400000, guid: 0f4af351862d06c4a8b40d97c0879b71, type: 2}
+  suap: {fileID: 11400000, guid: 6a3c006c48283ff4bac6ac235b351c73, type: 2}
+  bump: {fileID: 11400000, guid: 85fb1c61706221e46ba854652b0f49cb, type: 2}
+  jumpUp: {fileID: 11400000, guid: 16f5f561e212d3442a8562030dbbed0e, type: 2}
+  jumpDown: {fileID: 11400000, guid: 7b654f1e559670c4489ee9ace844dc3c, type: 2}
+  landing: {fileID: 11400000, guid: 74a6fb176b06b8a47b4f485cba7e919f, type: 2}
+  run: {fileID: 11400000, guid: d107c3bf5e4f75e498d3f7ad084b245e, type: 2}
+  dataAssetIdle: {fileID: 11400000, guid: dcc98af7b0110204892a7ed3565fc5b1, type: 2}
+  dataAssetRun: {fileID: 11400000, guid: 489d527dd9bac53429a072ba005f2fd4, type: 2}

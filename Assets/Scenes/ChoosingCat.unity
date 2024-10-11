@@ -666,10 +666,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyLayout:
   - {fileID: 1420813228}
-  - {fileID: 204920784}
   mainLayout:
   - {fileID: 1741539149}
-  - {fileID: 765136971}
 --- !u!1 &62874981
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,7 +913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &204920785
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -957,7 +955,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 1c6d63f3b4bceb14886732743b26b291, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1343fc3adcad96344b08966cf8c08d78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -977,8 +975,8 @@ Transform:
   m_GameObject: {fileID: 204920784}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1166, z: 0}
-  m_LocalScale: {x: 0.76292646, y: 0.76292646, z: 0.76292646}
+  m_LocalPosition: {x: 0, y: 0.0054, z: 0}
+  m_LocalScale: {x: 1.0668256, y: 1.0668256, z: 1.0668256}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2120,7 +2118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &765136972
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3189,7 +3187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1194120987
 RectTransform:
   m_ObjectHideFlags: 0

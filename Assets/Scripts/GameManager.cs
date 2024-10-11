@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         cat.RenewXpNeeded();
         cat.RenewPhase(cat.catScriptable.level);
         GameEvents.LevelChanged(cat.catScriptable.level);
+        GameEvents.PhaseChanged(cat.phase);
         cat.catScriptable.Save();
     }
 

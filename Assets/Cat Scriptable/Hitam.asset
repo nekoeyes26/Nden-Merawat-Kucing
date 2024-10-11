@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preview: {fileID: 0}
   id: 3
-  catName: 
-  xp: 0
-  xpNeeded: 0
-  level: 0
+  catName: GARONGGGGGGGG
+  xp: 6
+  xpNeeded: 8
+  level: 1
   phase: 0
   hungryRemaining: 0
   showerRemaining: 0
-  playRemaining: 0
+  playRemaining: 2
   photoRemaining: 0
-  state: 0
+  state: 1
   isHungry: 0
   isDirty: 0
-  isSad: 0
+  isSad: 1
   isSick: 0
   spriteFolderPath: Sprite/Cat/Hitam/
   animationFolderPath: Anim/Hitam/

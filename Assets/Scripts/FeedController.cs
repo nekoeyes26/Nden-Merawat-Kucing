@@ -73,6 +73,7 @@ public class FeedController : MonoBehaviour
             if (GameManager.instance.CatProfile.catScriptable.isHungry) GameManager.instance.ChangeHungry();
             GameManager.instance.isHungryTimerOn = false;
             Invoke("ShowPopUp", 1f);
+            DisableFoodObject();
         }
     }
 
@@ -102,5 +103,15 @@ public class FeedController : MonoBehaviour
     {
         completePopUp.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    private void DisableFoodObject()
+    {
+        FoodObject[] foodObjects = FindObjectsOfType<FoodObject>();
+
+        foreach (FoodObject obj in foodObjects)
+        {
+            obj.enabled = false;
+        }
     }
 }

@@ -119,7 +119,7 @@ public class ObstaclePool : MonoBehaviour
             secondLastSpawnedIndex = lastSpawnedIndex;
             lastSpawnedIndex = prefabIndex;
             ObstacleObject obstacleToSpawn = obstaclePrefabs[prefabIndex];
-            Debug.Log("Now: " + obstacleToSpawn.type);
+            // Debug.Log("Now: " + obstacleToSpawn.type);
             return obstacleToSpawn;
         }
         else
