@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcb6df5622997174d903ab637d08899f, type: 3}
-  m_Name: Kuning
+  m_Name: 3_Abu
   m_EditorClassIdentifier: 
   preview: {fileID: 0}
-  id: 4
+  id: 3
   catName: 
   xp: 0
   xpNeeded: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   isDirty: 0
   isSad: 0
   isSick: 0
-  spriteFolderPath: Sprite/Cat/Kuning/
-  animationFolderPath: Anim/Kuning/
+  spriteFolderPath: Sprite/Cat/Hitam/
+  animationFolderPath: Anim/Hitam/

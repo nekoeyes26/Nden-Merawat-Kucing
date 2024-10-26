@@ -1,0 +1,146 @@
+
+Cover_MerawatKucing.png
+size: 4096,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coboz_ArmL
+  rotate: false
+  xy: 2044, 76
+  size: 167, 206
+  orig: 167, 206
+  offset: 0, 0
+  index: -1
+Coboz_ArmR
+  rotate: true
+  xy: 651, 9
+  size: 142, 161
+  orig: 142, 162
+  offset: 0, 0
+  index: -1
+Coboz_Body
+  rotate: true
+  xy: 1618, 627
+  size: 393, 392
+  orig: 393, 392
+  offset: 0, 0
+  index: -1
+Coboz_Head
+  rotate: false
+  xy: 1618, 258
+  size: 337, 367
+  orig: 339, 367
+  offset: 1, 0
+  index: -1
+Coboz_KucingB
+  rotate: true
+  xy: 2213, 82
+  size: 200, 166
+  orig: 200, 166
+  offset: 0, 0
+  index: -1
+Coboz_KucingC
+  rotate: true
+  xy: 161, 6
+  size: 145, 132
+  orig: 145, 132
+  offset: 0, 0
+  index: -1
+Coboz_KucingCBody
+  rotate: true
+  xy: 814, 22
+  size: 129, 125
+  orig: 129, 125
+  offset: 0, 0
+  index: -1
+Coboz_KucingD
+  rotate: true
+  xy: 438, 9
+  size: 142, 211
+  orig: 142, 211
+  offset: 0, 0
+  index: -1
+Paris_ArmL
+  rotate: true
+  xy: 1113, 48
+  size: 103, 75
+  orig: 103, 76
+  offset: 0, 0
+  index: -1
+Paris_ArmR
+  rotate: false
+  xy: 1039, 37
+  size: 72, 114
+  orig: 72, 114
+  offset: 0, 0
+  index: -1
+Paris_BodyLegs
+  rotate: false
+  xy: 1618, 8
+  size: 248, 248
+  orig: 249, 248
+  offset: 1, 0
+  index: -1
+Paris_Head
+  rotate: true
+  xy: 1957, 284
+  size: 341, 301
+  orig: 341, 302
+  offset: 0, 0
+  index: -1
+Paris_KucingA
+  rotate: false
+  xy: 2, 2
+  size: 157, 149
+  orig: 158, 149
+  offset: 1, 0
+  index: -1
+Paris_KucingATail
+  rotate: true
+  xy: 1190, 65
+  size: 86, 82
+  orig: 86, 83
+  offset: 0, 1
+  index: -1
+Paris_KucingB
+  rotate: true
+  xy: 295, 8
+  size: 143, 141
+  orig: 143, 141
+  offset: 0, 0
+  index: -1
+Paris_KucingC
+  rotate: true
+  xy: 941, 28
+  size: 123, 96
+  orig: 123, 96
+  offset: 0, 0
+  index: -1
+Paris_KuncirL
+  rotate: true
+  xy: 1868, 45
+  size: 211, 174
+  orig: 212, 174
+  offset: 1, 0
+  index: -1
+Paris_KuncirR
+  rotate: true
+  xy: 2012, 831
+  size: 189, 188
+  orig: 189, 188
+  offset: 0, 0
+  index: -1
+Paris_PalmR
+  rotate: true
+  xy: 1274, 82
+  size: 69, 66
+  orig: 69, 66
+  offset: 0, 0
+  index: -1
+bg
+  rotate: false
+  xy: 2, 153
+  size: 1614, 867
+  orig: 1614, 867
+  offset: 0, 0
+  index: -1

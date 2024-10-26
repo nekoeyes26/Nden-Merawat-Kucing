@@ -25,6 +25,7 @@ public class FoodObject : MonoBehaviour
     [SerializeField] private FeedController feedController;
     [SerializeField] private FoodPool foodPool;
     public FoodType type;
+    public bool interactable = true;
 
     private void Start()
     {
@@ -37,12 +38,16 @@ public class FoodObject : MonoBehaviour
     void Update()
     {
         originalPosition += speed * Time.deltaTime * Vector3.left;
+        if (feedController.activityComplete)
+        {
+            interactable = false;
+        }
         if (!isDragging)
         {
             transform.position = originalPosition;
         }
         // Detect mouse down on the object to start dragging
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && interactable)
         {
             Vector3 mousePosition = GetMouseWorldPosition();
             if (IsMouseOverObject(mousePosition))
@@ -58,6 +63,7 @@ public class FoodObject : MonoBehaviour
             Vector3 newPosition = GetMouseWorldPosition() + offset;
             transform.position = newPosition;
             feedController.CatSteady();
+            GameEvents.DraggingFood(true);
         }
 
         // Stop dragging and check if the drop is successful or not
@@ -81,6 +87,7 @@ public class FoodObject : MonoBehaviour
             }
             isDragging = false;
             feedController.CatBackIdle();
+            GameEvents.DraggingFood(false);
         }
     }
 

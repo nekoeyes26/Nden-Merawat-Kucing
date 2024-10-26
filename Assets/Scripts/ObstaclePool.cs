@@ -22,6 +22,17 @@ public class ObstaclePool : MonoBehaviour
     private List<ObstacleObject> inactiveObstacleList = new List<ObstacleObject>();
     [SerializeField] private Transform poolParent;
     public float maxLeftPosition = -15f;
+    private bool groundStopped = false;
+
+    private void OnEnable()
+    {
+        GameEvents.OnGroundStop += RenewGroundStopped;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnGroundStop -= RenewGroundStopped;
+    }
 
     private void Start()
     {
@@ -29,6 +40,7 @@ public class ObstaclePool : MonoBehaviour
     }
     private void Update()
     {
+        if (groundStopped) return;
         CheckObstacleObjectPositions();
         timeUntilObstacleSpawn += Time.deltaTime;
         if (timeUntilObstacleSpawn >= obstacleSpawnTime)
@@ -197,5 +209,10 @@ public class ObstaclePool : MonoBehaviour
         lastSpawnedIndex = -1;
         secondLastSpawnedIndex = -1;
         timeUntilObstacleSpawn = 0f;
+    }
+
+    private void RenewGroundStopped(bool isStop)
+    {
+        groundStopped = isStop;
     }
 }

@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Adult
   m_EditorClassIdentifier: 
   elus: {fileID: 11400000, guid: 6c224ae24c3af6249a1164d1f924cd5f, type: 2}
+  kotor: {fileID: 11400000, guid: 4637f440a2cb54d40922e4cb7beda460, type: 2}
   makan: {fileID: 11400000, guid: 54e4106cfba1d384795c2cdc09339eaa, type: 2}
   mandi: {fileID: 11400000, guid: 32969d89bba15f74eb077fbea23a1822, type: 2}
   normal: {fileID: 11400000, guid: 30add1d272f97c34086d79b63f832f70, type: 2}
   sakit: {fileID: 11400000, guid: d5a0ee4163b1a5b46b931f8109e6a03c, type: 2}
   salah: {fileID: 11400000, guid: 995453a43f708884b9cf08ae1214cfdf, type: 2}
+  sedih: {fileID: 11400000, guid: 9bf83e4b13a06794ca272f3e0408fcf7, type: 2}
   suap: {fileID: 11400000, guid: e44403ed633c4ba4981a4283847a852d, type: 2}
   bump: {fileID: 11400000, guid: 52703200fb2e7114a9d3fa6724cbefdf, type: 2}
   jumpUp: {fileID: 11400000, guid: f7de9924cb1fab5498000fc9518f6790, type: 2}

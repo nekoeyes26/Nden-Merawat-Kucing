@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,17 +14,40 @@ public class FeedController : MonoBehaviour
     private bool isXPAdded = false;
     public Animator catAnimator;
     public GameObject completePopUp;
+    private bool isDragging;
+    public bool activityComplete = false;
+
+    void OnEnable()
+    {
+        GameEvents.OnDraggingFood += HandleOnDraggingFood;
+    }
 
     private void Start()
     {
         isFull = false;
         completePopUp.SetActive(false);
+        if (SpineAnimationController.instance.initialized)
+        {
+            SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.normal, true, 1f);
+        }
     }
 
     private void Update()
     {
         lerpSpeed = 2f * Time.deltaTime;
         BarFill();
+        if (SpineAnimationController.instance.initialized)
+        {
+            if (!isDragging && !SpineAnimationController.instance.isMakanPlaying)
+            {
+                SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.normal, true, 1f);
+            }
+            else if (isDragging)
+            {
+                SpineAnimationController.instance.isMakanPlaying = false;
+                SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.suap, true, 1f);
+            }
+        }
     }
 
     public void BarFill()
@@ -47,12 +71,20 @@ public class FeedController : MonoBehaviour
             catAnimator.SetBool("isSteady", false);
             catAnimator.SetBool("isEating", true);
             StartCoroutine(ResetEatingState());
+            if (SpineAnimationController.instance.initialized)
+            {
+                SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.makan, false, 1f);
+            }
         }
         else
         {
             Debug.Log("The object is not tagged as Food. Point not added.");
             catAnimator.SetBool("isSteady", false);
             catAnimator.SetBool("isEating", false);
+            if (SpineAnimationController.instance.initialized)
+            {
+                SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.salah, false, 1f);
+            }
         }
     }
 
@@ -72,9 +104,17 @@ public class FeedController : MonoBehaviour
             isXPAdded = true;
             if (GameManager.instance.CatProfile.catScriptable.isHungry) GameManager.instance.ChangeHungry();
             GameManager.instance.isHungryTimerOn = false;
+            activityComplete = true;
             Invoke("ShowPopUp", 1f);
-            DisableFoodObject();
+            //DisableFoodObject();
+            //DisableFoodCollider();
+            DisableFoodInteractable();
         }
+    }
+
+    private void HandleOnDraggingFood(bool dragging)
+    {
+        isDragging = dragging;
     }
 
     public void CatSteady()
@@ -96,7 +136,7 @@ public class FeedController : MonoBehaviour
     public void ShowPopUp()
     {
         completePopUp.SetActive(true);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
 
     public void ClosePopUp()
@@ -112,6 +152,26 @@ public class FeedController : MonoBehaviour
         foreach (FoodObject obj in foodObjects)
         {
             obj.enabled = false;
+        }
+    }
+
+    private void DisableFoodCollider()
+    {
+        PolygonCollider2D[] polygonCollider = FindObjectsOfType<PolygonCollider2D>();
+
+        foreach (PolygonCollider2D collider in polygonCollider)
+        {
+            collider.enabled = false;
+        }
+    }
+
+    private void DisableFoodInteractable()
+    {
+        FoodObject[] foodObjects = FindObjectsOfType<FoodObject>();
+
+        foreach (FoodObject obj in foodObjects)
+        {
+            obj.interactable = false;
         }
     }
 }

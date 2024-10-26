@@ -14,7 +14,9 @@ public class GameEvents : MonoBehaviour
     public static event Action OnMissChange;
     public static event Action OnNameChange;
     public static event Action<CatPhase> OnPhaseChange;
-
+    public static event Action<bool> OnDraggingFood;
+    public static event Action<CatPhase, int> OnGivingName;
+    public static event Action<bool> OnGroundStop;
     public static void XpChanged(int xpNow)
     {
         OnXpChange?.Invoke(xpNow);
@@ -58,5 +60,19 @@ public class GameEvents : MonoBehaviour
     public static void PhaseChanged(CatPhase phase)
     {
         OnPhaseChange?.Invoke(phase);
+    }
+
+    public static void DraggingFood(bool drag)
+    {
+        OnDraggingFood?.Invoke(drag);
+    }
+    public static void GiveName(CatPhase phase, int skinId)
+    {
+        OnGivingName?.Invoke(phase, skinId);
+    }
+
+    public static void GroundStopped(bool isStop)
+    {
+        OnGroundStop?.Invoke(isStop);
     }
 }

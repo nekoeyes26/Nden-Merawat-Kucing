@@ -22,6 +22,8 @@ public class MainPageController : MonoBehaviour
     private bool isPetted = false;
     private float idlingTimer = 0f;
     public GameObject maxText;
+    // public SpineAnimationController SpineAnimationController.instance;
+    public bool catNormal = true;
 
     void OnEnable()
     {
@@ -72,26 +74,91 @@ public class MainPageController : MonoBehaviour
             playUI.SetActive(true);
             photoUI.SetActive(true);
         }
+        // SpineAnimationController.instance = FindObjectOfType<SpineAnimationController>();
+
     }
 
+    bool reset = false;
     // Update is called once per frame
     void Update()
     {
-        idlingTimer += Time.deltaTime;
-        if (IsTapped())
+        // idlingTimer += Time.deltaTime;
+        // if (IsTapped())
+        // {
+        //     isPetted = !isPetted;
+        //     catAnimator.SetBool("isPet", isPetted);
+        //     idlingTimer = 0f;
+        //     StartCoroutine(ResetIsPetted());
+        // }
+
+        // if (idlingTimer >= 5f)
+        // {
+        //     catAnimator.SetBool("isIdling", true);
+        //     idlingTimer = 0f;
+        //     StartCoroutine(ResetIdling());
+        // }
+        if (SpineAnimationController.instance.initialized)
         {
-            isPetted = !isPetted;
-            catAnimator.SetBool("isPet", isPetted);
-            idlingTimer = 0f;
-            StartCoroutine(ResetIsPetted());
+            if (catNormal)
+            {
+                idlingTimer += Time.deltaTime;
+                if (IsTapped())
+                {
+                    isPetted = true;
+                    idlingTimer = 0f;
+                }
+
+                if (idlingTimer >= 2.5f)
+                {
+                    isPetted = false;
+                    idlingTimer = 0f;
+                }
+
+                if (isPetted)
+                {
+                    SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.elus, true, 1f);
+                    reset = true;
+                }
+                else
+                {
+                    if (reset == true)
+                    {
+                        SpineAnimationController.instance.skeletonAnimation.Initialize(true);
+                        SpineAnimationController.instance.SetSkin(GameManager.instance.CatProfile.catScriptable.id.ToString());
+                        reset = false;
+                    }
+
+                    SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.normal, true, 1f);
+                }
+
+            }
+
+            if (GameManager.instance.CatProfile.catScriptable.isSick)
+            {
+                SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.sakit, true, 1f);
+                catNormal = false;
+            }
+            else if (GameManager.instance.CatProfile.catScriptable.isHungry)
+            {
+                SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.salah, true, 1f);
+                catNormal = false;
+            }
+            else if (GameManager.instance.CatProfile.catScriptable.isDirty)
+            {
+                SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.kotor, true, 1f);
+                catNormal = false;
+            }
+            else if (GameManager.instance.CatProfile.catScriptable.isSad)
+            {
+                SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.sedih, true, 1f);
+                catNormal = false;
+            }
+            // else
+            // {
+            //     SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.normal, true, 1f);
+            // }
         }
 
-        if (idlingTimer >= 5f)
-        {
-            catAnimator.SetBool("isIdling", true);
-            idlingTimer = 0f;
-            StartCoroutine(ResetIdling());
-        }
     }
 
     // void BarFill(int xp)
@@ -176,7 +243,7 @@ public class MainPageController : MonoBehaviour
         if (hit.collider != null)
         {
             Debug.Log($"Hit: {hit.collider.gameObject.name}");
-            if (hit.collider == catCollider)
+            if (hit.collider == hit.collider.gameObject.CompareTag("Pet"))
             {
                 return true;
             }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcb6df5622997174d903ab637d08899f, type: 3}
-  m_Name: Belang
+  m_Name: 4_Hitam
   m_EditorClassIdentifier: 
   preview: {fileID: 0}
-  id: 2
+  id: 4
   catName: 
   xp: 0
   xpNeeded: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   isDirty: 0
   isSad: 0
   isSick: 0
-  spriteFolderPath: Sprite/Cat/Belang/
-  animationFolderPath: Anim/Belang/
+  spriteFolderPath: Sprite/Cat/Kuning/
+  animationFolderPath: Anim/Kuning/

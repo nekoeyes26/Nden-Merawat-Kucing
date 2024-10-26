@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using Spine;
 using Spine.Unity;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -24,89 +24,79 @@ public class MinigameController : MonoBehaviour
     // private Vector2 notGroundedSize = new Vector2(1f, 0.875f);
     // private Vector2 notGroundedOffset = new Vector2(0.5f, 0f);
     // private float transitionDuration = 0.25f;
-    private float jumpCooldownTime = 0.4f;
+    private float jumpCooldownTime = 0.25f;
     private bool isJumping = false;
-    SpineAnimationController spineAnimationController;
+    // SpineAnimationController SpineAnimationController.instance;
     private bool isFalling = false;
     private float distanceToGround;
-    private int catID = 4;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
-        spineAnimationController = FindObjectOfType<SpineAnimationController>();
-        // spineAnimationController.PlayAnimation(spineAnimationController.run, true, 1f);
-        catID = GameManager.instance.CatProfile.catScriptable.id;
-        StartCoroutine(spineAnimationController.InitializeSkeletonAfterDelay());
-        spineAnimationController.SetSkin(catID.ToString());
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (isGrounded)
-        // {
-        //     StartCoroutine(TransitionToGroundedState());
-        // }
-        // else
-        // {
-        //     StartCoroutine(TransitionToNotGroundedState());
-        // }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (SpineAnimationController.instance.initialized)
         {
-            Jump();
-        }
-        isGrounded = IsGrounded();
-        if (isGrounded)
-        {
-            isFalling = false;
-            if (spineAnimationController.currentAnimation.Equals(spineAnimationController.jumpDown.name))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                // Debug.Log("Landing");
-                spineAnimationController.PlayAnimation(spineAnimationController.landing, false, 1f);
+                Jump();
             }
-            else if (spineAnimationController.currentAnimation.Equals(spineAnimationController.landing.name))
+            isGrounded = IsGrounded();
+            if (isGrounded)
             {
-                // code to wait until animation finish
-                // TrackEntry trackEntry = spineAnimationController.skeletonAnimation.state.GetCurrent(0);
-                // if (trackEntry != null && !trackEntry.IsComplete)
-                // {
-                //     return; // wait until next frame
-                // }
-                if (spineAnimationController.isLandingPlaying)
+                isFalling = false;
+                if (SpineAnimationController.instance.currentAnimation.Equals(SpineAnimationController.instance.jumpDown.name))
                 {
-                    return;
+                    // Debug.Log("Landing");
+                    SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.landing, false, 1f);
                 }
-                spineAnimationController.PlayAnimation(spineAnimationController.run, true, 1f);
+                else if (SpineAnimationController.instance.currentAnimation.Equals(SpineAnimationController.instance.landing.name))
+                {
+                    // code to wait until animation finish
+                    // TrackEntry trackEntry = SpineAnimationController.instance.skeletonAnimation.state.GetCurrent(0);
+                    // if (trackEntry != null && !trackEntry.IsComplete)
+                    // {
+                    //     return; // wait until next frame
+                    // }
+                    if (SpineAnimationController.instance.isLandingPlaying)
+                    {
+                        return;
+                    }
+                    SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.run, true, 1f);
+                }
+                else
+                {
+                    if (SpineAnimationController.instance.isBumpPlaying) return;
+                    SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.run, true, 1f);
+                }
             }
             else
             {
-                spineAnimationController.PlayAnimation(spineAnimationController.run, true, 1f);
-            }
-        }
-        else
-        {
-            // isGrounded = false;  // Player is in the air
+                // isGrounded = false;  // Player is in the air
 
-            // Check the Rigidbody2D's velocity for upward or downward movement
-            if (rb.velocity.y > 0 && isJumping)
-            {
-                // Player is going up, ensure the jump up animation is playing
-                if (!spineAnimationController.currentAnimation.Equals(spineAnimationController.jumpUp.name))
+                // Check the Rigidbody2D's velocity for upward or downward movement
+                if (rb.velocity.y > 0 && isJumping)
                 {
-                    // Debug.Log("naikk");
-                    spineAnimationController.PlayAnimation(spineAnimationController.jumpUp, false, 1f);
+                    // Player is going up, ensure the jump up animation is playing
+                    if (!SpineAnimationController.instance.currentAnimation.Equals(SpineAnimationController.instance.jumpUp.name))
+                    {
+                        // Debug.Log("naikk");
+                        SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.jumpUp, false, 1f);
+                    }
                 }
-            }
-            else if (rb.velocity.y < 0)
-            {
-                // Player is falling, play jump down animation
-                if (!isFalling)
+                else if (rb.velocity.y < 0)
                 {
-                    // Debug.Log("turunnn");
-                    spineAnimationController.PlayAnimation(spineAnimationController.jumpDown, false, 1f);
-                    isFalling = true;  // Ensure we only play this once until landing
+                    // Player is falling, play jump down animation
+                    if (!isFalling)
+                    {
+                        // Debug.Log("turunnn");
+                        SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.jumpDown, false, 1f);
+                        isFalling = true;  // Ensure we only play this once until landing
+                    }
                 }
             }
         }
@@ -120,7 +110,7 @@ public class MinigameController : MonoBehaviour
             isGrounded = false;
             isJumping = true;
             Invoke(nameof(ResetJumping), jumpCooldownTime);
-            spineAnimationController.PlayAnimation(spineAnimationController.jumpUp, false, 1f);
+            SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.jumpUp, false, 0.5f);
         }
     }
 
@@ -157,6 +147,7 @@ public class MinigameController : MonoBehaviour
         {
             manager.HittingEnemy();
             isEnemyHitCooldown = true;
+            SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.bump, false, 1f);
             Invoke(nameof(ResetEnemyHitCooldown), enemyHitCooldown);
         }
     }

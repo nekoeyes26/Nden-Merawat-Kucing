@@ -38,6 +38,8 @@ public class MinigameManager : MonoBehaviour
     public GameObject emptyHealthPrefab;
     public Transform emptyHealthParent;
     public float maxFillAmount = 0.75f;
+    private bool isPopUpShowed = false;
+    private bool groundStopped = false;
 
     private void Start()
     {
@@ -89,16 +91,23 @@ public class MinigameManager : MonoBehaviour
     public void AddScore()
     {
         score++;
-        if (score >= targetScore && !isWin)
+        if (score >= targetScore && !isPopUpShowed)
         {
             isWin = true;
+            isPopUpShowed = true;
             TargetAchieved();
         }
     }
 
     public void TargetAchieved()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+        foreach (BackgroundScript backgroundScript in backgroundScripts)
+        {
+            backgroundScript.animationSpeed = 0;
+        }
+        StopGround();
+        SpineAnimationController.instance.FreezeAnimation();
         popUpWin.SetActive(true);
         if (!isXPAdded)
         {
@@ -118,13 +127,25 @@ public class MinigameManager : MonoBehaviour
     public void GameOverLose()
     {
         isGameover = true;
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+        foreach (BackgroundScript backgroundScript in backgroundScripts)
+        {
+            backgroundScript.animationSpeed = 0;
+        }
+        StopGround();
+        SpineAnimationController.instance.FreezeAnimation();
         gameOverLose.SetActive(true);
     }
 
     public void GameOverWin()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+        foreach (BackgroundScript backgroundScript in backgroundScripts)
+        {
+            backgroundScript.animationSpeed = 0;
+        }
+        StopGround();
+        SpineAnimationController.instance.FreezeAnimation();
         gameOverWin.SetActive(true);
     }
 
@@ -144,6 +165,12 @@ public class MinigameManager : MonoBehaviour
         backHomeMenu.SetActive(false);
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+        foreach (BackgroundScript backgroundScript in backgroundScripts)
+        {
+            backgroundScript.animationSpeed = backgroundScript.originalSpeed;
+        }
+        ContinueGround();
+        SpineAnimationController.instance.UnfreezeAnimation();
     }
 
     public void Restart()
@@ -152,6 +179,7 @@ public class MinigameManager : MonoBehaviour
         GenerateHealth();
         score = 0;
         isGameover = false;
+        isPopUpShowed = false;
         Resume();
     }
 
@@ -191,6 +219,7 @@ public class MinigameManager : MonoBehaviour
         {
             if (isWin) GameOverWin();
             else GameOverLose();
+            return;
         }
         foreach (BackgroundScript backgroundScript in backgroundScripts)
         {
@@ -232,5 +261,29 @@ public class MinigameManager : MonoBehaviour
         {
             Instantiate(emptyHealthPrefab, emptyHealthParent);
         }
+    }
+
+    private void StopGround()
+    {
+        ObstacleObject[] groundnCoinObjects = FindObjectsOfType<ObstacleObject>();
+
+        foreach (ObstacleObject obj in groundnCoinObjects)
+        {
+            obj.speed = 0;
+        }
+        groundStopped = true;
+        GameEvents.GroundStopped(groundStopped);
+    }
+
+    private void ContinueGround()
+    {
+        ObstacleObject[] groundnCoinObjects = FindObjectsOfType<ObstacleObject>();
+
+        foreach (ObstacleObject obj in groundnCoinObjects)
+        {
+            obj.speed = obj.originalSpeed;
+        }
+        groundStopped = false;
+        GameEvents.GroundStopped(groundStopped);
     }
 }

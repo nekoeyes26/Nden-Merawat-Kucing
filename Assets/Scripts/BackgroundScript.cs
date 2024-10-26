@@ -7,10 +7,12 @@ public class BackgroundScript : MonoBehaviour
     public float animationSpeed = 1f;
     private MeshRenderer meshRenderer;
     public float speedRestoreDuration = 2f;
+    public float originalSpeed;
 
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+        originalSpeed = animationSpeed;
     }
 
     private void Update()
@@ -25,7 +27,6 @@ public class BackgroundScript : MonoBehaviour
 
     private IEnumerator ReduceAndRestoreSpeed()
     {
-        float originalSpeed = animationSpeed;
         animationSpeed = 0f;
 
         float elapsedTime = 0f;

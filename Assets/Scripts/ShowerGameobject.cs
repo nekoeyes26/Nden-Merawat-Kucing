@@ -19,6 +19,7 @@ public class ShowerGameobject : MonoBehaviour
     public float limitXMaxPos = 7.5f;
     public float limitYMinPos = -3.67f;
     public float limitYMaxPos = 3.67f;
+    bool interactable = true;
 
     private void Start()
     {
@@ -29,8 +30,12 @@ public class ShowerGameobject : MonoBehaviour
 
     void Update()
     {
+        if (bathController.activityComplete)
+        {
+            interactable = false;
+        }
         // Detect mouse down on the object to start dragging
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && interactable)
         {
             Vector3 mousePosition = GetMouseWorldPosition();
             if (IsMouseOverObject(mousePosition))

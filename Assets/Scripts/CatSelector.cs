@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Text.RegularExpressions;
 using System;
+using Spine.Unity;
 
 public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
@@ -38,6 +39,7 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private Text[] catTypeTexts;
     private GameObject[] adoptedIcon;
     private CanvasGroup[] canvasGroup;
+    public SkeletonGraphic giveNameSkeleton;
 
     void Start()
     {
@@ -107,8 +109,9 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
 
         // Atur skala child object yang berada di tengah ke skala middle
-        StartCoroutine(ScaleBoxes());
-        StartCoroutine(ScaleMiddleBox());
+        //StartCoroutine(ScaleBoxes());
+        //StartCoroutine(ScaleMiddleBox());
+        BackChoosingUI();
     }
 
     void Update()
@@ -224,25 +227,25 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         float elapsedTime = 0f;
         Vector3 startPosition = box.position;
-        Vector3 startScale = box.localScale;
-        Vector3 targetScaleVector = isMiddleBox ? new Vector3(middleScale, middleScale, 1f) : new Vector3(normalScale, normalScale, 1f);
+        //Vector3 startScale = box.localScale;
+        //Vector3 targetScaleVector = isMiddleBox ? new Vector3(middleScale, middleScale, 1f) : new Vector3(normalScale, normalScale, 1f);
 
         while (elapsedTime < moveDuration)
         {
             float t = elapsedTime / moveDuration;
             box.position = Vector3.Lerp(startPosition, targetPosition, t);
-            box.localScale = Vector3.Lerp(startScale, targetScaleVector, t);
+            //box.localScale = Vector3.Lerp(startScale, targetScaleVector, t);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         box.position = targetPosition;
-        box.localScale = targetScaleVector;
+        //box.localScale = targetScaleVector;
 
-        float opacity = isMiddleBox ? maxAlpha : 0.4f;
+        //float opacity = isMiddleBox ? maxAlpha : 0.4f;
 
-        SetBoxOpacity(box, opacity);
+        //SetBoxOpacity(box, opacity);
     }
 
     void SetBoxOpacity(Transform box, float alpha)
@@ -352,24 +355,27 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (GameManager.instance.CatProfile.catScriptable.state == CatState.Unnamed)
         {
-            Sprite sprite;
-            if (GameManager.instance.CatProfile.catScriptable.phase == CatPhase.Baby)
-            {
-                sprite = Resources.Load<Sprite>(GameManager.instance.CatProfile.catScriptable.spriteFolderPath + "baby");
-            }
-            else if (GameManager.instance.CatProfile.catScriptable.phase == CatPhase.Child)
-            {
-                sprite = Resources.Load<Sprite>(GameManager.instance.CatProfile.catScriptable.spriteFolderPath + "child");
-            }
-            else if (GameManager.instance.CatProfile.catScriptable.phase == CatPhase.Adult)
-            {
-                sprite = Resources.Load<Sprite>(GameManager.instance.CatProfile.catScriptable.spriteFolderPath + "adult");
-            }
-            else
-            {
-                sprite = preview.sprite;
-            }
-            preview.sprite = sprite;
+            // Sprite sprite;
+            // if (GameManager.instance.CatProfile.catScriptable.phase == CatPhase.Baby)
+            // {
+            //     sprite = Resources.Load<Sprite>(GameManager.instance.CatProfile.catScriptable.spriteFolderPath + "baby");
+            // }
+            // else if (GameManager.instance.CatProfile.catScriptable.phase == CatPhase.Child)
+            // {
+            //     sprite = Resources.Load<Sprite>(GameManager.instance.CatProfile.catScriptable.spriteFolderPath + "child");
+            // }
+            // else if (GameManager.instance.CatProfile.catScriptable.phase == CatPhase.Adult)
+            // {
+            //     sprite = Resources.Load<Sprite>(GameManager.instance.CatProfile.catScriptable.spriteFolderPath + "adult");
+            // }
+            // else
+            // {
+            //     sprite = preview.sprite;
+            // }
+            // preview.sprite = sprite;
+            GameEvents.GiveName(middleCat.catScriptable.phase, middleCat.catScriptable.id);
+            // Debug.Log("id skin = " + middleCat.catScriptable.id);
+            giveNameSkeleton.Skeleton.SetSkin(middleCat.catScriptable.id.ToString());
             foreach (GameObject UI in choosingCatUI)
             {
                 UI.SetActive(false);

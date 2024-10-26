@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcb6df5622997174d903ab637d08899f, type: 3}
-  m_Name: Hitam
+  m_Name: Calico_old
   m_EditorClassIdentifier: 
   preview: {fileID: 0}
-  id: 3
-  catName: GARONGGGGGGGG
-  xp: 6
-  xpNeeded: 8
-  level: 1
+  id: 6
+  catName: 
+  xp: 0
+  xpNeeded: 0
+  level: 0
   phase: 0
   hungryRemaining: 0
   showerRemaining: 0
-  playRemaining: 2
+  playRemaining: 0
   photoRemaining: 0
-  state: 1
+  state: 0
   isHungry: 0
   isDirty: 0
-  isSad: 1
+  isSad: 0
   isSick: 0
-  spriteFolderPath: Sprite/Cat/Hitam/
-  animationFolderPath: Anim/Hitam/
+  spriteFolderPath: Sprite/Cat/Calico/
+  animationFolderPath: Anim/Calico/

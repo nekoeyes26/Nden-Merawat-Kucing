@@ -19,6 +19,7 @@ public class WefieController : MonoBehaviour
     public Sprite[] BGSprites;
     private int currentIndex = 0;
     public Image background;
+    public SpriteRenderer spriteRendererBG;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,7 @@ public class WefieController : MonoBehaviour
         LoadScreenshots();
 
         background.sprite = BGSprites[currentIndex];
+        spriteRendererBG.sprite = BGSprites[currentIndex];
     }
 
     // Update is called once per frame
@@ -243,5 +245,6 @@ public class WefieController : MonoBehaviour
     {
         currentIndex = (currentIndex + 1) % BGSprites.Length;
         background.sprite = BGSprites[currentIndex];
+        spriteRendererBG.sprite = BGSprites[currentIndex];
     }
 }

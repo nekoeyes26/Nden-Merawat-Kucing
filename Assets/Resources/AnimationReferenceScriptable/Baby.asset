@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Baby
   m_EditorClassIdentifier: 
   elus: {fileID: 11400000, guid: 058394778339c8a4e9b4a7b22f299fe5, type: 2}
+  kotor: {fileID: 11400000, guid: 5f67cf23eede00e47ad3583349ece64f, type: 2}
   makan: {fileID: 11400000, guid: e3c63205dfa371f458f7b97a243529d3, type: 2}
   mandi: {fileID: 11400000, guid: 3fcbcc7f1352f2a4eac598f71c7aa4c0, type: 2}
   normal: {fileID: 11400000, guid: 60f81942734c2bd4792ca137f4431528, type: 2}
   sakit: {fileID: 11400000, guid: 309fa737d611e8e49b6fd7520dc00172, type: 2}
   salah: {fileID: 11400000, guid: e20aef2202df4a049b17da518cfa08e3, type: 2}
+  sedih: {fileID: 11400000, guid: d851d46ac1a3bc749bed33c3abf0bd4b, type: 2}
   suap: {fileID: 11400000, guid: 55032ff62b2a89444a3f937b90d07240, type: 2}
   bump: {fileID: 11400000, guid: 1e1756d51f7094e4c951a0da95a4bb3f, type: 2}
   jumpUp: {fileID: 11400000, guid: 5605278df189bd84d9b5a8c725e66180, type: 2}

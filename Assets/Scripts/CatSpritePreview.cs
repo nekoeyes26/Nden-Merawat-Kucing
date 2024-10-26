@@ -30,7 +30,7 @@ public class CatSpritePreview : MonoBehaviour
             sprite = preview.sprite;
         }
         preview.sprite = sprite;
-        Debug.Log(sprite.ToString());
+        // Debug.Log(sprite.ToString());
     }
 
     // Update is called once per frame

@@ -28,6 +28,9 @@ public class AspectRatioAdjuster : MonoBehaviour
     public bool changeRightOffset = false;
     public bool changePosX = false;
     public bool changePosY = false;
+    public bool changeScaleX = false;
+    public bool changeScaleY = false;
+    public bool changeScaleZ = false;
 
     public float width = 0;
     public float height = 0;
@@ -37,6 +40,9 @@ public class AspectRatioAdjuster : MonoBehaviour
     public float rightOffset = 0;
     public float posX = 0;
     public float posY = 0;
+    public float scaleX = 1;
+    public float scaleY = 1;
+    public float scaleZ = 1;
 
     private RectTransform rectTransform;
 
@@ -116,5 +122,11 @@ public class AspectRatioAdjuster : MonoBehaviour
             rectTransform.anchoredPosition = new Vector2(posX, rectTransform.anchoredPosition.y);
         if (changePosY)
             rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, posY);
+        if (changeScaleX)
+            rectTransform.localScale = new Vector3(scaleX, rectTransform.localScale.y, rectTransform.localScale.z);
+        if (changeScaleY)
+            rectTransform.localScale = new Vector3(rectTransform.localScale.x, scaleY, rectTransform.localScale.z);
+        if (changeScaleZ)
+            rectTransform.localScale = new Vector3(rectTransform.localScale.x, rectTransform.localScale.y, scaleZ);
     }
 }

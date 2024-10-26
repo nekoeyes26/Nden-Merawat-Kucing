@@ -13,10 +13,11 @@ public class ObstacleObject : MonoBehaviour
     public float speed = 5f;
     public float speedRestoreDuration = 3f;
     public ObstacleType type;
+    public float originalSpeed;
     // Start is called before the first frame update
     void Start()
     {
-
+        originalSpeed = speed;
     }
 
     // Update is called once per frame
@@ -32,7 +33,6 @@ public class ObstacleObject : MonoBehaviour
 
     private IEnumerator ReduceAndRestoreSpeed()
     {
-        float originalSpeed = speed;
         speed = 0f;
 
         float elapsedTime = 0f;

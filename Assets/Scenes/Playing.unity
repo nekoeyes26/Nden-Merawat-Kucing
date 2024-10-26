@@ -534,6 +534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationSpeed: 0.1
   speedRestoreDuration: 3
+  originalSpeed: 0
 --- !u!23 &116146440
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2891,6 +2892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationSpeed: 0.11
   speedRestoreDuration: 3
+  originalSpeed: 0
 --- !u!23 &789511486
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3861,6 +3863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationSpeed: 0.05
   speedRestoreDuration: 3
+  originalSpeed: 0
 --- !u!1 &1107554489
 GameObject:
   m_ObjectHideFlags: 0
@@ -4570,6 +4573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationSpeed: 0.81
   speedRestoreDuration: 3
+  originalSpeed: 0
 --- !u!1 &1294639766
 GameObject:
   m_ObjectHideFlags: 0
@@ -7825,65 +7829,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2119384798
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2119384800}
-  - component: {fileID: 2119384799}
-  m_Layer: 0
-  m_Name: AnimationController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2119384799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119384798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e76f47e3fe41bb48a233be1d4cddfac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skeletonAnimation: {fileID: 1782680222}
-  elus: {fileID: 11400000, guid: 058394778339c8a4e9b4a7b22f299fe5, type: 2}
-  makan: {fileID: 11400000, guid: e3c63205dfa371f458f7b97a243529d3, type: 2}
-  mandi: {fileID: 11400000, guid: 3fcbcc7f1352f2a4eac598f71c7aa4c0, type: 2}
-  normal: {fileID: 11400000, guid: 60f81942734c2bd4792ca137f4431528, type: 2}
-  sakit: {fileID: 11400000, guid: 309fa737d611e8e49b6fd7520dc00172, type: 2}
-  salah: {fileID: 11400000, guid: e20aef2202df4a049b17da518cfa08e3, type: 2}
-  suap: {fileID: 11400000, guid: 55032ff62b2a89444a3f937b90d07240, type: 2}
-  bump: {fileID: 11400000, guid: 1e1756d51f7094e4c951a0da95a4bb3f, type: 2}
-  jumpUp: {fileID: 11400000, guid: 5605278df189bd84d9b5a8c725e66180, type: 2}
-  jumpDown: {fileID: 11400000, guid: 012e6d2196730d541bca28de7aa0b7eb, type: 2}
-  landing: {fileID: 11400000, guid: d67a57d52ae911d42b1a0a48186b6091, type: 2}
-  run: {fileID: 11400000, guid: 67eb200dd7f0a4d4095586f497059f3d, type: 2}
-  currentAnimation: 
-  isLandingPlaying: 0
---- !u!4 &2119384800
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119384798}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.520563, y: -3.617361, z: 0.006467189}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -7899,4 +7844,3 @@ SceneRoots:
   - {fileID: 1107554491}
   - {fileID: 113592929}
   - {fileID: 1782680225}
-  - {fileID: 2119384800}

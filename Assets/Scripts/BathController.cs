@@ -35,6 +35,7 @@ public class BathController : MonoBehaviour
     public GameObject instruction3;
     public GameObject instruction4;
     public GameObject completePopUp;
+    public bool activityComplete = false;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +59,7 @@ public class BathController : MonoBehaviour
     private void Update()
     {
         lerpSpeed = 2f * Time.deltaTime;
-        ProgressBar();
+        ProgressBarAndAnimation();
         if (isWet && !isXPAdded)
         {
             exitButton.interactable = false;
@@ -78,7 +79,7 @@ public class BathController : MonoBehaviour
         }
     }
 
-    public void ProgressBar()
+    public void ProgressBarAndAnimation()
     {
         if (isWet && !isSoapy && !isShowered && !isDried)
         {
@@ -86,6 +87,10 @@ public class BathController : MonoBehaviour
             catAnimator.SetBool("isWet", true);
             instruction1.SetActive(false);
             StartCoroutine(EnableChecklist(checklist1st));
+            if (SpineAnimationController.instance.initialized)
+            {
+                SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.mandi, true, 1f);
+            }
         }
 
         if (isWet && isSoapy && !isShowered && !isDried)
@@ -120,6 +125,21 @@ public class BathController : MonoBehaviour
                 GameManager.instance.isShowerTimerOn = false;
                 catAnimator.SetBool("isWet", false);
                 Invoke("ShowPopUp", 1f);
+                activityComplete = true;
+                if (SpineAnimationController.instance.initialized)
+                {
+                    SpineAnimationController.instance.skeletonAnimation.Initialize(true);
+                    SpineAnimationController.instance.SetSkin(GameManager.instance.CatProfile.catScriptable.id.ToString());
+                    SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.normal, true, 1f);
+                }
+            }
+        }
+
+        if (!isWet)
+        {
+            if (SpineAnimationController.instance.initialized)
+            {
+                SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.normal, true, 1f);
             }
         }
     }
@@ -228,7 +248,7 @@ public class BathController : MonoBehaviour
     public void ShowPopUp()
     {
         completePopUp.SetActive(true);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
 
     public void ClosePopUp()

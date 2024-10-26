@@ -23,17 +23,26 @@ public class DryerGameobject : MonoBehaviour
     public float limitYMinPos = -3.62f;
     public float limitYMaxPos = 3.6f;
 
+    bool interactable = true;
+    private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         mainCamera = Camera.main;
         originalPosition = transform.position;
         dryerAnimator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (bathController.activityComplete)
         {
+            interactable = false;
+        }
+        if (Input.GetMouseButtonDown(0) && interactable)
+        {
+            spriteRenderer.sortingOrder = 4;
             Vector3 mousePosition = GetMouseWorldPosition();
             if (IsMouseOverObject(mousePosition))
             {
@@ -55,6 +64,7 @@ public class DryerGameobject : MonoBehaviour
         // Stop dragging when the mouse button is released
         if (Input.GetMouseButtonUp(0))
         {
+            spriteRenderer.sortingOrder = 2;
             isDragging = false;
             ReturnToOriginalPosition();
             dryerAnimator.SetBool("isDrying", false);
