@@ -22,6 +22,7 @@ public class PetshopStory : MonoBehaviour, IPointerClickHandler
             {
                 ui.SetActive(false);
             }
+            StartCoroutine(DeactivateUIAfterDelay(3f));
         }
         else
         {
@@ -51,5 +52,27 @@ public class PetshopStory : MonoBehaviour, IPointerClickHandler
             }
             inStory = false;
         }
+    }
+
+    void CloseStory()
+    {
+        if (inStory)
+        {
+            foreach (GameObject ui in storyLayout)
+            {
+                ui.SetActive(false);
+            }
+            foreach (GameObject ui in mainLayout)
+            {
+                ui.SetActive(true);
+            }
+            inStory = false;
+        }
+    }
+
+    private IEnumerator DeactivateUIAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        CloseStory();
     }
 }

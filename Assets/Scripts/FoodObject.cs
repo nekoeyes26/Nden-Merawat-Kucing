@@ -62,7 +62,7 @@ public class FoodObject : MonoBehaviour
         {
             Vector3 newPosition = GetMouseWorldPosition() + offset;
             transform.position = newPosition;
-            feedController.CatSteady();
+            //feedController.CatSteady();
             GameEvents.DraggingFood(true);
         }
 
@@ -86,7 +86,7 @@ public class FoodObject : MonoBehaviour
                 ReturnToOriginalPositionInstantly();
             }
             isDragging = false;
-            feedController.CatBackIdle();
+            //feedController.CatBackIdle();
             GameEvents.DraggingFood(false);
         }
     }
@@ -96,7 +96,7 @@ public class FoodObject : MonoBehaviour
         if (collision.CompareTag("Pet"))
         {
             isOverPet = true;
-            Debug.Log("Object is over Pet");
+            //Debug.Log("Object is over Pet");
         }
     }
 

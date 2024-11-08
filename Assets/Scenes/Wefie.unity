@@ -1918,6 +1918,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 99dc5d75d0aab8d41815cb6b3d223731, type: 3}
   background: {fileID: 1805084244}
   spriteRendererBG: {fileID: 1481335403}
+  charOnLeftPosition: []
+  charOnRightPosition: []
+  backgroundWefies:
+  - bgSprite: {fileID: 21300000, guid: aea1d476e2ff94741966c2a0f6cf7b28, type: 3}
+    charOnLeftPosition: {x: 0, y: 0}
+    charOnRightPosition: {x: 0, y: 0}
+  buttonPose:
+  - {fileID: 1399793074}
+  - {fileID: 1292857942}
+  - {fileID: 379688224}
 --- !u!4 &1035110891
 Transform:
   m_ObjectHideFlags: 0
@@ -3432,6 +3442,12 @@ GameObject:
   - component: {fileID: 1805084243}
   - component: {fileID: 1805084245}
   - component: {fileID: 1805084244}
+  - component: {fileID: 1805084251}
+  - component: {fileID: 1805084250}
+  - component: {fileID: 1805084249}
+  - component: {fileID: 1805084248}
+  - component: {fileID: 1805084247}
+  - component: {fileID: 1805084246}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -3453,11 +3469,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1018778220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0}
+  m_SizeDelta: {x: 2136.565, y: 914.72}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1805084244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3496,6 +3512,216 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805084242}
   m_CullTransparentMesh: 1
+--- !u!114 &1805084246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805084242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb737856fec049b4fa6891e380472a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedAspectRatio: 5
+  changeWidth: 1
+  changeHeight: 1
+  changeTopOffset: 0
+  changeBottomOffset: 0
+  changeLeftOffset: 0
+  changeRightOffset: 0
+  changePosX: 0
+  changePosY: 0
+  changeScaleX: 0
+  changeScaleY: 0
+  changeScaleZ: 0
+  width: 2242.356
+  height: 960
+  topOffset: 0
+  bottomOffset: 0
+  leftOffset: 0
+  rightOffset: 0
+  posX: 0
+  posY: 0
+  scaleX: 1
+  scaleY: 1
+  scaleZ: 1
+--- !u!114 &1805084247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805084242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb737856fec049b4fa6891e380472a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedAspectRatio: 4
+  changeWidth: 1
+  changeHeight: 1
+  changeTopOffset: 0
+  changeBottomOffset: 0
+  changeLeftOffset: 0
+  changeRightOffset: 0
+  changePosX: 0
+  changePosY: 0
+  changeScaleX: 0
+  changeScaleY: 0
+  changeScaleZ: 0
+  width: 2523.352
+  height: 1080.3
+  topOffset: 0
+  bottomOffset: 0
+  leftOffset: 0
+  rightOffset: 0
+  posX: 0
+  posY: 0
+  scaleX: 1
+  scaleY: 1
+  scaleZ: 1
+--- !u!114 &1805084248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805084242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb737856fec049b4fa6891e380472a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedAspectRatio: 3
+  changeWidth: 1
+  changeHeight: 1
+  changeTopOffset: 0
+  changeBottomOffset: 0
+  changeLeftOffset: 0
+  changeRightOffset: 0
+  changePosX: 0
+  changePosY: 0
+  changeScaleX: 0
+  changeScaleY: 0
+  changeScaleZ: 0
+  width: 3587.656
+  height: 1536
+  topOffset: 0
+  bottomOffset: 0
+  leftOffset: 0
+  rightOffset: 0
+  posX: 0
+  posY: 0
+  scaleX: 1
+  scaleY: 1
+  scaleZ: 1
+--- !u!114 &1805084249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805084242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb737856fec049b4fa6891e380472a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedAspectRatio: 2
+  changeWidth: 1
+  changeHeight: 1
+  changeTopOffset: 0
+  changeBottomOffset: 0
+  changeLeftOffset: 0
+  changeRightOffset: 0
+  changePosX: 0
+  changePosY: 0
+  changeScaleX: 0
+  changeScaleY: 0
+  changeScaleZ: 0
+  width: 2692.143
+  height: 1152.6
+  topOffset: 0
+  bottomOffset: 0
+  leftOffset: 0
+  rightOffset: 0
+  posX: 0
+  posY: 0
+  scaleX: 1
+  scaleY: 1
+  scaleZ: 1
+--- !u!114 &1805084250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805084242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb737856fec049b4fa6891e380472a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedAspectRatio: 1
+  changeWidth: 1
+  changeHeight: 1
+  changeTopOffset: 0
+  changeBottomOffset: 0
+  changeLeftOffset: 0
+  changeRightOffset: 0
+  changePosX: 0
+  changePosY: 0
+  changeScaleX: 0
+  changeScaleY: 0
+  changeScaleZ: 0
+  width: 3361.411
+  height: 1439.1
+  topOffset: 0
+  bottomOffset: 0
+  leftOffset: 0
+  rightOffset: 0
+  posX: 0
+  posY: 0
+  scaleX: 1
+  scaleY: 1
+  scaleZ: 1
+--- !u!114 &1805084251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805084242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb737856fec049b4fa6891e380472a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedAspectRatio: 7
+  changeWidth: 1
+  changeHeight: 1
+  changeTopOffset: 0
+  changeBottomOffset: 0
+  changeLeftOffset: 0
+  changeRightOffset: 0
+  changePosX: 0
+  changePosY: 0
+  changeScaleX: 0
+  changeScaleY: 0
+  changeScaleZ: 0
+  width: 2136.565
+  height: 914.72
+  topOffset: 0
+  bottomOffset: 0
+  leftOffset: 0
+  rightOffset: 0
+  posX: 0
+  posY: 0
+  scaleX: 1
+  scaleY: 1
+  scaleZ: 1
 --- !u!1 &1883079415
 GameObject:
   m_ObjectHideFlags: 0

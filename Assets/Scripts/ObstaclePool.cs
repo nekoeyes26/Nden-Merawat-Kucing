@@ -23,15 +23,18 @@ public class ObstaclePool : MonoBehaviour
     [SerializeField] private Transform poolParent;
     public float maxLeftPosition = -15f;
     private bool groundStopped = false;
+    private bool inCooldown = false;
 
     private void OnEnable()
     {
         GameEvents.OnGroundStop += RenewGroundStopped;
+        GameEvents.OnEnemyHitCooldown += RenewEnemyCooldown;
     }
 
     private void OnDisable()
     {
         GameEvents.OnGroundStop -= RenewGroundStopped;
+        GameEvents.OnEnemyHitCooldown -= RenewEnemyCooldown;
     }
 
     private void Start()
@@ -40,7 +43,7 @@ public class ObstaclePool : MonoBehaviour
     }
     private void Update()
     {
-        if (groundStopped) return;
+        if (groundStopped || inCooldown) return;
         CheckObstacleObjectPositions();
         timeUntilObstacleSpawn += Time.deltaTime;
         if (timeUntilObstacleSpawn >= obstacleSpawnTime)
@@ -214,5 +217,10 @@ public class ObstaclePool : MonoBehaviour
     private void RenewGroundStopped(bool isStop)
     {
         groundStopped = isStop;
+    }
+
+    private void RenewEnemyCooldown(bool onCooldown)
+    {
+        inCooldown = onCooldown;
     }
 }

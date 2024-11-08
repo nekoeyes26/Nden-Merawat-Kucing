@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DryerGameobject : MonoBehaviour
 {
-    private Vector3 originalPosition;
+    public Vector3 originalPosition;
     private bool isDragging = false;
     private Vector3 offset;
     private Camera mainCamera;
@@ -26,12 +26,23 @@ public class DryerGameobject : MonoBehaviour
     bool interactable = true;
     private SpriteRenderer spriteRenderer;
 
+    public ParticleSystem vfx;
+
     private void Start()
     {
         mainCamera = Camera.main;
-        originalPosition = transform.position;
+        //originalPosition = transform.position;
         dryerAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        vfx.gameObject.SetActive(false);
+        vfx.Stop();
+        StartCoroutine(AssignOriginalPosition());
+    }
+
+    private IEnumerator AssignOriginalPosition()
+    {
+        yield return new WaitForSeconds(0.01f);
+        originalPosition = transform.position;
     }
 
     private void Update()
@@ -42,10 +53,10 @@ public class DryerGameobject : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && interactable)
         {
-            spriteRenderer.sortingOrder = 4;
             Vector3 mousePosition = GetMouseWorldPosition();
             if (IsMouseOverObject(mousePosition))
             {
+                spriteRenderer.sortingOrder = 4;
                 isDragging = true;
                 offset = transform.position - mousePosition;
             }
@@ -59,6 +70,8 @@ public class DryerGameobject : MonoBehaviour
             newPosition.y = Mathf.Clamp(newPosition.y, limitYMinPos, limitYMaxPos);
             transform.position = newPosition;
             dryerAnimator.SetBool("isDrying", true);
+            vfx.gameObject.SetActive(true);
+            if (!vfx.isPlaying) vfx.Play();
         }
 
         // Stop dragging when the mouse button is released
@@ -68,6 +81,7 @@ public class DryerGameobject : MonoBehaviour
             isDragging = false;
             ReturnToOriginalPosition();
             dryerAnimator.SetBool("isDrying", false);
+            vfx.Stop();
         }
 
         if (isOverPet && isDragging)

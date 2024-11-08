@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class WefieController : MonoBehaviour
 {
@@ -20,7 +20,11 @@ public class WefieController : MonoBehaviour
     private int currentIndex = 0;
     public Image background;
     public SpriteRenderer spriteRendererBG;
-    // Start is called before the first frame update
+    public Vector2[] charOnLeftPosition;
+    public Vector2[] charOnRightPosition;
+    public BackgroundWefie[] backgroundWefies;
+    public Button[] buttonPose;
+
     void Start()
     {
         catS = GameManager.instance.CatProfile.catScriptable;
@@ -46,6 +50,11 @@ public class WefieController : MonoBehaviour
 
         background.sprite = BGSprites[currentIndex];
         spriteRendererBG.sprite = BGSprites[currentIndex];
+        buttonPose[0].interactable = false;
+        foreach (Button button in buttonPose)
+        {
+            button.onClick.AddListener(() => OnButtonPoseClicked(button));
+        }
     }
 
     // Update is called once per frame
@@ -245,6 +254,24 @@ public class WefieController : MonoBehaviour
     {
         currentIndex = (currentIndex + 1) % BGSprites.Length;
         background.sprite = BGSprites[currentIndex];
-        spriteRendererBG.sprite = BGSprites[currentIndex];
+        //spriteRendererBG.sprite = BGSprites[currentIndex];
+        //charOnLeft.rectTransform.anchoredPosition = charOnLeftPosition[currentIndex];
+        //charOnRight.rectTransform.anchoredPosition = charOnRightPosition[currentIndex];
+        //currentIndex = (currentIndex + 1) % backgroundWefies.Length;
+        //background.sprite = backgroundWefies[currentIndex].bgSprite;
+        //charOnLeft.rectTransform.anchoredPosition = backgroundWefies[currentIndex].charOnLeftPosition;
+        //charOnRight.rectTransform.anchoredPosition = backgroundWefies[currentIndex].charOnRightPosition;
+    }
+
+    private void OnButtonPoseClicked(Button clickedButton)
+    {
+        clickedButton.interactable = false;
+        foreach (Button button in buttonPose)
+        {
+            if (button != clickedButton)
+            {
+                button.interactable = true;
+            }
+        }
     }
 }

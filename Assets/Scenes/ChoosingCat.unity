@@ -164,7 +164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1350, y: 0}
+  m_AnchoredPosition: {x: 1600, y: 0}
   m_SizeDelta: {x: 433, y: 470}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &31220820
@@ -1796,6 +1796,8 @@ GameObject:
   - component: {fileID: 533490782}
   - component: {fileID: 533490783}
   - component: {fileID: 533490784}
+  - component: {fileID: 533490786}
+  - component: {fileID: 533490785}
   m_Layer: 5
   m_Name: Kucing (3)
   m_TagString: Untagged
@@ -1933,6 +1935,76 @@ MonoBehaviour:
   posYBaby: -222
   posYChild: -303
   posYAdult: -350
+--- !u!114 &533490785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533490777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb737856fec049b4fa6891e380472a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedAspectRatio: 1
+  changeWidth: 0
+  changeHeight: 0
+  changeTopOffset: 0
+  changeBottomOffset: 0
+  changeLeftOffset: 0
+  changeRightOffset: 0
+  changePosX: 0
+  changePosY: 0
+  changeScaleX: 0
+  changeScaleY: 0
+  changeScaleZ: 0
+  width: 0
+  height: 0
+  topOffset: 0
+  bottomOffset: 0
+  leftOffset: 0
+  rightOffset: 0
+  posX: 0
+  posY: 0
+  scaleX: 1
+  scaleY: 1
+  scaleZ: 1
+--- !u!114 &533490786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533490777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb737856fec049b4fa6891e380472a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedAspectRatio: 7
+  changeWidth: 0
+  changeHeight: 0
+  changeTopOffset: 0
+  changeBottomOffset: 0
+  changeLeftOffset: 0
+  changeRightOffset: 0
+  changePosX: 0
+  changePosY: 0
+  changeScaleX: 1
+  changeScaleY: 1
+  changeScaleZ: 1
+  width: 0
+  height: 0
+  topOffset: 0
+  bottomOffset: 0
+  leftOffset: 0
+  rightOffset: 0
+  posX: 0
+  posY: 0
+  scaleX: 1
+  scaleY: 1
+  scaleZ: 1
 --- !u!1 &596557385
 GameObject:
   m_ObjectHideFlags: 0
@@ -3920,6 +3992,7 @@ GameObject:
   - component: {fileID: 1420813231}
   - component: {fileID: 1420813230}
   - component: {fileID: 1420813229}
+  - component: {fileID: 1420813233}
   m_Layer: 5
   m_Name: Story
   m_TagString: Untagged
@@ -4012,6 +4085,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1420813233
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420813228}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b1b5b45dba7c0243bd54033e0025e31, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1439992506
 GameObject:
   m_ObjectHideFlags: 0
@@ -4280,7 +4374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1350, y: 0}
+  m_AnchoredPosition: {x: -1600, y: 0}
   m_SizeDelta: {x: 433, y: 470}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1462766363

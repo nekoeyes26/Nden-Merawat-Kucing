@@ -46,10 +46,11 @@ public class MinigameController : MonoBehaviour
                 Jump();
             }
             isGrounded = IsGrounded();
+            //Debug.Log("isGrounded: " + isGrounded);
             if (isGrounded)
             {
                 isFalling = false;
-                if (SpineAnimationController.instance.currentAnimation.Equals(SpineAnimationController.instance.jumpDown.name))
+                if (SpineAnimationController.instance.currentAnimation.Equals(SpineAnimationController.instance.jumpDown.name) || SpineAnimationController.instance.currentAnimation.Equals(SpineAnimationController.instance.jumpUp.name))
                 {
                     // Debug.Log("Landing");
                     SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.landing, false, 1f);
@@ -67,6 +68,7 @@ public class MinigameController : MonoBehaviour
                         return;
                     }
                     SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.run, true, 1f);
+                    isJumping = false;
                 }
                 else
                 {
@@ -107,10 +109,10 @@ public class MinigameController : MonoBehaviour
         if (isGrounded && !isJumping && !isEnemyHitCooldown)
         {
             rb.AddForce(Vector2.up * jumpForce);
+            SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.jumpUp, false, 0.5f);
             isGrounded = false;
             isJumping = true;
             Invoke(nameof(ResetJumping), jumpCooldownTime);
-            SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.jumpUp, false, 0.5f);
         }
     }
 
@@ -147,6 +149,7 @@ public class MinigameController : MonoBehaviour
         {
             manager.HittingEnemy();
             isEnemyHitCooldown = true;
+            GameEvents.HitEnemyCooldown(isEnemyHitCooldown);
             SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.bump, false, 1f);
             Invoke(nameof(ResetEnemyHitCooldown), enemyHitCooldown);
         }
@@ -155,6 +158,7 @@ public class MinigameController : MonoBehaviour
     private void ResetEnemyHitCooldown()
     {
         isEnemyHitCooldown = false;
+        GameEvents.HitEnemyCooldown(isEnemyHitCooldown);
     }
 
     // IEnumerator TransitionToGroundedState()

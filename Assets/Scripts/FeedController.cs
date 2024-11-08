@@ -12,14 +12,21 @@ public class FeedController : MonoBehaviour
     private float lerpSpeed;
     private bool isFull = false;
     private bool isXPAdded = false;
-    public Animator catAnimator;
+    //public Animator catAnimator;
     public GameObject completePopUp;
     private bool isDragging;
     public bool activityComplete = false;
+    private bool reset = false;
+    public ParticleSystem vfx;
 
     void OnEnable()
     {
         GameEvents.OnDraggingFood += HandleOnDraggingFood;
+    }
+
+    void OnDisable()
+    {
+        GameEvents.OnDraggingFood -= HandleOnDraggingFood;
     }
 
     private void Start()
@@ -30,16 +37,25 @@ public class FeedController : MonoBehaviour
         {
             SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.normal, true, 1f);
         }
+        vfx.gameObject.SetActive(false);
+        vfx.Stop();
     }
 
     private void Update()
     {
         lerpSpeed = 2f * Time.deltaTime;
         BarFill();
+        //Debug.Log(SpineAnimationController.instance.isMakanPlaying);
         if (SpineAnimationController.instance.initialized)
         {
             if (!isDragging && !SpineAnimationController.instance.isMakanPlaying)
             {
+                if (reset)
+                {
+                    SpineAnimationController.instance.InitializeTheSkeleton();
+                    SpineAnimationController.instance.SetSkin(GameManager.instance.CatProfile.catScriptable.id.ToString());
+                    reset = false;
+                }
                 SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.normal, true, 1f);
             }
             else if (isDragging)
@@ -68,22 +84,26 @@ public class FeedController : MonoBehaviour
                 Full();
                 Debug.Log(point);
             }
-            catAnimator.SetBool("isSteady", false);
-            catAnimator.SetBool("isEating", true);
-            StartCoroutine(ResetEatingState());
+            //catAnimator.SetBool("isSteady", false);
+            //catAnimator.SetBool("isEating", true);
+            //StartCoroutine(ResetEatingState());
             if (SpineAnimationController.instance.initialized)
             {
                 SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.makan, false, 1f);
+                reset = true;
             }
+            vfx.gameObject.SetActive(true);
+            vfx.Play();
         }
         else
         {
             Debug.Log("The object is not tagged as Food. Point not added.");
-            catAnimator.SetBool("isSteady", false);
-            catAnimator.SetBool("isEating", false);
+            //catAnimator.SetBool("isSteady", false);
+            //catAnimator.SetBool("isEating", false);
             if (SpineAnimationController.instance.initialized)
             {
                 SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.salah, false, 1f);
+                reset = true;
             }
         }
     }
@@ -117,21 +137,21 @@ public class FeedController : MonoBehaviour
         isDragging = dragging;
     }
 
-    public void CatSteady()
-    {
-        catAnimator.SetBool("isSteady", true);
-    }
+    //public void CatSteady()
+    //{
+    //    catAnimator.SetBool("isSteady", true);
+    //}
 
-    private IEnumerator ResetEatingState()
-    {
-        yield return new WaitForSeconds(2f);
-        catAnimator.SetBool("isEating", false);
-    }
+    //private IEnumerator ResetEatingState()
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //    catAnimator.SetBool("isEating", false);
+    //}
 
-    public void CatBackIdle()
-    {
-        catAnimator.SetBool("isSteady", false);
-    }
+    //public void CatBackIdle()
+    //{
+    //    catAnimator.SetBool("isSteady", false);
+    //}
 
     public void ShowPopUp()
     {

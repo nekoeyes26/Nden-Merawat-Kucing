@@ -126,7 +126,7 @@ public class SpineAnimationController : MonoBehaviour
         // Freeze the animation by setting the time scale to zero
         skeletonAnimation.state.TimeScale = 0f;
         freezed = true;
-        Debug.Log("Animation frozen: " + currentAnimation);
+        //Debug.Log("Animation frozen: " + currentAnimation);
         //}
         //else
         //{
@@ -142,7 +142,7 @@ public class SpineAnimationController : MonoBehaviour
         // Restore the original time scale to resume the animation
         skeletonAnimation.state.TimeScale = originalTimeScale;
         freezed = false;
-        Debug.Log("Animation unfrozen: " + currentAnimation);
+        //Debug.Log("Animation unfrozen: " + currentAnimation);
         //}
         //else
         //{
@@ -174,7 +174,7 @@ public class SpineAnimationController : MonoBehaviour
         {
             isBumpPlaying = false;
         }
-        if (trackEntry.Animation.Name == makan.name || trackEntry.Animation.Name == salah.name)
+        if (trackEntry.Animation.Name.Equals(makan.name) || trackEntry.Animation.Name.Equals(salah.name))
         {
             isMakanPlaying = false;
         }
@@ -187,6 +187,7 @@ public class SpineAnimationController : MonoBehaviour
 
     public void RenewAnimationReference(CatPhase phase)
     {
+        freezed = false;
         AnimationReferenceScriptable animationReferenceScriptable;
         animationReferenceScriptable = Resources.Load<AnimationReferenceScriptable>("AnimationReferenceScriptable/" + phase);
         if (animationReferenceScriptable != null)

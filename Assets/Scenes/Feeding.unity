@@ -2171,8 +2171,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPoint: 5
   bar: {fileID: 996321741}
-  catAnimator: {fileID: 225601623}
   completePopUp: {fileID: 1675688886}
+  activityComplete: 0
+  vfx: {fileID: 1426756710}
 --- !u!4 &1071661250
 Transform:
   m_ObjectHideFlags: 0
@@ -2758,6 +2759,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1424230325}
   m_CullTransparentMesh: 1
+--- !u!1001 &1426756709
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1590637410233211421, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1379474
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590637410233211421, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7087273
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590637410233211421, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590637410233211421, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590637410233211421, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590637410233211421, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590637410233211421, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590637410233211421, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590637410233211421, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590637410233211421, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6404387118468378786, guid: 529ca6393d535324aa039789d177209b, type: 3}
+      propertyPath: m_Name
+      value: vfx_love
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 529ca6393d535324aa039789d177209b, type: 3}
+--- !u!198 &1426756710 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6087554542855167127, guid: 529ca6393d535324aa039789d177209b, type: 3}
+  m_PrefabInstance: {fileID: 1426756709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1432938142
 GameObject:
   m_ObjectHideFlags: 0
@@ -3091,6 +3154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationSpeed: 0.12
   speedRestoreDuration: 2
+  originalSpeed: 0
 --- !u!1 &1526523266
 GameObject:
   m_ObjectHideFlags: 0
@@ -3694,7 +3758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 1b445d5eeb4b4e4448549d25e9114467, type: 2}
-  initialSkinName: 3
+  initialSkinName: 5
   initialFlipX: 0
   initialFlipY: 0
   updateWhenInvisible: 3
@@ -4472,3 +4536,4 @@ SceneRoots:
   - {fileID: 1489624302}
   - {fileID: 1800650934}
   - {fileID: 1831629189}
+  - {fileID: 1426756709}

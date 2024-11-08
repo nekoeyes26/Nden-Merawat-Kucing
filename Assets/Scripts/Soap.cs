@@ -46,7 +46,7 @@ public class Soap : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             {
                 if (hit.collider != null && hit.collider.CompareTag("Pet"))
                 {
-                    Vector3 foamPosition = new Vector3(worldPosition.x, worldPosition.y, -1);
+                    Vector3 foamPosition = new Vector3(worldPosition.x, worldPosition.y, 0);
 
                     GameObject spawnedFoam = Instantiate(foamPrefab, foamPosition, Quaternion.identity, hit.collider.transform);
                     foamQueue.Enqueue(spawnedFoam);

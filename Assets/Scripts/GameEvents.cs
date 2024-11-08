@@ -17,6 +17,7 @@ public class GameEvents : MonoBehaviour
     public static event Action<bool> OnDraggingFood;
     public static event Action<CatPhase, int> OnGivingName;
     public static event Action<bool> OnGroundStop;
+    public static event Action<bool> OnEnemyHitCooldown;
     public static void XpChanged(int xpNow)
     {
         OnXpChange?.Invoke(xpNow);
@@ -74,5 +75,10 @@ public class GameEvents : MonoBehaviour
     public static void GroundStopped(bool isStop)
     {
         OnGroundStop?.Invoke(isStop);
+    }
+
+    public static void HitEnemyCooldown(bool cooldown)
+    {
+        OnEnemyHitCooldown?.Invoke(cooldown);
     }
 }

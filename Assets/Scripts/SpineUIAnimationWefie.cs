@@ -1,7 +1,8 @@
+using Spine.Unity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Spine.Unity;
 
 public class SpineUIAnimationWefie : MonoBehaviour
 {
@@ -40,8 +41,19 @@ public class SpineUIAnimationWefie : MonoBehaviour
     {
         if (!initialized)
         {
-            catID = GameManager.instance.CatProfile.catScriptable.id;
-            RenewAnimationReference(GameManager.instance.CatProfile.catScriptable.phase);
+            try
+            {
+                catID = GameManager.instance.CatProfile.catScriptable.id;
+                RenewAnimationReference(GameManager.instance.CatProfile.catScriptable.phase);
+            }
+            catch (NullReferenceException ex)
+            {
+                //Debug.LogWarning("CatScriptable is null: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                //Debug.LogError("An error occurred: " + ex.Message);
+            }
         }
         if (initialized && !skinSet)
         {

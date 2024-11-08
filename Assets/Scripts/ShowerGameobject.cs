@@ -20,12 +20,22 @@ public class ShowerGameobject : MonoBehaviour
     public float limitYMinPos = -3.67f;
     public float limitYMaxPos = 3.67f;
     bool interactable = true;
+    public ParticleSystem vfx;
 
     private void Start()
     {
         mainCamera = Camera.main;
         originalPosition = transform.position;
         showerAnimator = GetComponent<Animator>();
+        vfx.gameObject.SetActive(false);
+        vfx.Stop();
+        StartCoroutine(AssignOriginalPosition());
+    }
+
+    private IEnumerator AssignOriginalPosition()
+    {
+        yield return new WaitForSeconds(0.01f);
+        originalPosition = transform.position;
     }
 
     void Update()
@@ -53,6 +63,9 @@ public class ShowerGameobject : MonoBehaviour
             newPosition.y = Mathf.Clamp(newPosition.y, limitYMinPos, limitYMaxPos);
             transform.position = newPosition;
             showerAnimator.SetBool("isShowering", true);
+            vfx.gameObject.SetActive(true);
+            if (!vfx.isPlaying) vfx.Play();
+
         }
 
         // Stop dragging when the mouse button is released
@@ -61,6 +74,8 @@ public class ShowerGameobject : MonoBehaviour
             isDragging = false;
             ReturnToOriginalPosition();
             showerAnimator.SetBool("isShowering", false);
+            vfx.Stop();
+            //vfx.gameObject.SetActive(false);
         }
 
         if (isOverPet && isDragging)
