@@ -12,7 +12,6 @@ public class SpineUIAnimationWefie : MonoBehaviour
     public bool initialized = false;
     private int catID = 1;
     private bool skinSet = false;
-    public Transform skeletonObj;
 
     void OnEnable()
     {
@@ -26,13 +25,19 @@ public class SpineUIAnimationWefie : MonoBehaviour
     {
         initialized = false;
         skinSet = false;
-        foreach (Transform child in transform)
+        if (skeletonGraphic == null)
         {
-            skeletonGraphic = child.GetComponent<SkeletonGraphic>();
-            if (skeletonGraphic != null)
+            foreach (Transform child in transform)
             {
-                skeletonObj = child;
-                break;
+                skeletonGraphic = child.GetComponent<SkeletonGraphic>();
+                if (skeletonGraphic != null)
+                {
+                    break;
+                }
+            }
+            if (skeletonGraphic == null)
+            {
+                Debug.LogError("SkeletonGraphic not found!");
             }
         }
     }
@@ -108,9 +113,9 @@ public class SpineUIAnimationWefie : MonoBehaviour
         }
     }
 
-    public float posYBaby;
-    public float posYChild;
-    public float posYAdult;
+    public Vector2 posBaby;
+    public Vector2 posChild;
+    public Vector2 posAdult;
 
     public void RenewAnimationReference(CatPhase phase)
     {
@@ -123,20 +128,25 @@ public class SpineUIAnimationWefie : MonoBehaviour
             sakit = animationReferenceScriptable.sakit;
             salah = animationReferenceScriptable.salah;
             InitializeTheSkeleton();
-            float posY = -222;
+            Vector2 pos;
             if (phase == CatPhase.Baby)
             {
-                posY = posYBaby;
+                pos = posBaby;
             }
             else if (phase == CatPhase.Child)
             {
-                posY = posYChild;
+                pos = posChild;
             }
             else if (phase == CatPhase.Adult)
             {
-                posY = posYAdult;
+                pos = posAdult;
             }
-            skeletonGraphic.rectTransform.anchoredPosition = new Vector2(skeletonGraphic.rectTransform.anchoredPosition.x, posY);
+            else
+            {
+                Debug.LogError("Invalid CatPhase");
+                return;
+            }
+            skeletonGraphic.rectTransform.anchoredPosition = pos;
         }
         else
         {

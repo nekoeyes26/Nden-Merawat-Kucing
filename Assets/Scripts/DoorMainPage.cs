@@ -45,9 +45,7 @@ public class DoorMainPage : MonoBehaviour
         }
         else
         {
-            SceneLoad sceneLoad = new SceneLoad();
-            sceneLoad.sceneName = "Playing";
-            sceneLoad.LoadScene();
+            SceneLoader.LoadSceneStatic("Playing");
         }
     }
 }

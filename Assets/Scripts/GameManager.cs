@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-
+        MusicManager.Instance.PlayMusic(MusicManager.Instance.mainMusic);
     }
 
     // Update is called once per frame

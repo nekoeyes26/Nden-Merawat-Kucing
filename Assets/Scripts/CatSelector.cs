@@ -1,10 +1,10 @@
-using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using System.Text.RegularExpressions;
-using System;
 using Spine.Unity;
+using System;
+using System.Collections;
+using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
@@ -40,7 +40,8 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private GameObject[] adoptedIcon;
     private CanvasGroup[] canvasGroup;
     public SkeletonGraphic giveNameSkeleton;
-
+    public AudioClip swipeSFX;
+    public AudioClip selectSFX;
     void Start()
     {
         boxes = new Transform[transform.childCount];
@@ -111,7 +112,7 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         // Atur skala child object yang berada di tengah ke skala middle
         //StartCoroutine(ScaleBoxes());
         //StartCoroutine(ScaleMiddleBox());
-        BackChoosingUI();
+        BackChoosingUI(false);
     }
 
     void Update()
@@ -140,6 +141,7 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         if (!isMoving)
         {
             StartCoroutine(MoveBoxesRight());
+            SFXManager.Instance.PlaySFX(SoundEffect.Swipe);
         }
     }
 
@@ -148,6 +150,7 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         if (!isMoving)
         {
             StartCoroutine(MoveBoxesLeft());
+            SFXManager.Instance.PlaySFX(SoundEffect.Swipe);
         }
     }
 
@@ -386,16 +389,15 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 UI.SetActive(true);
             }
+            SFXManager.Instance.PlaySFX(SoundEffect.Select);
         }
         else
         {
-            SceneLoad sceneLoad = new SceneLoad();
-            sceneLoad.sceneName = "MainPage";
-            sceneLoad.LoadScene();
+            SceneLoader.LoadSceneStatic("MainPage");
         }
     }
 
-    public void BackChoosingUI()
+    public void BackChoosingUI(bool sfx = true)
     {
         foreach (GameObject UI in choosingCatUI)
         {
@@ -405,6 +407,10 @@ public class CatSelector : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         foreach (GameObject UI in givingNameUI)
         {
             UI.SetActive(false);
+        }
+        if (sfx)
+        {
+            SFXManager.Instance.PlaySFX(SoundEffect.Back);
         }
     }
 

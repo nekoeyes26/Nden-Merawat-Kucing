@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Soap : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -17,6 +18,7 @@ public class Soap : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public int maxFoamCount = 10;
 
     public BathController bathController;
+    public Image gloveImage;
 
     private void Start()
     {
@@ -24,16 +26,28 @@ public class Soap : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         canvas = GetComponentInParent<Canvas>();
         originalPosition = rectTransform.anchoredPosition;
         foamSpawnTimer = foamSpawnRate;
+        if (gloveImage != null)
+        {
+            gloveImage.gameObject.SetActive(false);
+            gloveImage.rectTransform.anchoredPosition = rectTransform.anchoredPosition;
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-
+        if (gloveImage != null)
+        {
+            gloveImage.gameObject.SetActive(true);
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        if (gloveImage != null)
+        {
+            Vector2 newPosition = gloveImage.rectTransform.anchoredPosition + eventData.delta / canvas.scaleFactor;
+            gloveImage.rectTransform.anchoredPosition = newPosition;
+        }
 
         Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -66,6 +80,12 @@ public class Soap : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition = originalPosition;
+        if (gloveImage != null)
+        {
+            gloveImage.rectTransform.anchoredPosition = rectTransform.anchoredPosition; // Reset position to the soap's original position
+            gloveImage.gameObject.SetActive(false); // Disable the glove
+        }
+
+        rectTransform.anchoredPosition = originalPosition; // Reset soap position (if needed)
     }
 }

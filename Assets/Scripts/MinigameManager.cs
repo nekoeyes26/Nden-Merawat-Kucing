@@ -54,6 +54,7 @@ public class MinigameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         GenerateHealth();
         GenerateEmptyHealth();
+        MusicManager.Instance.PlayMusic(MusicManager.Instance.minigameMusic);
     }
 
     private void Update()
@@ -154,6 +155,7 @@ public class MinigameManager : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
+        SFXManager.Instance.PlaySFX(SoundEffect.PopUpOpen);
     }
 
     public void Resume()
@@ -171,6 +173,7 @@ public class MinigameManager : MonoBehaviour
         }
         ContinueGround();
         SpineAnimationController.instance.UnfreezeAnimation();
+        SFXManager.Instance.PlaySFX(SoundEffect.PopCloseClose);
     }
 
     public void Restart()
@@ -190,6 +193,7 @@ public class MinigameManager : MonoBehaviour
         if (isGameover) gameOverLose.SetActive(false);
         if (isWin) backHomeAdditionalText.SetActive(false);
         backHomeMenu.SetActive(true);
+        SFXManager.Instance.PlaySFX(SoundEffect.Select);
     }
 
     public void CancelHome()

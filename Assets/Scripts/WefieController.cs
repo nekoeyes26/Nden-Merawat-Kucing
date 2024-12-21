@@ -5,11 +5,32 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+[System.Serializable]
+public class BackgroundWefie
+{
+    public Sprite bgSprite;
+    public Vector2 catPosition;
+    public Vector2 charOnLeftPosition;
+    public Vector2 charOnRightPosition;
+    public GameObject[] objectToShow;
+
+    public BackgroundWefie(Sprite bgSprite, Vector2 catPos, Vector2 leftPos, Vector2 rightPos, GameObject[] objectToShow)
+    {
+        this.bgSprite = bgSprite;
+        this.catPosition = catPos;
+        this.charOnLeftPosition = leftPos;
+        this.charOnRightPosition = rightPos;
+        this.objectToShow = objectToShow;
+    }
+}
+
 public class WefieController : MonoBehaviour
 {
     public Image display;
     public GameObject[] wefieUI;
     public GameObject[] displayFrame;
+    public RectTransform catKucing;
     public Image charOnLeft;
     public Image charOnRight;
     public Image cat;
@@ -252,15 +273,64 @@ public class WefieController : MonoBehaviour
 
     public void ChangeBackground()
     {
-        currentIndex = (currentIndex + 1) % BGSprites.Length;
-        background.sprite = BGSprites[currentIndex];
+        //currentIndex = (currentIndex + 1) % BGSprites.Length;
+        //background.sprite = BGSprites[currentIndex];
         //spriteRendererBG.sprite = BGSprites[currentIndex];
         //charOnLeft.rectTransform.anchoredPosition = charOnLeftPosition[currentIndex];
         //charOnRight.rectTransform.anchoredPosition = charOnRightPosition[currentIndex];
-        //currentIndex = (currentIndex + 1) % backgroundWefies.Length;
-        //background.sprite = backgroundWefies[currentIndex].bgSprite;
-        //charOnLeft.rectTransform.anchoredPosition = backgroundWefies[currentIndex].charOnLeftPosition;
-        //charOnRight.rectTransform.anchoredPosition = backgroundWefies[currentIndex].charOnRightPosition;
+        currentIndex = (currentIndex + 1) % backgroundWefies.Length;
+        background.sprite = backgroundWefies[currentIndex].bgSprite;
+        catKucing.anchoredPosition = backgroundWefies[currentIndex].catPosition;
+        charOnLeft.rectTransform.anchoredPosition = backgroundWefies[currentIndex].charOnLeftPosition;
+        charOnRight.rectTransform.anchoredPosition = backgroundWefies[currentIndex].charOnRightPosition;
+        // Check if currentIndex is valid
+        if (currentIndex > 0 && currentIndex < backgroundWefies.Length)
+        {
+            // Deactivate the previous object's GameObjects
+            if (backgroundWefies[currentIndex - 1]?.objectToShow != null)
+            {
+                foreach (var obj in backgroundWefies[currentIndex - 1].objectToShow)
+                {
+                    if (obj != null)
+                    {
+                        obj.SetActive(false);
+                    }
+                    //else
+                    //{
+                    //    Debug.LogWarning($"GameObject is null in objectToShow for index {currentIndex - 1}");
+                    //}
+                }
+            }
+            //else
+            //{
+            //    Debug.LogWarning($"objectToShow is null for index {currentIndex - 1}");
+            //}
+
+            // Activate the current object's GameObjects
+            if (backgroundWefies[currentIndex]?.objectToShow != null)
+            {
+                foreach (var obj in backgroundWefies[currentIndex].objectToShow)
+                {
+                    if (obj != null)
+                    {
+                        obj.SetActive(true);
+                    }
+                    //else
+                    //{
+                    //    Debug.LogWarning($"GameObject is null in objectToShow for index {currentIndex}");
+                    //}
+                }
+            }
+            //else
+            //{
+            //    Debug.LogWarning($"objectToShow is null for index {currentIndex}");
+            //}
+        }
+        //else
+        //{
+        //    Debug.LogError($"currentIndex {currentIndex} is out of bounds. Valid range is 0 to {backgroundWefies.Length - 1}.");
+        //}
+
     }
 
     private void OnButtonPoseClicked(Button clickedButton)

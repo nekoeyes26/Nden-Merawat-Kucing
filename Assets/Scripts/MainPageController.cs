@@ -24,6 +24,8 @@ public class MainPageController : MonoBehaviour
     public GameObject maxText;
     // public SpineAnimationController SpineAnimationController.instance;
     public bool catNormal = true;
+    public CharacterVoice catSoundScript;
+    private bool catSoundPlaying = false;
 
     void OnEnable()
     {
@@ -117,6 +119,11 @@ public class MainPageController : MonoBehaviour
                 if (isPetted)
                 {
                     SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.elus, true, 1f);
+                    if (!catSoundPlaying)
+                    {
+                        catSoundScript.PlayHappy();
+                        catSoundPlaying = true;
+                    }
                     reset = true;
                 }
                 else
@@ -128,6 +135,7 @@ public class MainPageController : MonoBehaviour
                         reset = false;
                     }
 
+                    catSoundPlaying = false;
                     SpineAnimationController.instance.PlayAnimation(SpineAnimationController.instance.normal, true, 1f);
                 }
 
